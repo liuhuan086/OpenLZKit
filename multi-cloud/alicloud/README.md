@@ -24,12 +24,13 @@ alicloud/
 
 ## 实现状态
 
-| 层 | 模块 | 状态 |
+| 层 | 实现 | 状态 |
 |---|---|---|
-| `10-org` | [`modules/org`](modules/org) | ✅ 已实现（Resource Directory 文件夹层级，fmt+validate 通过；账号创建默认关闭） |
+| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（启用 Resource Directory、OSS state 桶、GitHub OIDC + CI/CD plan 角色） |
+| `10-org` | [`modules/org`](modules/org) | ✅ 已实现（Resource Directory 文件夹层级，账号创建默认关闭） |
 | 其他层 | — | 🚧 占位，待实现 |
 
-参见 [examples/basic](examples/basic) 与 [live/10-org](live/10-org)。
+所有已实现 stack 均通过 `terraform fmt + validate`（无需云账号）。参见 [examples/basic](examples/basic)。
 
 ## live stack 顺序
 

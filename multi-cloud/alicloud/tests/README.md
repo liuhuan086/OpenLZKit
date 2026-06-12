@@ -13,7 +13,9 @@ terraform -chdir=examples/basic fmt -check -recursive
 terraform -chdir=examples/basic init -backend=false
 terraform -chdir=examples/basic validate
 
-# validate the live stack (backend disabled)
+# validate the live stacks (backend disabled)
+terraform -chdir=live/00-bootstrap init -backend=false
+terraform -chdir=live/00-bootstrap validate
 terraform -chdir=live/10-org init -backend=false
 terraform -chdir=live/10-org validate
 ```
@@ -29,6 +31,7 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 
 | Target | fmt | validate | plan | notes |
 |---|:--:|:--:|:--:|---|
+| `live/00-bootstrap` | ✅ | ✅ | account | local state → migrate to OSS; OIDC CI role |
 | `modules/org` (via `examples/basic`) | ✅ | ✅ | account | folders only; accounts off by default |
 | `live/10-org` | ✅ | ✅ | account | OSS backend via `-backend-config` |
 
