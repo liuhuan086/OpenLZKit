@@ -17,6 +17,11 @@ locals {
     for key, stream in var.firehose_streams :
     key => merge(var.common_tags, stream.tags)
   }
+
+  security_lake_tags = {
+    for key, data_lake in var.security_lake_data_lakes :
+    key => merge(var.common_tags, data_lake.tags)
+  }
 }
 
 data "aws_caller_identity" "current" {}
@@ -200,4 +205,60 @@ resource "aws_kinesis_firehose_delivery_stream" "s3" {
       }
     }
   }
+}
+
+resource "aws_securitylake_data_lake" "this" {
+  for_each = var.security_lake_data_lakes
+
+  meta_store_manager_role_arn = each.value.meta_store_manager_role_arn
+  tags                        = local.security_lake_tags[each.key]
+
+  dynamic "configuration" {
+    for_each = each.value.configurations
+    content {
+      region                   = configuration.value.region
+      encryption_configuration = configuration.value.kms_key_id == null ? null : [{ kms_key_id = configuration.value.kms_key_id }]
+
+      dynamic "lifecycle_configuration" {
+        for_each = configuration.value.expiration_days == null && configuration.value.transition_days == null ? [] : [configuration.value]
+        content {
+          dynamic "expiration" {
+            for_each = lifecycle_configuration.value.expiration_days == null ? [] : [lifecycle_configuration.value.expiration_days]
+            content {
+              days = expiration.value
+            }
+          }
+
+          dynamic "transition" {
+            for_each = lifecycle_configuration.value.transition_days == null ? [] : [lifecycle_configuration.value]
+            content {
+              days          = transition.value.transition_days
+              storage_class = transition.value.transition_class
+            }
+          }
+        }
+      }
+
+      dynamic "replication_configuration" {
+        for_each = length(configuration.value.replication_regions) == 0 && configuration.value.replication_role_arn == null ? [] : [configuration.value]
+        content {
+          regions  = replication_configuration.value.replication_regions
+          role_arn = replication_configuration.value.replication_role_arn
+        }
+      }
+    }
+  }
+}
+
+resource "aws_securitylake_aws_log_source" "this" {
+  for_each = var.security_lake_aws_log_sources
+
+  source {
+    source_name    = each.value.source_name
+    source_version = each.value.source_version
+    regions        = each.value.regions
+    accounts       = length(each.value.accounts) == 0 ? null : each.value.accounts
+  }
+
+  depends_on = [aws_securitylake_data_lake.this]
 }

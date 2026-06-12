@@ -37,4 +37,30 @@ module "logging" {
       }
     }
   }
+
+  security_lake_data_lakes = {
+    security = {
+      meta_store_manager_role_arn = "arn:aws:iam::111122223333:role/security-lake-metastore"
+      configurations = [{
+        region           = "us-east-1"
+        transition_days  = 90
+        transition_class = "STANDARD_IA"
+        expiration_days  = 365
+      }]
+      tags = {
+        owner       = "security-platform"
+        cost_center = "cc-7100"
+        env         = "shared"
+        project     = "security-lake"
+      }
+    }
+  }
+
+  security_lake_aws_log_sources = {
+    cloudtrail = {
+      source_name = "CLOUD_TRAIL_MGMT"
+      regions     = ["us-east-1"]
+      accounts    = ["111122223333"]
+    }
+  }
 }

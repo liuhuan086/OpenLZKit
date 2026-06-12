@@ -172,7 +172,7 @@ run organization-level `apply` from a personal admin session.
 | `live/45-compliance` | yes | yes | account | FP-7 deployment entry; maps default empty |
 | `modules/delegation` | yes | via examples/delegation | account | FP-8 Organizations delegated admin and governed RAM sharing |
 | `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |
-| `modules/logging` | yes | via examples/logging | account | FP-9 CloudTrail, S3 log archive, KMS, Object Lock and Firehose |
+| `modules/logging` | yes | via examples/logging | account | FP-9 CloudTrail, S3 log archive, KMS, Object Lock, Firehose and Security Lake |
 | `live/50-logging` | yes | yes | account | FP-9 deployment entry |
 | `modules/finops` | yes | via examples/finops | account | FP-10 budgets, cost anomaly detection, cost categories and CUR exports |
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |

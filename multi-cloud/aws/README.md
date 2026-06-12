@@ -36,7 +36,7 @@ aws/
 | `35-connectivity` | [`live/35-connectivity`](live/35-connectivity), [`modules/connectivity`](modules/connectivity) | ✅ 第一版（Transit Gateway / RAM sharing） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
 | `45-compliance` | [`live/45-compliance`](live/45-compliance), [`modules/compliance`](modules/compliance) | ✅ 第一版（AWS Config recorder / Security Hub / GuardDuty） |
-| `50-logging` | [`live/50-logging`](live/50-logging), [`modules/logging`](modules/logging) | ✅ 第一版（CloudTrail / log archive / Object Lock / Firehose） |
+| `50-logging` | [`live/50-logging`](live/50-logging), [`modules/logging`](modules/logging) | ✅ 第一版（CloudTrail / log archive / Object Lock / Firehose / Security Lake） |
 | `55-delegation` | [`live/55-delegation`](live/55-delegation), [`modules/delegation`](modules/delegation) | ✅ 第一版（Delegated Admin / governed RAM sharing） |
 | `60-finops` | [`live/60-finops`](live/60-finops), [`modules/finops`](modules/finops) | ✅ 第一版（Budgets / Cost Anomaly / Cost Categories / CUR） |
 | `70-workload-onboarding` | [`live/70-workload-onboarding`](live/70-workload-onboarding), [`modules/workload-onboarding`](modules/workload-onboarding) | ✅ 第一版（workload access role / metadata handoff） |

@@ -2,7 +2,7 @@
 
 ## 目标
 
-日志归档是企业 Landing Zone 的审计底座：组织级 CloudTrail、Config/SecurityHub/GuardDuty findings、VPC Flow Logs 和服务访问日志最终都应进入专用 log archive 账号，并使用加密、版本化、对象锁和保留期保护。FP-9 第一版聚焦 CloudTrail 组织级审计归档，并提供 Firehose 到 S3 的通用日志接入通道。
+日志归档是企业 Landing Zone 的审计底座：组织级 CloudTrail、Config/SecurityHub/GuardDuty findings、VPC Flow Logs 和服务访问日志最终都应进入专用 log archive 账号，并使用加密、版本化、对象锁和保留期保护。FP-9 第一版聚焦 CloudTrail 组织级审计归档，提供 Firehose 到 S3 的通用日志接入通道，并可启用 Security Lake 汇聚标准安全日志源。
 
 ## 云原生服务
 
@@ -13,19 +13,20 @@
 - CloudWatch Logs：CloudTrail 近实时投递。
 - CloudTrail organization trail：组织级多区域管理事件与可选数据事件审计。
 - Kinesis Data Firehose：把应用、网络或服务日志缓冲、压缩后写入 log archive S3。
+- Security Lake：按 OCSF 标准汇聚 AWS 原生安全日志源，供安全分析和 SIEM 消费。
 
 ## 模块边界
 
 由 [`modules/logging`](../modules/logging) 实现：
 
-- **负责**：创建/消费 log archive bucket、KMS key、CloudWatch log group、组织级 CloudTrail、S3 bucket policy、Object Lock、版本化、加密配置和可选 Firehose S3 delivery stream。
-- **不负责**：Security Lake、每类业务服务日志源配置、SIEM 集成。
+- **负责**：创建/消费 log archive bucket、KMS key、CloudWatch log group、组织级 CloudTrail、S3 bucket policy、Object Lock、版本化、加密配置、可选 Firehose S3 delivery stream、可选 Security Lake data lake 和 AWS log source。
+- **不负责**：每类业务服务日志源配置、自定义 Security Lake source、SIEM 集成。
 
 下游协作：
 
 - `modules/compliance` 产生 Config/SecurityHub/GuardDuty findings。
 - `modules/org-policies` 阻断删除日志和关闭审计能力。
-- VPC Flow Logs、S3 access logs、应用日志可通过 Firehose 进入同一归档模型；Security Lake 可作为后续安全数据湖扩展。
+- VPC Flow Logs、S3 access logs、应用日志可通过 Firehose 进入同一归档模型；CloudTrail、VPC Flow、Route53 等安全日志可通过 Security Lake 统一进入安全数据湖。
 
 ## 输入、输出与依赖
 
@@ -40,6 +41,8 @@
 - `cloudtrail`
 - `event_selectors`
 - `firehose_streams`
+- `security_lake_data_lakes`
+- `security_lake_aws_log_sources`
 
 主要输出：
 
@@ -47,6 +50,8 @@
 - `kms_key_arn`
 - `cloudtrail_arn`
 - `firehose_stream_arns`
+- `security_lake_arns`
+- `security_lake_log_source_ids`
 - `cloudwatch_log_group_name`
 
 依赖：
@@ -74,6 +79,7 @@ terraform -chdir=multi-cloud/aws/live/50-logging validate
 - 在 sandbox log archive account 创建日志桶和 KMS key。
 - 启用组织级 CloudTrail，确认管理事件进入 S3。
 - 创建 Firehose delivery stream，确认业务日志按 prefix、压缩和错误路径进入 S3。
+- 启用 Security Lake data lake 和 AWS log source，确认源状态和 S3 数据湖 ARN。
 - 测试 Object Lock 默认保留期和版本化。
 - 确认非授权主体不能删除日志对象或修改 bucket policy。
 
@@ -82,6 +88,7 @@ terraform -chdir=multi-cloud/aws/live/50-logging validate
 - 先停止 CloudTrail logging 或切换到替代日志桶。
 - 移除 CloudTrail event selectors 和 CloudWatch delivery。
 - 停止或迁移 Firehose 生产者，再删除 delivery stream。
+- 停止 Security Lake log source，再删除 data lake。
 - 删除 CloudTrail。
 - 只有在保留期、合规和审计要求允许时，才销毁日志桶和 KMS key。
 
@@ -92,5 +99,6 @@ terraform -chdir=multi-cloud/aws/live/50-logging validate
 | CloudTrail 无法写入 S3 | 检查 bucket policy、S3 key prefix、组织 trail ARN 和 ACL condition。 |
 | CloudWatch Logs 不投递 | 检查 `cloud_watch_logs_role_arn` trust policy 和 log group ARN。 |
 | Firehose 写入失败 | 检查 Firehose role 的 S3/KMS 权限、bucket ARN、prefix 和错误输出路径。 |
+| Security Lake 源未启用 | 检查 meta store manager role、区域、source name/version 和 delegated admin 流程。 |
 | Object Lock 配置失败 | 确认 bucket 创建时已启用 Object Lock。 |
 | KMS 权限不足 | 检查 CloudTrail 和日志读取角色是否具备 KMS encrypt/decrypt 权限。 |

@@ -18,6 +18,16 @@ output "firehose_stream_arns" {
   value       = { for key, stream in aws_kinesis_firehose_delivery_stream.s3 : key => stream.arn }
 }
 
+output "security_lake_arns" {
+  description = "Security Lake data lake ARNs by key."
+  value       = { for key, data_lake in aws_securitylake_data_lake.this : key => data_lake.arn }
+}
+
+output "security_lake_log_source_ids" {
+  description = "Security Lake AWS log source ids by key."
+  value       = { for key, source in aws_securitylake_aws_log_source.this : key => source.id }
+}
+
 output "cloudwatch_log_group_name" {
   description = "CloudTrail CloudWatch log group name."
   value       = aws_cloudwatch_log_group.cloudtrail.name

@@ -17,3 +17,13 @@ output "firehose_stream_arns" {
   description = "Firehose delivery stream ARNs by key."
   value       = module.logging.firehose_stream_arns
 }
+
+output "security_lake_arns" {
+  description = "Security Lake data lake ARNs by key."
+  value       = module.logging.security_lake_arns
+}
+
+output "security_lake_log_source_ids" {
+  description = "Security Lake AWS log source ids by key."
+  value       = module.logging.security_lake_log_source_ids
+}

@@ -76,3 +76,32 @@ variable "firehose_streams" {
   }))
   default = {}
 }
+
+variable "security_lake_data_lakes" {
+  description = "Security Lake data lakes keyed by stable identifier."
+  type = map(object({
+    meta_store_manager_role_arn = string
+    configurations = list(object({
+      region               = string
+      kms_key_id           = optional(string, null)
+      expiration_days      = optional(number, null)
+      transition_days      = optional(number, null)
+      transition_class     = optional(string, null)
+      replication_regions  = optional(list(string), [])
+      replication_role_arn = optional(string, null)
+    }))
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}
+
+variable "security_lake_aws_log_sources" {
+  description = "Security Lake AWS log sources keyed by stable identifier."
+  type = map(object({
+    source_name    = string
+    source_version = optional(string, null)
+    regions        = list(string)
+    accounts       = optional(list(string), [])
+  }))
+  default = {}
+}

@@ -10,10 +10,11 @@ Builds the central AWS log archive foundation.
 - Create a CloudWatch log group for CloudTrail delivery.
 - Create an organization CloudTrail with log file validation.
 - Create optional Kinesis Data Firehose delivery streams into the log archive.
+- Create optional Security Lake data lakes and AWS log sources.
 
 It does **not**:
 
-- Enable AWS Security Lake.
+- Create custom Security Lake sources, subscribers or SIEM integrations.
 - Create every workload service log source.
 - Replace FP-7 runtime compliance findings aggregation.
 
