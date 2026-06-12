@@ -52,6 +52,15 @@ terraform -chdir=multi-cloud/aws/examples/cross-account-access validate
 terraform -chdir=multi-cloud/aws/live/24-cross-account-access fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/24-cross-account-access init -backend=false
 terraform -chdir=multi-cloud/aws/live/24-cross-account-access validate
+
+# FP-5 IAM Identity Center
+terraform -chdir=multi-cloud/aws/examples/identity-center fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/identity-center init -backend=false
+terraform -chdir=multi-cloud/aws/examples/identity-center validate
+
+terraform -chdir=multi-cloud/aws/live/25-sso fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/25-sso init -backend=false
+terraform -chdir=multi-cloud/aws/live/25-sso validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -75,6 +84,8 @@ run organization-level `apply` from a personal admin session.
 | `modules/cross-account-access` | yes | via examples/cross-account-access | account | FP-4 STS, OIDC and AWS RAM sharing |
 | `live/24-cross-account-access` | yes | yes | account | FP-4 deployment entry; access maps default empty |
 | `policies/iam_trust.rego` | — | conftest verify | — | FP-4 trust policy wildcard principal guardrail tests |
+| `modules/identity-center` | yes | via examples/identity-center | account | FP-5 permission sets, assignments and optional Identity Store objects |
+| `live/25-sso` | yes | yes | account | FP-5 deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |

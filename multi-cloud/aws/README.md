@@ -29,8 +29,9 @@ aws/
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
 | `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
 | `15-departments` | [`live/15-departments`](live/15-departments), [`modules/department`](modules/department) | ✅ 第一版（department OU / admin role / tag baseline） |
-| `20-identity` | [`modules/identity`](modules/identity) | 🟡 待实现（IAM roles / Identity Center 对接） |
+| `20-identity` | [`modules/identity`](modules/identity) | 🟡 骨架目录（基础 IAM 边界待补） |
 | `24-cross-account-access` | [`live/24-cross-account-access`](live/24-cross-account-access), [`modules/cross-account-access`](modules/cross-account-access) | ✅ 第一版（STS / OIDC / RAM sharing） |
+| `25-sso` | [`live/25-sso`](live/25-sso), [`modules/identity-center`](modules/identity-center) | ✅ 第一版（IAM Identity Center permission sets / assignments） |
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
 | `50-logging` | [`modules/logging`](modules/logging) | 🟡 待实现（CloudTrail / log archive） |
@@ -48,11 +49,12 @@ aws/
 3. `15-departments`：业务部门 OU、部门管理员角色、部门标签基线。
 4. `20-identity`：SSO、角色、权限边界。
 5. `24-cross-account-access`：安全、CI/CD、日志、网络等跨账号访问路径。
-6. `30-network`：网络基线。
-7. `40-security`：安全基线和 Guardrails。
-8. `50-logging`：日志审计与集中归档。
-9. `60-finops`：标签、预算、成本告警。
-10. `70-workload-onboarding`：业务接入模板。
+6. `25-sso`：IAM Identity Center permission set 与账号分配。
+7. `30-network`：网络基线。
+8. `40-security`：安全基线和 Guardrails。
+9. `50-logging`：日志审计与集中归档。
+10. `60-finops`：标签、预算、成本告警。
+11. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 

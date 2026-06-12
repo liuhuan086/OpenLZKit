@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -61,10 +61,11 @@
 
 ### FP-5 人员 SSO：IAM Identity Center
 
+- **状态**：✅ 第一版已实现（`modules/identity-center`、`live/25-sso`、`examples/identity-center`、`docs/identity-model.md`）。
 - **场景**：人员通过 IAM Identity Center 登录，按 permission set 分配到账号/OU，不在成员账号里建 IAM user。
 - **AWS 能力**：IAM Identity Center permission set、account assignment；Identity Store group/user。
 - **Terraform**：`aws_ssoadmin_permission_set`、`aws_ssoadmin_managed_policy_attachment`、`aws_ssoadmin_account_assignment`、`aws_identitystore_group`、`aws_identitystore_user`、`aws_identitystore_group_membership`。
-- **落地**：新增 `modules/identity-center`；在 `live/25-sso` 消费。
+- **落地**：`modules/identity-center`；在 `live/25-sso` 消费。
 - **验收**：permission set 映射到统一角色模型；优先 group assignment；fmt+validate 通过。
 
 ### FP-6 网络互联：Transit Gateway / RAM
