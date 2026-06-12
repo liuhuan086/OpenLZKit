@@ -54,6 +54,14 @@ terraform -chdir=multi-cloud/aws/live/24-cross-account-access init -backend=fals
 terraform -chdir=multi-cloud/aws/live/24-cross-account-access validate
 
 # FP-5 IAM Identity Center
+terraform -chdir=multi-cloud/aws/examples/identity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/identity init -backend=false
+terraform -chdir=multi-cloud/aws/examples/identity validate
+
+terraform -chdir=multi-cloud/aws/live/20-identity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/20-identity init -backend=false
+terraform -chdir=multi-cloud/aws/live/20-identity validate
+
 terraform -chdir=multi-cloud/aws/examples/identity-center fmt -check -recursive
 terraform -chdir=multi-cloud/aws/examples/identity-center init -backend=false
 terraform -chdir=multi-cloud/aws/examples/identity-center validate
@@ -146,6 +154,8 @@ run organization-level `apply` from a personal admin session.
 | `modules/cross-account-access` | yes | via examples/cross-account-access | account | FP-4 STS, OIDC and AWS RAM sharing |
 | `live/24-cross-account-access` | yes | yes | account | FP-4 deployment entry; access maps default empty |
 | `policies/iam_trust.rego` | — | conftest verify | — | FP-4 trust policy wildcard principal guardrail tests |
+| `modules/identity` | yes | via examples/identity | account | IAM account alias, password policy, permission boundaries and customer policies |
+| `live/20-identity` | yes | yes | account | account-local IAM baseline deployment entry |
 | `modules/identity-center` | yes | via examples/identity-center | account | FP-5 permission sets, assignments and optional Identity Store objects |
 | `live/25-sso` | yes | yes | account | FP-5 deployment entry; maps default empty |
 | `modules/network` | yes | via examples/network | account | VPC, subnet, route table, endpoints, flow logs baseline |

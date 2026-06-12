@@ -29,7 +29,7 @@ aws/
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
 | `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
 | `15-departments` | [`live/15-departments`](live/15-departments), [`modules/department`](modules/department) | ✅ 第一版（department OU / admin role / tag baseline） |
-| `20-identity` | [`modules/identity`](modules/identity) | 🟡 骨架目录（基础 IAM 边界待补） |
+| `20-identity` | [`live/20-identity`](live/20-identity), [`modules/identity`](modules/identity) | ✅ 第一版（account alias / password policy / permission boundary） |
 | `24-cross-account-access` | [`live/24-cross-account-access`](live/24-cross-account-access), [`modules/cross-account-access`](modules/cross-account-access) | ✅ 第一版（STS / OIDC / RAM sharing） |
 | `25-sso` | [`live/25-sso`](live/25-sso), [`modules/identity-center`](modules/identity-center) | ✅ 第一版（IAM Identity Center permission sets / assignments） |
 | `30-network` | [`live/30-network`](live/30-network), [`modules/network`](modules/network) | ✅ 第一版（VPC / subnet / endpoint / flow log baseline） |

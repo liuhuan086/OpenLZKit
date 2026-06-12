@@ -2,7 +2,7 @@
 
 ## 目标
 
-AWS Landing Zone 的人员访问应通过 IAM Identity Center 获得短期凭证，按组分配 permission set 到账号，而不是在成员账号内创建 IAM user 或长期 access key。机器访问由 FP-4 的 STS/OIDC 跨账号角色承载；本域聚焦人员 SSO。
+AWS Landing Zone 的人员访问应通过 IAM Identity Center 获得短期凭证，按组分配 permission set 到账号，而不是在成员账号内创建 IAM user 或长期 access key。机器访问由 FP-4 的 STS/OIDC 跨账号角色承载；账号内 IAM 基线用于账号别名、应急密码策略、权限边界和客户托管策略。
 
 ## 云原生服务
 
@@ -10,10 +10,17 @@ AWS Landing Zone 的人员访问应通过 IAM Identity Center 获得短期凭证
 - IAM Identity Center Account Assignment：把 permission set 分配给账号中的 group 或 user。
 - Identity Store Group/User/Membership：可选创建本地身份对象；生产通常接入外部 IdP 同步。
 - IAM Managed Policy / Inline Policy：permission set 的权限来源。
+- IAM Account Alias / Password Policy：成员账号可读标识与应急 IAM 用户密码约束。
+- IAM Permission Boundary：约束成员账号内工作负载角色和例外角色的最大权限。
 
 ## 模块边界
 
-由 [`modules/identity-center`](../modules/identity-center) 实现：
+账号 IAM 基线由 [`modules/identity`](../modules/identity) 实现：
+
+- **负责**：账号 alias、账号密码策略、permission boundary policy、客户托管 policy。
+- **不负责**：创建 IAM user、长期 access key、人员 SSO 分配、跨账号机器角色。
+
+人员 SSO 由 [`modules/identity-center`](../modules/identity-center) 实现：
 
 - **负责**：创建 permission set、managed policy attachment、inline policy、可选 group/user/membership、account assignment。
 - **不负责**：启用 IAM Identity Center、接入外部 IdP、创建 AWS 账号、创建跨账号机器角色。
@@ -43,9 +50,13 @@ AWS Landing Zone 的人员访问应通过 IAM Identity Center 获得短期凭证
 - `permission_sets`：permission set map。
 - `assignments`：账号分配 map，显式指定 principal 和 target account。
 - `groups`、`users`、`group_memberships`：可选本地 Identity Store 对象。
+- `permission_boundaries`：账号内权限边界 policy map。
+- `managed_policies`：账号内客户托管 policy map。
 
 主要输出：
 
+- `permission_boundary_arns`
+- `managed_policy_arns`
 - `permission_set_arns`
 - `group_ids`
 - `user_ids`
@@ -69,6 +80,14 @@ terraform -chdir=multi-cloud/aws/examples/identity-center validate
 terraform -chdir=multi-cloud/aws/live/25-sso fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/25-sso init -backend=false
 terraform -chdir=multi-cloud/aws/live/25-sso validate
+
+terraform -chdir=multi-cloud/aws/examples/identity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/identity init -backend=false
+terraform -chdir=multi-cloud/aws/examples/identity validate
+
+terraform -chdir=multi-cloud/aws/live/20-identity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/20-identity init -backend=false
+terraform -chdir=multi-cloud/aws/live/20-identity validate
 ```
 
 集成验证：
