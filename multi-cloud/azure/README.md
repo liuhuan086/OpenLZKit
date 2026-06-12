@@ -31,6 +31,7 @@ azure/
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（Storage state 账户 + GitHub OIDC 联合身份 + CI 角色） |
 | `10-org` | [`modules/org`](modules/org), [`modules/subscription-vending`](modules/subscription-vending) | ✅ 已实现（管理组层级 + 订阅工厂 FP-1，订阅创建默认关闭） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 RBAC 角色 + 分配，组优先） |
+| `40-security` | [`modules/policy-guardrails`](modules/policy-guardrails) | ✅ 已实现（Azure Policy 组织护栏 FP-2：允许地域 / 禁公网 blob） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化
