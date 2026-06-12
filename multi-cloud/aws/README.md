@@ -26,7 +26,7 @@ aws/
 
 | 层 | 实现 | 状态 |
 |---|---|---|
-| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
+| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 第一版（S3 state / DynamoDB lock / KMS / CI role） |
 | `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
 | `15-departments` | [`live/15-departments`](live/15-departments), [`modules/department`](modules/department) | ✅ 第一版（department OU / admin role / tag baseline） |
 | `20-identity` | [`live/20-identity`](live/20-identity), [`modules/identity`](modules/identity) | ✅ 第一版（account alias / password policy / permission boundary） |

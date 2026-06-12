@@ -9,6 +9,11 @@ require a sandbox AWS Organization or delegated sandbox account.
 # Documentation links / text checks
 rg -n "FP-1|FP-10|Organizations|IAM Identity Center|Transit Gateway" docs README.md
 
+# Bootstrap state backend and CI/CD entry
+terraform -chdir=multi-cloud/aws/live/00-bootstrap fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/00-bootstrap init -backend=false
+terraform -chdir=multi-cloud/aws/live/00-bootstrap validate
+
 # FP-1 Organizations OU baseline
 terraform -chdir=multi-cloud/aws/examples/basic fmt -check -recursive
 terraform -chdir=multi-cloud/aws/examples/basic init -backend=false
@@ -143,6 +148,7 @@ run organization-level `apply` from a personal admin session.
 | Target | fmt | validate | plan | notes |
 |---|:--:|:--:|:--:|---|
 | `docs/enterprise-scenarios.md` | — | text | — | FP-1..FP-10 AWS enterprise roadmap |
+| `live/00-bootstrap` | yes | yes | account | S3 state, DynamoDB lock, optional KMS and CI/CD role |
 | `modules/org` | yes | via examples/basic | account | FP-1 OU hierarchy |
 | `modules/account-factory` | yes | via examples/account-factory | account | FP-1 account vending, apply requires approval |
 | `live/10-org` | yes | yes | account | FP-1 deployment entry; accounts default empty |
@@ -172,8 +178,6 @@ run organization-level `apply` from a personal admin session.
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
 | `modules/workload-onboarding` | yes | via examples/workload-onboarding | account | workload access role and metadata handoff |
 | `live/70-workload-onboarding` | yes | yes | account | workload onboarding deployment entry; maps default empty |
-| `modules/*` | pending | pending | account | remaining feature points |
-| `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
