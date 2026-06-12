@@ -34,6 +34,15 @@ terraform -chdir=multi-cloud/aws/live/40-security init -backend=false
 terraform -chdir=multi-cloud/aws/live/40-security validate
 
 conftest verify --policy multi-cloud/aws/policies
+
+# FP-3 business departments
+terraform -chdir=multi-cloud/aws/examples/departments fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/departments init -backend=false
+terraform -chdir=multi-cloud/aws/examples/departments validate
+
+terraform -chdir=multi-cloud/aws/live/15-departments fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/15-departments init -backend=false
+terraform -chdir=multi-cloud/aws/live/15-departments validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -52,8 +61,10 @@ run organization-level `apply` from a personal admin session.
 | `modules/org-policies` | yes | via examples/org-policies | account | FP-2 SCP and Tag Policy |
 | `live/40-security` | yes | yes | account | FP-2 deployment entry; attachments default empty |
 | `policies/organizations.rego` | — | conftest verify | — | FP-2 Organizations policy guardrail tests |
+| `modules/department` | yes | via examples/departments | account | FP-3 department OU, admin role and tag baseline |
+| `live/15-departments` | yes | yes | account | FP-3 deployment entry; departments default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
-| `policies/` | pending | pending | — | AWS Conftest/Rego guardrails pending |
+| `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).

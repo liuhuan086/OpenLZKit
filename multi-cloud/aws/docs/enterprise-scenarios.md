@@ -18,8 +18,8 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2 已有第一版，其余功能点待补齐 |
-| policies | 🟡 | AWS plan-time guardrails 待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3 已有第一版，其余功能点待补齐 |
+| policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
 
@@ -43,10 +43,11 @@
 
 ### FP-3 业务部门管理（Departments / Business Units）
 
+- **状态**：✅ 第一版已实现（`modules/department`、`live/15-departments`、`examples/departments`、`docs/department-model.md`）。
 - **场景**：不同业务部门各自的 OU + 部门级 SCP/Tag Policy + 部门管理员角色 + 成本归属标签。
 - **AWS 能力**：Organizations OU、SCP、Tag Policy、IAM role。
 - **Terraform**：组合 OU、policy attachment、`aws_iam_role`、`aws_iam_role_policy_attachment`。
-- **落地**：新增 `modules/department`；在 `live/15-departments` 消费。
+- **落地**：`modules/department`；在 `live/15-departments` 消费。
 - **验收**：每个部门一套 OU/role/tag baseline；trust 限定到平台/SSO/部门主体；fmt+validate 通过。
 
 ### FP-4 跨账号访问（Cross-account Access）

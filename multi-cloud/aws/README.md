@@ -28,6 +28,7 @@ aws/
 |---|---|---|
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
 | `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
+| `15-departments` | [`live/15-departments`](live/15-departments), [`modules/department`](modules/department) | ✅ 第一版（department OU / admin role / tag baseline） |
 | `20-identity` | [`modules/identity`](modules/identity) | 🟡 待实现（IAM roles / Identity Center 对接） |
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
@@ -43,12 +44,13 @@ aws/
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
 2. `10-org`：AWS Organizations OU 基线与账号售卖入口。
-3. `20-identity`：SSO、角色、权限边界。
-4. `30-network`：网络基线。
-5. `40-security`：安全基线和 Guardrails。
-6. `50-logging`：日志审计与集中归档。
-7. `60-finops`：标签、预算、成本告警。
-8. `70-workload-onboarding`：业务接入模板。
+3. `15-departments`：业务部门 OU、部门管理员角色、部门标签基线。
+4. `20-identity`：SSO、角色、权限边界。
+5. `30-network`：网络基线。
+6. `40-security`：安全基线和 Guardrails。
+7. `50-logging`：日志审计与集中归档。
+8. `60-finops`：标签、预算、成本告警。
+9. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 
