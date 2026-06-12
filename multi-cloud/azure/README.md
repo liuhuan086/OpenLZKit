@@ -37,6 +37,7 @@ azure/
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VNet/子网 + 默认拒绝 NSG） |
 | `35-connectivity` | [`modules/connectivity`](modules/connectivity) | ✅ 已实现（FP-6：Hub-Spoke VNet peering，spoke 间隔离） |
 | `40-security` | [`modules/policy-guardrails`](modules/policy-guardrails) | ✅ 已实现（Azure Policy 组织护栏 FP-2：允许地域 / 禁公网 blob） |
+| `45-compliance` | [`modules/compliance`](modules/compliance) | ✅ 已实现（FP-7：Defender for Cloud 计划 + 告警联系人） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央 Log Analytics 工作区 + 诊断设置路由） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（管理组预算 + 阈值告警 + 强制 owner 标签） |
 | 其他层 | — | 🚧 待实现（见路线图） |
