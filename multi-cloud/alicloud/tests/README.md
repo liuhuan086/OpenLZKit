@@ -22,6 +22,8 @@ terraform -chdir=live/20-identity init -backend=false
 terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network init -backend=false
 terraform -chdir=live/30-network validate
+terraform -chdir=live/40-security init -backend=false
+terraform -chdir=live/40-security validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -40,5 +42,6 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `live/10-org` | ✅ | ✅ | account | OSS backend via `-backend-config` |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
+| `modules/security` + `live/40-security` | ✅ | ✅ | account | RAM password policy + security preference |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
