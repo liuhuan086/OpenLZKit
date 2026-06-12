@@ -64,3 +64,10 @@ skip-check:
   - CKV_AWS_290  # write without constraints — permission boundary ceiling by design
   - CKV_AWS_355  # wildcard resource — permission boundary ceiling by design
   - CKV2_AWS_40  # full IAM privileges — permission boundary ceiling by design
+
+  # --- Azure state-bootstrap context (controls depend on resources not yet created) ---
+  - CKV2_AZURE_1   # Storage CMK — bootstrap predates Key Vault; platform-managed + infra encryption used
+  - CKV2_AZURE_21  # Blob read logging — requires Log Analytics (created later in 50-logging)
+  - CKV2_AZURE_33  # Storage private endpoint — requires a VNet (created later in 30-network)
+  - CKV_AZURE_33   # Queue service logging — no queue service is used
+  - CKV_AZURE_59   # Storage public access — state backend must stay reachable; harden with a private endpoint in production
