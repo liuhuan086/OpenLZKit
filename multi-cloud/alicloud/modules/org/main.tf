@@ -16,7 +16,7 @@ locals {
     }
   ]...)
 
-  # Unified lookup of every folder id by key, for account placement.
+  # Unified lookup of every folder id by key (top-level and "<parent>/<child>").
   folder_ids = merge(
     { for k, f in alicloud_resource_manager_folder.top : k => f.folder_id },
     { for k, f in alicloud_resource_manager_folder.child : k => f.folder_id },
@@ -35,12 +35,4 @@ resource "alicloud_resource_manager_folder" "child" {
 
   folder_name      = "${var.name_prefix}${each.value.display_name}"
   parent_folder_id = alicloud_resource_manager_folder.top[each.value.parent_key].folder_id
-}
-
-resource "alicloud_resource_manager_account" "this" {
-  for_each = var.accounts
-
-  display_name = each.value.display_name
-  folder_id    = local.folder_ids[each.value.folder_key]
-  tags         = merge(var.tags, each.value.tags)
 }

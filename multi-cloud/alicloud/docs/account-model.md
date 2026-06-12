@@ -15,13 +15,20 @@
 
 由 [`modules/org`](../modules/org) 实现：
 
-- **负责**：读取已启用的 Resource Directory，创建 folder 层级，可选创建成员账号。
+- **负责**：读取已启用的 Resource Directory，创建 folder 层级。
 - **不负责**：启用 Resource Directory（属 `live/00-bootstrap` 的一次性操作）、RAM、网络、日志、计费。
+
+由 [`modules/account-factory`](../modules/account-factory) 实现：
+
+- **负责**：按标准契约创建成员账号，放入指定 folder，合并并校验 FinOps 标签。
+- **不负责**：创建 folder、配置账号内 RAM/网络/日志基线、处理账号回收流程。
 
 ## 4. 输入、输出与依赖
 
-- 输入：`name_prefix`、`folders`（一到两级层级）、可选 `accounts`、`tags`。
-- 输出：`root_folder_id`、`folder_ids`、`account_ids`。
+- `modules/org` 输入：`name_prefix`、`folders`（一到两级层级）。
+- `modules/org` 输出：`root_folder_id`、`folder_ids`。
+- `modules/account-factory` 输入：`folder_ids`、可选 `accounts`、`common_tags`、`required_tag_keys`。
+- `modules/account-factory` 输出：`account_ids`、`account_display_names`。
 - 依赖：Resource Directory 已启用；调用方具备 ResourceManager 权限。
 
 ## 5. 推荐账号/文件夹结构

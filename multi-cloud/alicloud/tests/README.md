@@ -13,6 +13,11 @@ terraform -chdir=examples/basic fmt -check -recursive
 terraform -chdir=examples/basic init -backend=false
 terraform -chdir=examples/basic validate
 
+# validate the account factory contract via its example
+terraform -chdir=examples/account-factory fmt -check -recursive
+terraform -chdir=examples/account-factory init -backend=false
+terraform -chdir=examples/account-factory validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
@@ -47,8 +52,9 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | Target | fmt | validate | plan | notes |
 |---|:--:|:--:|:--:|---|
 | `live/00-bootstrap` | ✅ | ✅ | account | local state → migrate to OSS; OIDC CI role |
-| `modules/org` (via `examples/basic`) | ✅ | ✅ | account | folders only; accounts off by default |
-| `live/10-org` | ✅ | ✅ | account | OSS backend via `-backend-config` |
+| `modules/org` (via `examples/basic`) | ✅ | ✅ | account | folders only |
+| `modules/account-factory` (via `examples/account-factory`) | ✅ | ✅ | account | opt-in member accounts + required FinOps tags |
+| `live/10-org` | ✅ | ✅ | account | folders + account factory; OSS backend via `-backend-config` |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/security` + `live/40-security` | ✅ | ✅ | account | RAM password policy + security preference |

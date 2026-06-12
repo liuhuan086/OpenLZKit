@@ -27,7 +27,7 @@ alicloud/
 | 层 | 实现 | 状态 |
 |---|---|---|
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（启用 Resource Directory、OSS state 桶、GitHub OIDC + CI/CD plan 角色） |
-| `10-org` | [`modules/org`](modules/org) | ✅ 已实现（Resource Directory 文件夹层级，账号创建默认关闭） |
+| `10-org` | [`modules/org`](modules/org) + [`modules/account-factory`](modules/account-factory) | ✅ 已实现（Resource Directory 文件夹层级 + opt-in 账号工厂，账号创建默认关闭） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（可假设 RAM 角色，SSO/联邦导向，不建长期用户） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | `40-security` | [`modules/security`](modules/security) | ✅ 已实现（RAM 密码策略 + 安全偏好：强制 MFA、禁用户管 AK） |
@@ -44,7 +44,7 @@ alicloud/
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
-2. `10-org`：组织、账号/订阅/项目/文件夹结构。
+2. `10-org`：组织、账号/订阅/项目/文件夹结构（账号工厂默认空输入）。
 3. `20-identity`：SSO、角色、权限边界。
 4. `30-network`：网络基线。
 5. `40-security`：安全基线和 Guardrails。

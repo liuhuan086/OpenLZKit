@@ -23,10 +23,11 @@
 
 ### FP-1 多账号管理：账号工厂（Account Vending）
 
+- **状态**：✅ 已实现第一版（`modules/account-factory` + `live/10-org` 空输入接入 + 静态示例）。
 - **场景**：平台团队按标准流程批量创建业务/环境成员账号，落入对应 folder，强制标签与命名。
 - **阿里云能力**：Resource Directory 成员账号。
-- **Terraform**：`alicloud_resource_manager_account`（`display_name`、`folder_id`、`type`、`tags`）。
-- **落地**：新增 `modules/account-factory`；在 `live/10-org` 消费（默认空 map，创建账号有计费影响，需显式开启）。
+- **Terraform**：`alicloud_resource_manager_account`（`display_name`、`folder_id`、`tags`）。
+- **落地**：`modules/account-factory`；在 `live/10-org` 消费（默认空 map，创建账号有计费影响，需显式开启）。
 - **验收**：从 folder key 映射创建账号；标签包含 FinOps 标签集；fmt+validate 通过。
 
 ### FP-2 组织护栏：管控策略（Control Policies / SCP 等价）
