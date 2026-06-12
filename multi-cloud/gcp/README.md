@@ -30,6 +30,7 @@ gcp/
 |---|---|---|
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（GCS state 桶 + GitHub WIF + CI 服务账号） |
 | `10-org` | [`modules/org`](modules/org), [`modules/project-factory`](modules/project-factory) | ✅ 已实现（Folder 层级 + 项目工厂 FP-1，项目创建默认关闭） |
+| `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 IAM 角色 + 绑定，组优先） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化
