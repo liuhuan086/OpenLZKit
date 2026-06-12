@@ -33,6 +33,7 @@ azure/
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 RBAC 角色 + 分配，组优先） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VNet/子网 + 默认拒绝 NSG） |
 | `40-security` | [`modules/policy-guardrails`](modules/policy-guardrails) | ✅ 已实现（Azure Policy 组织护栏 FP-2：允许地域 / 禁公网 blob） |
+| `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央 Log Analytics 工作区 + 诊断设置路由） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化

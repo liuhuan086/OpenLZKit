@@ -15,6 +15,7 @@ terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/1
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
+terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 ```
 
 ## Plan / integration (sandbox subscription) — manual
@@ -34,5 +35,6 @@ terraform -chdir=live/10-org plan -var subscription_id=<sub-guid>
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | sub | custom RBAC roles + assignments |
 | `modules/network` + `live/30-network` | ✅ | ✅ | sub | Hub-Spoke VNets; default-deny NSG |
 | `modules/policy-guardrails` + `live/40-security` | ✅ | ✅ | sub | Azure Policy deny guardrails |
+| `modules/logging` + `live/50-logging` | ✅ | ✅ | sub | central Log Analytics + diagnostics |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
