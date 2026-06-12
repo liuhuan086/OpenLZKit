@@ -19,7 +19,7 @@
 |---|---|---|
 | docs | ✅ | 企业级深化文档与各域模型已覆盖当前第一版实现 |
 | modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding 均已有第一版；Security Lake、CUR/BI 等可继续深化 |
-| policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
+| policies | ✅ | 已覆盖 Organizations、IAM trust、IAM policy、S3 state 和标签类 plan-time guardrails；后续可按合规框架继续扩展 |
 
 ## 深化功能点（计划）
 

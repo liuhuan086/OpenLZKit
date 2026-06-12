@@ -178,6 +178,6 @@ run organization-level `apply` from a personal admin session.
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
 | `modules/workload-onboarding` | yes | via examples/workload-onboarding | account | workload access role and metadata handoff |
 | `live/70-workload-onboarding` | yes | yes | account | workload onboarding deployment entry; maps default empty |
-| `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
+| `policies/` | yes | conftest verify | — | Organizations, IAM trust, IAM policy, S3 state and tag guardrail tests |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
