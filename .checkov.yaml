@@ -73,3 +73,7 @@ skip-check:
   - CKV_AZURE_59   # Storage public access — state backend must stay reachable; harden with a private endpoint in production
   - CKV_AZURE_21   # Defender contact high-severity email — module defaults alert_notifications = true (var indirection)
   - CKV_AZURE_22   # Defender contact email to admins — module defaults alerts_to_admins = true (var indirection)
+
+  # --- GCP state-bootstrap context (controls depend on resources not yet created) ---
+  - CKV_GCP_62   # GCS bucket access logging — bootstrap predates the central log-sink bucket
+  - CKV_GCP_125  # WIF trust policy — a repo-restricted attribute_condition is set (var indirection hides it)

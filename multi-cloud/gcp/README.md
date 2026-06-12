@@ -28,7 +28,9 @@ gcp/
 
 | 层 | 实现 | 状态 |
 |---|---|---|
-| 全部 | — | 🚧 待实现（见路线图） |
+| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（GCS state 桶 + GitHub WIF + CI 服务账号） |
+| `10-org` | [`modules/org`](modules/org), [`modules/project-factory`](modules/project-factory) | ✅ 已实现（Folder 层级 + 项目工厂 FP-1，项目创建默认关闭） |
+| 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化
 
