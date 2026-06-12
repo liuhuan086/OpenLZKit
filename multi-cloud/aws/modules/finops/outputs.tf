@@ -27,3 +27,18 @@ output "cur_report_names" {
   description = "CUR report names by key."
   value       = { for key, report in aws_cur_report_definition.this : key => report.report_name }
 }
+
+output "quicksight_data_source_arns" {
+  description = "QuickSight Athena data source ARNs by key."
+  value       = { for key, data_source in aws_quicksight_data_source.athena : key => data_source.arn }
+}
+
+output "quicksight_folder_arns" {
+  description = "QuickSight folder ARNs by key."
+  value       = { for key, folder in aws_quicksight_folder.this : key => folder.arn }
+}
+
+output "quicksight_group_arns" {
+  description = "QuickSight group ARNs by key."
+  value       = { for key, group in aws_quicksight_group.this : key => group.arn }
+}

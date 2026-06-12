@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | ✅ | 企业级深化文档与各域模型已覆盖当前第一版实现 |
-| modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding、CUR、Firehose、Security Lake 均已有第一版；BI 等可继续深化 |
+| modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding、CUR、Firehose、Security Lake、BI handoff 均已有第一版 |
 | policies | ✅ | 已覆盖 Organizations、IAM trust、IAM policy、S3 state 和标签类 plan-time guardrails；后续可按合规框架继续扩展 |
 
 ## 深化功能点（计划）
@@ -107,11 +107,11 @@
 ### FP-10 FinOps 与预算治理深化
 
 - **状态**：✅ 第一版已实现（`modules/finops`、`live/60-finops`、`examples/finops`、`docs/finops-model.md`）。
-- **场景**：强制成本标签、预算告警、异常检测、部门成本归集、sandbox 限额。
-- **AWS 能力**：Organizations Tag Policy、AWS Budgets、Cost Anomaly Detection、Cost Categories。
-- **Terraform**：`aws_budgets_budget`、`aws_ce_anomaly_monitor`、`aws_ce_anomaly_subscription`、`aws_ce_cost_category`。
+- **场景**：强制成本标签、预算告警、异常检测、部门成本归集、sandbox 限额、CUR 明细导出和 BI 接入。
+- **AWS 能力**：Organizations Tag Policy、AWS Budgets、Cost Anomaly Detection、Cost Categories、Cost and Usage Reports、QuickSight。
+- **Terraform**：`aws_budgets_budget`、`aws_ce_anomaly_monitor`、`aws_ce_anomaly_subscription`、`aws_ce_cost_category`、`aws_cur_report_definition`、`aws_quicksight_data_source`、`aws_quicksight_folder`、`aws_quicksight_group`。
 - **落地**：扩展 `modules/finops`；在 `live/60-finops` 消费。
-- **验收**：预算与异常检测可按部门/账号/env 维度声明；fmt+validate 通过。
+- **验收**：预算与异常检测可按部门/账号/env 维度声明；CUR 可落入 S3/Athena；QuickSight 接入资产可声明；fmt+validate 通过。
 
 ## 推进顺序
 

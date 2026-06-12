@@ -94,6 +94,48 @@ variable "cur_reports" {
   default = {}
 }
 
+variable "quicksight_athena_data_sources" {
+  description = "QuickSight Athena data sources for FinOps reporting, keyed by stable identifier."
+  type = map(object({
+    data_source_id = string
+    name           = string
+    work_group     = optional(string, null)
+    role_arn       = optional(string, null)
+    permissions = optional(list(object({
+      principal = string
+      actions   = list(string)
+    })), [])
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}
+
+variable "quicksight_folders" {
+  description = "QuickSight folders for FinOps reporting assets, keyed by stable identifier."
+  type = map(object({
+    folder_id         = string
+    name              = optional(string, null)
+    folder_type       = optional(string, null)
+    parent_folder_arn = optional(string, null)
+    permissions = optional(list(object({
+      principal = string
+      actions   = list(string)
+    })), [])
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}
+
+variable "quicksight_groups" {
+  description = "QuickSight groups for FinOps reporting access, keyed by stable identifier."
+  type = map(object({
+    group_name  = string
+    namespace   = optional(string, "default")
+    description = optional(string, "")
+  }))
+  default = {}
+}
+
 variable "common_tags" {
   description = "Tags merged onto FinOps resources that support tagging."
   type        = map(string)

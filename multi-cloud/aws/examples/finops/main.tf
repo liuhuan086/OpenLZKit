@@ -70,4 +70,39 @@ module "finops" {
       ]
     }
   }
+
+  quicksight_groups = {
+    finops_viewers = {
+      group_name  = "finops-viewers"
+      description = "FinOps report viewers."
+    }
+  }
+
+  quicksight_folders = {
+    finops = {
+      folder_id   = "finops"
+      name        = "FinOps"
+      folder_type = "SHARED"
+      tags = {
+        owner       = "cloud-finops"
+        cost_center = "cc-9000"
+        env         = "shared"
+        project     = "finops"
+      }
+    }
+  }
+
+  quicksight_athena_data_sources = {
+    cur = {
+      data_source_id = "cur-athena"
+      name           = "CUR Athena"
+      work_group     = "primary"
+      tags = {
+        owner       = "cloud-finops"
+        cost_center = "cc-9000"
+        env         = "shared"
+        project     = "finops"
+      }
+    }
+  }
 }

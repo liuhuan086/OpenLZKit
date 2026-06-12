@@ -174,7 +174,7 @@ run organization-level `apply` from a personal admin session.
 | `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |
 | `modules/logging` | yes | via examples/logging | account | FP-9 CloudTrail, S3 log archive, KMS, Object Lock, Firehose and Security Lake |
 | `live/50-logging` | yes | yes | account | FP-9 deployment entry |
-| `modules/finops` | yes | via examples/finops | account | FP-10 budgets, cost anomaly detection, cost categories and CUR exports |
+| `modules/finops` | yes | via examples/finops | account | FP-10 budgets, cost anomaly detection, cost categories, CUR exports and BI handoff |
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
 | `modules/workload-onboarding` | yes | via examples/workload-onboarding | account | workload access role and metadata handoff |
 | `live/70-workload-onboarding` | yes | yes | account | workload onboarding deployment entry; maps default empty |

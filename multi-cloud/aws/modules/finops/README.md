@@ -10,13 +10,14 @@ Cost and Usage Report exports.
 - Create Cost Categories for department, account or environment allocation.
 - Create optional Cost and Usage Report definitions.
 - Create optional hardened S3 buckets for CUR delivery.
+- Create optional QuickSight Athena data sources, folders and groups for BI handoff.
 
 It does **not**:
 
 - Create Organizations Tag Policies; those live in `modules/org-policies` and
   `modules/department`.
 - Replace billing account approval workflows.
-- Create dashboards or QuickSight assets.
+- Create finished dashboards or analyses.
 
 ## Testing
 

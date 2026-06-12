@@ -4,6 +4,16 @@ locals {
     key => merge(var.common_tags, bucket.tags)
   }
 
+  quicksight_data_source_tags = {
+    for key, data_source in var.quicksight_athena_data_sources :
+    key => merge(var.common_tags, data_source.tags)
+  }
+
+  quicksight_folder_tags = {
+    for key, folder in var.quicksight_folders :
+    key => merge(var.common_tags, folder.tags)
+  }
+
   anomaly_subscription_monitor_arns = {
     for key, subscription in var.anomaly_subscriptions :
     key => [for monitor_key in subscription.monitor_keys : aws_ce_anomaly_monitor.this[monitor_key].arn]
@@ -228,4 +238,54 @@ resource "aws_cur_report_definition" "this" {
   s3_region                  = each.value.s3_region
   refresh_closed_reports     = each.value.refresh_closed_reports
   report_versioning          = each.value.report_versioning
+}
+
+resource "aws_quicksight_data_source" "athena" {
+  for_each = var.quicksight_athena_data_sources
+
+  data_source_id = each.value.data_source_id
+  name           = each.value.name
+  type           = "ATHENA"
+  tags           = local.quicksight_data_source_tags[each.key]
+
+  parameters {
+    athena {
+      role_arn   = each.value.role_arn
+      work_group = each.value.work_group
+    }
+  }
+
+  dynamic "permission" {
+    for_each = each.value.permissions
+    content {
+      principal = permission.value.principal
+      actions   = permission.value.actions
+    }
+  }
+}
+
+resource "aws_quicksight_folder" "this" {
+  for_each = var.quicksight_folders
+
+  folder_id         = each.value.folder_id
+  name              = each.value.name
+  folder_type       = each.value.folder_type
+  parent_folder_arn = each.value.parent_folder_arn
+  tags              = local.quicksight_folder_tags[each.key]
+
+  dynamic "permissions" {
+    for_each = each.value.permissions
+    content {
+      principal = permissions.value.principal
+      actions   = permissions.value.actions
+    }
+  }
+}
+
+resource "aws_quicksight_group" "this" {
+  for_each = var.quicksight_groups
+
+  group_name  = each.value.group_name
+  namespace   = each.value.namespace
+  description = each.value.description
 }
