@@ -27,7 +27,7 @@ aws/
 | 层 | 实现 | 状态 |
 |---|---|---|
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
-| `10-org` | [`modules/org`](modules/org) | 🟡 待实现（Organizations OU / account vending） |
+| `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
 | `20-identity` | [`modules/identity`](modules/identity) | 🟡 待实现（IAM roles / Identity Center 对接） |
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
 | `40-security` | [`modules/security`](modules/security) | 🟡 待实现（SCP / security guardrails） |
@@ -42,7 +42,7 @@ aws/
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
-2. `10-org`：组织、账号/订阅/项目/文件夹结构。
+2. `10-org`：AWS Organizations OU 基线与账号售卖入口。
 3. `20-identity`：SSO、角色、权限边界。
 4. `30-network`：网络基线。
 5. `40-security`：安全基线和 Guardrails。

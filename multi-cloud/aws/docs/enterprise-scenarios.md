@@ -18,17 +18,18 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | 目录已存在，主体实现待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | AWS plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
 
 ### FP-1 多账号管理：组织与账号工厂（Organizations / Account Vending）
 
+- **状态**：✅ 第一版已实现（`modules/org`、`modules/account-factory`、`live/10-org`、`examples/basic`、`examples/account-factory`）。
 - **场景**：平台团队按标准流程创建/导入业务、环境、安全、网络、共享服务账号，放入对应 OU，强制命名、email、标签和生命周期约束。
 - **AWS 能力**：AWS Organizations OU / Account；生产可对接 Control Tower Account Factory 或 AFT。
 - **Terraform**：`aws_organizations_organizational_unit`、`aws_organizations_account`。
-- **落地**：新增 `modules/org`（OU 层级）与 `modules/account-factory`（账号售卖，默认空 map，避免误创建真实账号）；在 `live/10-org` 消费。
+- **落地**：`modules/org`（OU 层级）与 `modules/account-factory`（账号售卖，默认空 map，避免误创建真实账号）；在 `live/10-org` 消费。
 - **验收**：OU key 可稳定引用；账号创建显式启用；输出 OU/account ids；fmt+validate 通过。
 
 ### FP-2 组织护栏：SCP 与 Tag Policy
