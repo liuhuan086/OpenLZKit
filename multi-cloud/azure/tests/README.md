@@ -23,6 +23,7 @@ terraform -chdir=live/45-compliance init -backend=false && terraform -chdir=live
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 terraform -chdir=live/55-delegation init -backend=false && terraform -chdir=live/55-delegation validate
 terraform -chdir=live/60-finops   init -backend=false && terraform -chdir=live/60-finops   validate
+terraform -chdir=live/70-workload-onboarding init -backend=false && terraform -chdir=live/70-workload-onboarding validate
 ```
 
 ## Plan / integration (sandbox subscription) — manual
@@ -50,5 +51,6 @@ terraform -chdir=live/10-org plan -var subscription_id=<sub-guid>
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | sub | central Log Analytics + diagnostics |
 | `modules/delegation` + `live/55-delegation` | ✅ | ✅ | sub | Azure Lighthouse delegation (no Owner) |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | sub | MG budgets + require-tag policy |
+| `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | sub | resource group + identity + tags |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).

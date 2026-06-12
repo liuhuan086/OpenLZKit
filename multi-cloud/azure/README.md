@@ -24,7 +24,7 @@ azure/
 
 ## 实现状态
 
-🚧 实现进行中（文档先行）。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)，按 FP 逐轮交付，每个 stack 通过 CI 五道门禁（fmt / validate / tflint / checkov / conftest）。
+✅ MVP 七域 + 企业级深化 FP-1~FP-8 全部落地（文档先行）。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)，按 FP 逐轮交付，每个 stack 通过 CI 五道门禁（fmt / validate / tflint / checkov / conftest）。
 
 | 层 | 实现 | 状态 |
 |---|---|---|
@@ -41,7 +41,7 @@ azure/
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央 Log Analytics 工作区 + 诊断设置路由） |
 | `55-delegation` | [`modules/delegation`](modules/delegation) | ✅ 已实现（FP-8：Azure Lighthouse 委派，禁 Owner） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（管理组预算 + 阈值告警 + 强制 owner 标签） |
-| 其他层 | — | 🚧 待实现（见路线图） |
+| `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | ✅ 已实现（资源组 + 工作负载托管身份 + 标准标签模板） |
 
 ## 企业级深化
 
