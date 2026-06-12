@@ -13,6 +13,7 @@ terraform fmt -check -recursive
 terraform -chdir=live/00-bootstrap init -backend=false && terraform -chdir=live/00-bootstrap validate
 terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/10-org      validate
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
+terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
 ```
 
 ## Plan / integration (sandbox project) — manual
@@ -30,5 +31,6 @@ terraform -chdir=live/10-org plan -var project_id=<seed-project> -var org_id=<or
 | `modules/org` + `live/10-org` | ✅ | ✅ | proj | folder hierarchy |
 | `modules/project-factory` | ✅ | ✅ | proj | project vending (off by default) |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | proj | custom IAM roles + bindings |
+| `modules/org-policies` + `live/40-security` | ✅ | ✅ | proj | Organization Policy guardrails |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
