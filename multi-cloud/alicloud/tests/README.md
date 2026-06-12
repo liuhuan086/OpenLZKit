@@ -43,6 +43,11 @@ terraform -chdir=examples/connectivity fmt -check -recursive
 terraform -chdir=examples/connectivity init -backend=false
 terraform -chdir=examples/connectivity validate
 
+# validate the Cloud Config compliance contract via its example
+terraform -chdir=examples/compliance fmt -check -recursive
+terraform -chdir=examples/compliance init -backend=false
+terraform -chdir=examples/compliance validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
@@ -62,6 +67,8 @@ terraform -chdir=live/35-connectivity init -backend=false
 terraform -chdir=live/35-connectivity validate
 terraform -chdir=live/40-security init -backend=false
 terraform -chdir=live/40-security validate
+terraform -chdir=live/45-compliance init -backend=false
+terraform -chdir=live/45-compliance validate
 terraform -chdir=live/50-logging init -backend=false
 terraform -chdir=live/50-logging validate
 terraform -chdir=live/60-finops init -backend=false
@@ -99,6 +106,8 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/connectivity` (via `examples/connectivity`) | ✅ | ✅ | account | CEN + Transit Router + VPC attachments + route tables |
 | `live/35-connectivity` | ✅ | ✅ | account | opt-in CEN/TR cross-account connectivity |
 | `modules/security` + `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | RAM password policy + opt-in organization guardrails |
+| `modules/compliance` (via `examples/compliance`) | ✅ | ✅ | account | Cloud Config aggregator + aggregate rules + compliance packs |
+| `live/45-compliance` | ✅ | ✅ | account | opt-in Cloud Config runtime compliance |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
 | `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | resource group + workload role + tags |

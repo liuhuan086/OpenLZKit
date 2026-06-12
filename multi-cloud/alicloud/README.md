@@ -35,6 +35,7 @@ alicloud/
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | `35-connectivity` | [`modules/connectivity`](modules/connectivity) | ✅ 已实现（CEN + Transit Router + VPC attachment + 跨账号 grant + 路由表） |
 | `40-security` | [`modules/security`](modules/security) + [`modules/control-policies`](modules/control-policies) | ✅ 已实现（RAM 密码策略 + 安全偏好 + opt-in 组织管控策略） |
+| `45-compliance` | [`modules/compliance`](modules/compliance) | ✅ 已实现（Cloud Config recorder + aggregator + aggregate rules + compliance packs + delivery） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（标签策略强制 FinOps 标签集） |
 | `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | ✅ 已实现（资源组 + 工作负载角色 + 标准标签模板） |
@@ -56,9 +57,10 @@ alicloud/
 7. `30-network`：网络基线。
 8. `35-connectivity`：CEN/Transit Router 跨账号网络互联。
 9. `40-security`：安全基线和 Guardrails。
-10. `50-logging`：日志审计与集中归档。
-11. `60-finops`：标签、预算、成本告警。
-12. `70-workload-onboarding`：业务接入模板。
+10. `45-compliance`：Cloud Config 运行时合规聚合。
+11. `50-logging`：日志审计与集中归档。
+12. `60-finops`：标签、预算、成本告警。
+13. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 

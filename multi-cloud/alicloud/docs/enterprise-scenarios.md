@@ -77,10 +77,11 @@
 
 ### FP-7 集中合规（Cloud Config）
 
+- **状态**：✅ 已实现第一版（`modules/compliance` + `live/45-compliance` + 静态示例）。
 - **场景**：运行时持续检测——未打标签、公网 OSS、未加密磁盘、SG 公网高危——跨账号聚合。
 - **阿里云能力**：Cloud Config 规则 + 多账号聚合器。
-- **Terraform**：`alicloud_config_rule`、`alicloud_config_aggregator`、`alicloud_config_aggregate_config_rule`。
-- **落地**：新增 `modules/compliance`；在新 `live/45-compliance` 消费（委派到安全账号）。
+- **Terraform**：`alicloud_config_configuration_recorder`、`alicloud_config_aggregator`、`alicloud_config_aggregate_config_rule`、`alicloud_config_aggregate_compliance_pack`、`alicloud_config_aggregate_delivery`。
+- **落地**：`modules/compliance`；在 `live/45-compliance` 消费（委派到安全账号）。
 - **验收**：托管规则集覆盖标签/加密/公网；与 plan-time Conftest 互补；fmt+validate 通过。
 
 ### FP-8 委派管理与资源共享（Delegated Admin / Resource Share）
