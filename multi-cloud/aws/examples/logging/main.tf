@@ -23,4 +23,18 @@ module "logging" {
       values = ["arn:aws:s3:::example-sensitive-bucket/"]
     }]
   }]
+
+  firehose_streams = {
+    application_json = {
+      name     = "application-json-archive"
+      role_arn = "arn:aws:iam::111122223333:role/firehose-log-archive"
+      prefix   = "application/!{timestamp:yyyy/MM/dd}/"
+      tags = {
+        owner       = "platform-logging"
+        cost_center = "cc-7000"
+        env         = "shared"
+        project     = "log-archive"
+      }
+    }
+  }
 }

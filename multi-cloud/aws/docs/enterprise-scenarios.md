@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | ✅ | 企业级深化文档与各域模型已覆盖当前第一版实现 |
-| modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding、CUR 均已有第一版；Security Lake、BI 等可继续深化 |
+| modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding、CUR、Firehose 均已有第一版；Security Lake、BI 等可继续深化 |
 | policies | ✅ | 已覆盖 Organizations、IAM trust、IAM policy、S3 state 和标签类 plan-time guardrails；后续可按合规框架继续扩展 |
 
 ## 深化功能点（计划）
@@ -100,7 +100,7 @@
 - **状态**：✅ 第一版已实现（`modules/logging`、`live/50-logging`、`examples/logging`、`docs/operations-runbook.md`）。
 - **场景**：组织级 CloudTrail、Config/SecurityHub/GuardDuty findings、VPC Flow Logs、S3 access logs、CloudWatch/Kinesis/Firehose 统一入 log archive/security lake。
 - **AWS 能力**：CloudTrail organization trail、S3 Object Lock、KMS、CloudWatch Logs、Firehose、Security Lake（可选）。
-- **Terraform**：`aws_cloudtrail`、`aws_s3_bucket`、`aws_s3_bucket_object_lock_configuration`、`aws_kms_key`、`aws_cloudwatch_log_group`、可选 Security Lake 资源。
+- **Terraform**：`aws_cloudtrail`、`aws_s3_bucket`、`aws_s3_bucket_object_lock_configuration`、`aws_kms_key`、`aws_cloudwatch_log_group`、`aws_kinesis_firehose_delivery_stream`、可选 Security Lake 资源。
 - **落地**：扩展 `modules/logging`；在 `live/50-logging` 消费。
 - **验收**：组织级 trail、集中加密、对象锁/保留期、防删除策略；fmt+validate 通过。
 

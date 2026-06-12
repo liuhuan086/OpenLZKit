@@ -7,4 +7,5 @@ module "logging" {
   kms_key_arn       = var.kms_key_arn
   cloudtrail        = var.cloudtrail
   event_selectors   = var.event_selectors
+  firehose_streams  = var.firehose_streams
 }

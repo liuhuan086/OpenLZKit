@@ -9,10 +9,11 @@ Builds the central AWS log archive foundation.
 - Create or consume a KMS key for log encryption.
 - Create a CloudWatch log group for CloudTrail delivery.
 - Create an organization CloudTrail with log file validation.
+- Create optional Kinesis Data Firehose delivery streams into the log archive.
 
 It does **not**:
 
-- Enable AWS Security Lake or Firehose pipelines.
+- Enable AWS Security Lake.
 - Create every workload service log source.
 - Replace FP-7 runtime compliance findings aggregation.
 

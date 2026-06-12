@@ -57,3 +57,22 @@ variable "event_selectors" {
   }))
   default = []
 }
+
+variable "firehose_streams" {
+  description = "Kinesis Data Firehose streams that deliver operational logs to S3."
+  type = map(object({
+    name                       = string
+    role_arn                   = string
+    bucket_arn                 = optional(string, null)
+    prefix                     = optional(string, "firehose/!{timestamp:yyyy/MM/dd}/")
+    error_output_prefix        = optional(string, "firehose-errors/!{firehose:error-output-type}/!{timestamp:yyyy/MM/dd}/")
+    buffering_interval         = optional(number, 300)
+    buffering_size             = optional(number, 5)
+    compression_format         = optional(string, "GZIP")
+    kms_key_arn                = optional(string, null)
+    cloudwatch_log_group_name  = optional(string, null)
+    cloudwatch_log_stream_name = optional(string, null)
+    tags                       = optional(map(string), {})
+  }))
+  default = {}
+}

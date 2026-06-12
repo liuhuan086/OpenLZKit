@@ -2,6 +2,21 @@ locals {
   kms_key_arn = var.create_kms_key ? aws_kms_key.logs[0].arn : var.kms_key_arn
   bucket_id   = var.create_log_bucket ? aws_s3_bucket.log_archive[0].id : var.log_bucket_name
   bucket_arn  = var.create_log_bucket ? aws_s3_bucket.log_archive[0].arn : "arn:aws:s3:::${var.log_bucket_name}"
+
+  firehose_bucket_arns = {
+    for key, stream in var.firehose_streams :
+    key => stream.bucket_arn == null ? local.bucket_arn : stream.bucket_arn
+  }
+
+  firehose_kms_key_arns = {
+    for key, stream in var.firehose_streams :
+    key => stream.kms_key_arn == null ? local.kms_key_arn : stream.kms_key_arn
+  }
+
+  firehose_tags = {
+    for key, stream in var.firehose_streams :
+    key => merge(var.common_tags, stream.tags)
+  }
 }
 
 data "aws_caller_identity" "current" {}
@@ -157,4 +172,32 @@ resource "aws_cloudtrail" "organization" {
   }
 
   depends_on = [aws_s3_bucket_policy.cloudtrail]
+}
+
+resource "aws_kinesis_firehose_delivery_stream" "s3" {
+  for_each = var.firehose_streams
+
+  name        = each.value.name
+  destination = "extended_s3"
+  tags        = local.firehose_tags[each.key]
+
+  extended_s3_configuration {
+    role_arn            = each.value.role_arn
+    bucket_arn          = local.firehose_bucket_arns[each.key]
+    prefix              = each.value.prefix
+    error_output_prefix = each.value.error_output_prefix
+    buffering_interval  = each.value.buffering_interval
+    buffering_size      = each.value.buffering_size
+    compression_format  = each.value.compression_format
+    kms_key_arn         = local.firehose_kms_key_arns[each.key]
+
+    dynamic "cloudwatch_logging_options" {
+      for_each = each.value.cloudwatch_log_group_name == null ? [] : [each.value]
+      content {
+        enabled         = true
+        log_group_name  = cloudwatch_logging_options.value.cloudwatch_log_group_name
+        log_stream_name = cloudwatch_logging_options.value.cloudwatch_log_stream_name
+      }
+    }
+  }
 }
