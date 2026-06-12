@@ -30,7 +30,7 @@ alicloud/
 | `10-org` | [`modules/org`](modules/org) + [`modules/account-factory`](modules/account-factory) | ✅ 已实现（Resource Directory 文件夹层级 + opt-in 账号工厂，账号创建默认关闭） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（可假设 RAM 角色，SSO/联邦导向，不建长期用户） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
-| `40-security` | [`modules/security`](modules/security) | ✅ 已实现（RAM 密码策略 + 安全偏好：强制 MFA、禁用户管 AK） |
+| `40-security` | [`modules/security`](modules/security) + [`modules/control-policies`](modules/control-policies) | ✅ 已实现（RAM 密码策略 + 安全偏好 + opt-in 组织管控策略） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（标签策略强制 FinOps 标签集） |
 | `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | ✅ 已实现（资源组 + 工作负载角色 + 标准标签模板） |

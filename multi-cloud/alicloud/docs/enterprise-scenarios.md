@@ -32,10 +32,11 @@
 
 ### FP-2 组织护栏：管控策略（Control Policies / SCP 等价）
 
+- **状态**：✅ 已实现第一版（`modules/control-policies` + `live/40-security` 空输入接入 + 静态示例）。
 - **场景**：组织层禁止高危操作——关闭 ActionTrail、超出允许地域、创建长期 AccessKey、公网暴露高危端口、删除日志归档。
 - **阿里云能力**：Resource Directory Control Policy（管控策略）。
 - **Terraform**：`alicloud_resource_manager_control_policy` + `alicloud_resource_manager_control_policy_attachment`。
-- **落地**：新增 `modules/control-policies`；在 `live/40-security` 附加到 Root / 指定 folder。
+- **落地**：`modules/control-policies`；在 `live/40-security` 附加到 Root / 指定 folder。
 - **验收**：策略文档为合法 JSON；按 effect_scope（RAM/Resource）声明；可附加到目标；Conftest 校验策略 JSON 结构。
 
 ### FP-3 业务部门管理（Departments）

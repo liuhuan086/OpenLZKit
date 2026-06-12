@@ -18,6 +18,11 @@ terraform -chdir=examples/account-factory fmt -check -recursive
 terraform -chdir=examples/account-factory init -backend=false
 terraform -chdir=examples/account-factory validate
 
+# validate the control policy contract via its example
+terraform -chdir=examples/control-policies fmt -check -recursive
+terraform -chdir=examples/control-policies init -backend=false
+terraform -chdir=examples/control-policies validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
@@ -57,7 +62,7 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `live/10-org` | ✅ | ✅ | account | folders + account factory; OSS backend via `-backend-config` |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
-| `modules/security` + `live/40-security` | ✅ | ✅ | account | RAM password policy + security preference |
+| `modules/security` + `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | RAM password policy + opt-in organization guardrails |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
 | `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | resource group + workload role + tags |
