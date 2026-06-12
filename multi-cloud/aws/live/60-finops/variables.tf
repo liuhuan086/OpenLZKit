@@ -64,3 +64,40 @@ variable "cost_categories" {
   }))
   default = {}
 }
+
+variable "cur_buckets" {
+  description = "Optional S3 buckets for Cost and Usage Reports, keyed by stable identifier."
+  type = map(object({
+    name          = string
+    force_destroy = optional(bool, false)
+    tags          = optional(map(string), {})
+  }))
+  default = {}
+}
+
+variable "cur_reports" {
+  description = "Cost and Usage Report definitions keyed by stable identifier."
+  type = map(object({
+    report_name                = string
+    time_unit                  = optional(string, "DAILY")
+    format                     = optional(string, "Parquet")
+    compression                = optional(string, "Parquet")
+    additional_schema_elements = optional(list(string), ["RESOURCES"])
+    additional_artifacts       = optional(list(string), ["ATHENA"])
+    s3_bucket_key              = optional(string, null)
+    s3_bucket_name             = optional(string, null)
+    s3_prefix                  = optional(string, "cur")
+    s3_region                  = optional(string, "us-east-1")
+    refresh_closed_reports     = optional(bool, true)
+    report_versioning          = optional(string, "OVERWRITE_REPORT")
+  }))
+  default = {}
+}
+
+variable "common_tags" {
+  description = "Tags merged onto FinOps resources that support tagging."
+  type        = map(string)
+  default = {
+    managed_by = "terraform"
+  }
+}

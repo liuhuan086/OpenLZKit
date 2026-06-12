@@ -1,4 +1,9 @@
 locals {
+  cur_bucket_tags = {
+    for key, bucket in var.cur_buckets :
+    key => merge(var.common_tags, bucket.tags)
+  }
+
   anomaly_subscription_monitor_arns = {
     for key, subscription in var.anomaly_subscriptions :
     key => [for monitor_key in subscription.monitor_keys : aws_ce_anomaly_monitor.this[monitor_key].arn]
@@ -27,7 +32,14 @@ locals {
   ])...)
 
   anomaly_subscription_subscribers = merge(local.anomaly_subscription_emails, local.anomaly_subscription_sns)
+
+  cur_report_bucket_names = {
+    for key, report in var.cur_reports :
+    key => report.s3_bucket_name != null ? report.s3_bucket_name : aws_s3_bucket.cur[report.s3_bucket_key].bucket
+  }
 }
+
+data "aws_caller_identity" "current" {}
 
 resource "aws_budgets_budget" "this" {
   for_each = var.budgets
@@ -108,4 +120,112 @@ resource "aws_ce_cost_category" "this" {
       }
     }
   }
+}
+
+resource "aws_s3_bucket" "cur" {
+  for_each = var.cur_buckets
+
+  bucket        = each.value.name
+  force_destroy = each.value.force_destroy
+  tags          = local.cur_bucket_tags[each.key]
+}
+
+resource "aws_s3_bucket_public_access_block" "cur" {
+  for_each = var.cur_buckets
+
+  bucket                  = aws_s3_bucket.cur[each.key].id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_ownership_controls" "cur" {
+  for_each = var.cur_buckets
+
+  bucket = aws_s3_bucket.cur[each.key].id
+
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "cur" {
+  for_each = var.cur_buckets
+
+  bucket = aws_s3_bucket.cur[each.key].id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "cur" {
+  for_each = var.cur_buckets
+
+  bucket = aws_s3_bucket.cur[each.key].id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "cur" {
+  for_each = var.cur_buckets
+
+  bucket = aws_s3_bucket.cur[each.key].id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "AllowBillingReportsBucketRead"
+        Effect = "Allow"
+        Principal = {
+          Service = "billingreports.amazonaws.com"
+        }
+        Action = [
+          "s3:GetBucketAcl",
+          "s3:GetBucketPolicy",
+        ]
+        Resource = aws_s3_bucket.cur[each.key].arn
+        Condition = {
+          StringEquals = {
+            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
+      },
+      {
+        Sid    = "AllowBillingReportsWrite"
+        Effect = "Allow"
+        Principal = {
+          Service = "billingreports.amazonaws.com"
+        }
+        Action   = "s3:PutObject"
+        Resource = "${aws_s3_bucket.cur[each.key].arn}/*"
+        Condition = {
+          StringEquals = {
+            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_cur_report_definition" "this" {
+  for_each = var.cur_reports
+
+  report_name                = each.value.report_name
+  time_unit                  = each.value.time_unit
+  format                     = each.value.format
+  compression                = each.value.compression
+  additional_schema_elements = each.value.additional_schema_elements
+  additional_artifacts       = each.value.additional_artifacts
+  s3_bucket                  = local.cur_report_bucket_names[each.key]
+  s3_prefix                  = each.value.s3_prefix
+  s3_region                  = each.value.s3_region
+  refresh_closed_reports     = each.value.refresh_closed_reports
+  report_versioning          = each.value.report_versioning
 }

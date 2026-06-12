@@ -46,4 +46,28 @@ module "finops" {
       }]
     }
   }
+
+  cur_buckets = {
+    analytics = {
+      name = "example-openlzkit-cur"
+      tags = {
+        owner       = "cloud-finops"
+        cost_center = "cc-9000"
+        env         = "shared"
+        project     = "finops"
+      }
+    }
+  }
+
+  cur_reports = {
+    hourly_parquet = {
+      report_name   = "hourly-parquet-cur"
+      time_unit     = "HOURLY"
+      s3_bucket_key = "analytics"
+      s3_prefix     = "cur/hourly"
+      additional_artifacts = [
+        "ATHENA",
+      ]
+    }
+  }
 }

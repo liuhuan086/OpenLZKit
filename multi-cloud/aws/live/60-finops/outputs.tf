@@ -12,3 +12,13 @@ output "cost_category_arns" {
   description = "Cost category ARNs by key."
   value       = module.finops.cost_category_arns
 }
+
+output "cur_bucket_names" {
+  description = "CUR bucket names by key."
+  value       = module.finops.cur_bucket_names
+}
+
+output "cur_report_names" {
+  description = "CUR report names by key."
+  value       = module.finops.cur_report_names
+}

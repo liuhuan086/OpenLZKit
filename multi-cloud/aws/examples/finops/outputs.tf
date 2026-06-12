@@ -7,3 +7,13 @@ output "anomaly_monitor_arns" {
   description = "Cost anomaly monitor ARNs by key."
   value       = module.finops.anomaly_monitor_arns
 }
+
+output "cur_bucket_names" {
+  description = "CUR bucket names by key."
+  value       = module.finops.cur_bucket_names
+}
+
+output "cur_report_names" {
+  description = "CUR report names by key."
+  value       = module.finops.cur_report_names
+}
