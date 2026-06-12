@@ -30,6 +30,7 @@ azure/
 |---|---|---|
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（Storage state 账户 + GitHub OIDC 联合身份 + CI 角色） |
 | `10-org` | [`modules/org`](modules/org), [`modules/subscription-vending`](modules/subscription-vending) | ✅ 已实现（管理组层级 + 订阅工厂 FP-1，订阅创建默认关闭） |
+| `15-departments` | [`modules/department`](modules/department) | ✅ 已实现（FP-3：部门管理组 + 部门 RBAC + 部门预算） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 RBAC 角色 + 分配，组优先） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VNet/子网 + 默认拒绝 NSG） |
 | `40-security` | [`modules/policy-guardrails`](modules/policy-guardrails) | ✅ 已实现（Azure Policy 组织护栏 FP-2：允许地域 / 禁公网 blob） |
