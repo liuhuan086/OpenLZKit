@@ -6,11 +6,39 @@ on:
     branches: [ main ]
 
 jobs:
-  static-checks:
+  fmt:
+    name: terraform fmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.2"
+          terraform_wrapper: false
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+
+  validate:
+    name: terraform validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.2"
+          terraform_wrapper: false
+      - name: Validate every module and live stack
+        shell: bash
         run: |
-          echo "Add terraform fmt, validate, tflint, checkov/tfsec and conftest here."
-          find . -maxdepth 4 -type f | sort
+          set -euo pipefail
+          # Auto-discover every directory containing Terraform files. Backend is
+          # disabled so no cloud credentials are needed; this is the static gate.
+          while IFS= read -r dir; do
+            echo "::group::validate ${dir}"
+            terraform -chdir="${dir}" init -backend=false -no-color
+            terraform -chdir="${dir}" validate -no-color
+            echo "::endgroup::"
+          done < <(find multi-cloud -type f -name '*.tf' -exec dirname {} \; | sort -u)
+
+  # TODO: add lint (tflint), security scan (checkov/tfsec) and policy (conftest)
+  # jobs as those toolchains are introduced.
