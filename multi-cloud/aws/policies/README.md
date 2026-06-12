@@ -9,6 +9,7 @@ resources by catching unsafe plan-time changes before apply.
 | File | Rule |
 |---|---|
 | [organizations.rego](organizations.rego) | Organizations SCP documents must not contain broad Allow statements or wildcard bypass conditions. |
+| [iam_trust.rego](iam_trust.rego) | IAM role trust policies must not trust wildcard AWS or federated principals. |
 
 Each policy ships with a `*_test.rego` file for offline unit tests.
 

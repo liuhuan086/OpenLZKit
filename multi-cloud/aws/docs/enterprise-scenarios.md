@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -52,10 +52,11 @@
 
 ### FP-4 跨账号访问（Cross-account Access）
 
+- **状态**：✅ 第一版已实现（`modules/cross-account-access`、`live/24-cross-account-access`、`examples/cross-account-access`、`docs/cross-account-access-model.md`、`policies/iam_trust.rego`）。
 - **场景**：安全账号只读审计所有成员账号；CI/CD 从自动化账号 assume role 到工作负载账号；日志账号集中收集；网络账号管理 TGW。
 - **AWS 能力**：IAM role trust policy、STS AssumeRole、OIDC federation、RAM Resource Share。
 - **Terraform**：`aws_iam_role`、`aws_iam_role_policy_attachment`、`aws_iam_openid_connect_provider`、`aws_ram_resource_share`。
-- **落地**：新增 `modules/cross-account-access`，按 `{trusted_principals, external_id, oidc_conditions, permissions}` 声明角色与信任。
+- **落地**：`modules/cross-account-access`，按 `{trusted_principals, external_id, oidc_conditions, permissions}` 声明角色与信任。
 - **验收**：trust policy 有来源账号/外部 ID/OIDC 条件；最小权限；Conftest 正反例禁止 `Principal="*"`。
 
 ### FP-5 人员 SSO：IAM Identity Center

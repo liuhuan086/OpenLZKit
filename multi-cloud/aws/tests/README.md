@@ -43,6 +43,15 @@ terraform -chdir=multi-cloud/aws/examples/departments validate
 terraform -chdir=multi-cloud/aws/live/15-departments fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/15-departments init -backend=false
 terraform -chdir=multi-cloud/aws/live/15-departments validate
+
+# FP-4 cross-account access
+terraform -chdir=multi-cloud/aws/examples/cross-account-access fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/cross-account-access init -backend=false
+terraform -chdir=multi-cloud/aws/examples/cross-account-access validate
+
+terraform -chdir=multi-cloud/aws/live/24-cross-account-access fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/24-cross-account-access init -backend=false
+terraform -chdir=multi-cloud/aws/live/24-cross-account-access validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -63,6 +72,9 @@ run organization-level `apply` from a personal admin session.
 | `policies/organizations.rego` | — | conftest verify | — | FP-2 Organizations policy guardrail tests |
 | `modules/department` | yes | via examples/departments | account | FP-3 department OU, admin role and tag baseline |
 | `live/15-departments` | yes | yes | account | FP-3 deployment entry; departments default empty |
+| `modules/cross-account-access` | yes | via examples/cross-account-access | account | FP-4 STS, OIDC and AWS RAM sharing |
+| `live/24-cross-account-access` | yes | yes | account | FP-4 deployment entry; access maps default empty |
+| `policies/iam_trust.rego` | — | conftest verify | — | FP-4 trust policy wildcard principal guardrail tests |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
