@@ -1,0 +1,9 @@
+# Copy to backend.hcl and fill in the values produced by live/00-bootstrap.
+# backend.hcl is gitignored (see repo .gitignore: *.tfvars is tracked separately;
+# do not commit real bucket names or account ids).
+#
+#   terraform init -backend-config=backend.hcl
+#
+bucket = "REPLACE-with-oss-state-bucket"
+region = "cn-hangzhou"
+# OSS backend uses RAM credentials from the environment / provider chain.

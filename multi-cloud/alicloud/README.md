@@ -22,6 +22,15 @@ alicloud/
 └── tests/
 ```
 
+## 实现状态
+
+| 层 | 模块 | 状态 |
+|---|---|---|
+| `10-org` | [`modules/org`](modules/org) | ✅ 已实现（Resource Directory 文件夹层级，fmt+validate 通过；账号创建默认关闭） |
+| 其他层 | — | 🚧 占位，待实现 |
+
+参见 [examples/basic](examples/basic) 与 [live/10-org](live/10-org)。
+
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
