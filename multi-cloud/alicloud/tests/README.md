@@ -48,6 +48,11 @@ terraform -chdir=examples/compliance fmt -check -recursive
 terraform -chdir=examples/compliance init -backend=false
 terraform -chdir=examples/compliance validate
 
+# validate the delegated admin / resource share contract via its example
+terraform -chdir=examples/delegation fmt -check -recursive
+terraform -chdir=examples/delegation init -backend=false
+terraform -chdir=examples/delegation validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
@@ -71,6 +76,8 @@ terraform -chdir=live/45-compliance init -backend=false
 terraform -chdir=live/45-compliance validate
 terraform -chdir=live/50-logging init -backend=false
 terraform -chdir=live/50-logging validate
+terraform -chdir=live/55-delegation init -backend=false
+terraform -chdir=live/55-delegation validate
 terraform -chdir=live/60-finops init -backend=false
 terraform -chdir=live/60-finops validate
 terraform -chdir=live/70-workload-onboarding init -backend=false
@@ -109,6 +116,8 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/compliance` (via `examples/compliance`) | ✅ | ✅ | account | Cloud Config aggregator + aggregate rules + compliance packs |
 | `live/45-compliance` | ✅ | ✅ | account | opt-in Cloud Config runtime compliance |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
+| `modules/delegation` (via `examples/delegation`) | ✅ | ✅ | account | delegated administrators + CloudSSO delegate + Resource Share |
+| `live/55-delegation` | ✅ | ✅ | account | opt-in delegated admin and governed sharing |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
 | `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | resource group + workload role + tags |
 | `policies/` (Conftest) | — | `verify` | — | tags / public-ingress / encryption rules + unit tests |

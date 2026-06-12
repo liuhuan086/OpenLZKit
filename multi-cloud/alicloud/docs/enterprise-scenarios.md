@@ -86,10 +86,11 @@
 
 ### FP-8 委派管理与资源共享（Delegated Admin / Resource Share）
 
+- **状态**：✅ 已实现第一版（`modules/delegation` + `live/55-delegation` + 静态示例）。
 - **场景**：把审计、合规、网络能力委派给专用成员账号；共享 Transit Router / VPC 给业务账号。
 - **阿里云能力**：Resource Directory delegated administrator；Resource Share。
-- **Terraform**：`alicloud_resource_manager_delegated_administrator`、`alicloud_resource_manager_resource_share` + `shared_resource` + `shared_target`。
-- **落地**：扩展 `modules/cross-account-access` 或新增 `modules/delegation`。
+- **Terraform**：`alicloud_resource_manager_delegated_administrator`、`alicloud_cloud_sso_delegate_account`、`alicloud_resource_manager_resource_share`。
+- **落地**：`modules/delegation`；在 `live/55-delegation` 消费。
 - **验收**：委派范围最小；共享目标受限；fmt+validate 通过。
 
 ## 推进顺序
