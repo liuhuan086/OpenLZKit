@@ -21,6 +21,7 @@ terraform -chdir=live/35-connectivity init -backend=false && terraform -chdir=li
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
 terraform -chdir=live/45-compliance init -backend=false && terraform -chdir=live/45-compliance validate
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
+terraform -chdir=live/55-delegation init -backend=false && terraform -chdir=live/55-delegation validate
 terraform -chdir=live/60-finops   init -backend=false && terraform -chdir=live/60-finops   validate
 ```
 
@@ -47,6 +48,7 @@ terraform -chdir=live/10-org plan -var subscription_id=<sub-guid>
 | `modules/policy-guardrails` + `live/40-security` | ✅ | ✅ | sub | Azure Policy deny guardrails |
 | `modules/compliance` + `live/45-compliance` | ✅ | ✅ | sub | Defender for Cloud plans |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | sub | central Log Analytics + diagnostics |
+| `modules/delegation` + `live/55-delegation` | ✅ | ✅ | sub | Azure Lighthouse delegation (no Owner) |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | sub | MG budgets + require-tag policy |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
