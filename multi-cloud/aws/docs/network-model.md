@@ -22,7 +22,7 @@ AWS Landing Zone 网络模型分为两层：`30-network` 承载未来 VPC baseli
 
 - 后续 `modules/network` 创建 VPC baseline 和 subnet。
 - `modules/cross-account-access` 创建网络自动化角色。
-- `modules/delegation` 后续启用组织级 RAM 共享和网络服务委派。
+- `modules/delegation` 启用组织级 RAM 共享和网络服务委派。
 
 ## 推荐网络域
 

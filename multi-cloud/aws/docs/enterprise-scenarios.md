@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7、FP-8 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -88,10 +88,11 @@
 
 ### FP-8 委派管理与资源共享（Delegated Admin / RAM）
 
+- **状态**：✅ 第一版已实现（`modules/delegation`、`live/55-delegation`、`examples/delegation`、`docs/delegation-model.md`）。
 - **场景**：把 Security Hub、GuardDuty、Config、Firewall Manager、IAM Access Analyzer 等能力委派给专用成员账号；共享 TGW/Subnet/License/AMI 等资源给业务账号。
 - **AWS 能力**：Organizations delegated administrator；AWS RAM。
 - **Terraform**：`aws_organizations_delegated_administrator`、`aws_ram_resource_share`、`aws_ram_principal_association`、`aws_ram_resource_association`。
-- **落地**：新增 `modules/delegation`；在 `live/55-delegation` 消费。
+- **落地**：`modules/delegation`；在 `live/55-delegation` 消费。
 - **验收**：委派 service principal 精确；共享目标受限；fmt+validate 通过。
 
 ### FP-9 日志、安全湖与审计归档深化

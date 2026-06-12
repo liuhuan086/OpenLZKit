@@ -23,7 +23,7 @@ FP-7 建立运行时合规与持续检测能力，用 AWS Config、Security Hub 
 
 - `modules/org-policies` 阻断关闭审计和检测服务。
 - 后续 `modules/logging` 提供集中 S3/KMS/CloudTrail/Config 归档。
-- 后续 `modules/delegation` 统一管理 Organizations delegated administrator。
+- `modules/delegation` 统一管理 Organizations delegated administrator。
 
 ## 推荐检测基线
 

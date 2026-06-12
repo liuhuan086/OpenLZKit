@@ -79,6 +79,15 @@ terraform -chdir=multi-cloud/aws/examples/compliance validate
 terraform -chdir=multi-cloud/aws/live/45-compliance fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/45-compliance init -backend=false
 terraform -chdir=multi-cloud/aws/live/45-compliance validate
+
+# FP-8 delegated administration and governed RAM sharing
+terraform -chdir=multi-cloud/aws/examples/delegation fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/delegation init -backend=false
+terraform -chdir=multi-cloud/aws/examples/delegation validate
+
+terraform -chdir=multi-cloud/aws/live/55-delegation fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/55-delegation init -backend=false
+terraform -chdir=multi-cloud/aws/live/55-delegation validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -108,6 +117,8 @@ run organization-level `apply` from a personal admin session.
 | `live/35-connectivity` | yes | yes | account | FP-6 deployment entry; maps default empty |
 | `modules/compliance` | yes | via examples/compliance | account | FP-7 AWS Config, Security Hub and GuardDuty |
 | `live/45-compliance` | yes | yes | account | FP-7 deployment entry; maps default empty |
+| `modules/delegation` | yes | via examples/delegation | account | FP-8 Organizations delegated admin and governed RAM sharing |
+| `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
