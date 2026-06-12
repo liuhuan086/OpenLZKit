@@ -62,9 +62,6 @@ jobs:
         with:
           directory: multi-cloud
           config_file: .checkov.yaml
-          # Report-only during triage; flipped to a hard gate once findings are
-          # fixed or documented as skips.
-          soft_fail: true
 
   policy:
     name: conftest policy

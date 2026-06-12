@@ -41,6 +41,14 @@ resource "aws_vpc" "this" {
   tags                             = local.vpc_tags
 }
 
+# Lock down the VPC's default security group: no ingress/egress rules, so it
+# denies all traffic (CIS / well-architected baseline). Workloads must use
+# explicit, narrowly-scoped security groups instead.
+resource "aws_default_security_group" "this" {
+  vpc_id = aws_vpc.this.id
+  tags   = merge(var.common_tags, { Name = "${var.name_prefix}${var.vpc.name}-default-deny" })
+}
+
 resource "aws_internet_gateway" "this" {
   count = var.create_internet_gateway ? 1 : 0
 
