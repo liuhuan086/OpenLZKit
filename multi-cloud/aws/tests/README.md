@@ -88,6 +88,15 @@ terraform -chdir=multi-cloud/aws/examples/delegation validate
 terraform -chdir=multi-cloud/aws/live/55-delegation fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/55-delegation init -backend=false
 terraform -chdir=multi-cloud/aws/live/55-delegation validate
+
+# FP-9 logging and audit archive
+terraform -chdir=multi-cloud/aws/examples/logging fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/logging init -backend=false
+terraform -chdir=multi-cloud/aws/examples/logging validate
+
+terraform -chdir=multi-cloud/aws/live/50-logging fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/50-logging init -backend=false
+terraform -chdir=multi-cloud/aws/live/50-logging validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -119,6 +128,8 @@ run organization-level `apply` from a personal admin session.
 | `live/45-compliance` | yes | yes | account | FP-7 deployment entry; maps default empty |
 | `modules/delegation` | yes | via examples/delegation | account | FP-8 Organizations delegated admin and governed RAM sharing |
 | `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |
+| `modules/logging` | yes | via examples/logging | account | FP-9 CloudTrail, S3 log archive, KMS and Object Lock |
+| `live/50-logging` | yes | yes | account | FP-9 deployment entry |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |

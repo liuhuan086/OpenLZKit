@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7、FP-8 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7、FP-8、FP-9 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -97,6 +97,7 @@
 
 ### FP-9 日志、安全湖与审计归档深化
 
+- **状态**：✅ 第一版已实现（`modules/logging`、`live/50-logging`、`examples/logging`、`docs/operations-runbook.md`）。
 - **场景**：组织级 CloudTrail、Config/SecurityHub/GuardDuty findings、VPC Flow Logs、S3 access logs、CloudWatch/Kinesis/Firehose 统一入 log archive/security lake。
 - **AWS 能力**：CloudTrail organization trail、S3 Object Lock、KMS、CloudWatch Logs、Firehose、Security Lake（可选）。
 - **Terraform**：`aws_cloudtrail`、`aws_s3_bucket`、`aws_s3_bucket_object_lock_configuration`、`aws_kms_key`、`aws_cloudwatch_log_group`、可选 Security Lake 资源。
