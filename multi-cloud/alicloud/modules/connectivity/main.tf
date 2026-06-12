@@ -61,15 +61,15 @@ resource "alicloud_cen_transit_router_route_table" "this" {
 resource "alicloud_cen_transit_router_vpc_attachment" "this" {
   for_each = var.vpc_attachments
 
-  cen_id                               = local.cen_id
-  transit_router_id                    = alicloud_cen_transit_router.this.transit_router_id
-  transit_router_vpc_attachment_name   = "${var.name_prefix}${each.value.name}"
+  cen_id                                = local.cen_id
+  transit_router_id                     = alicloud_cen_transit_router.this.transit_router_id
+  transit_router_vpc_attachment_name    = "${var.name_prefix}${each.value.name}"
   transit_router_attachment_description = "VPC attachment ${each.value.name}."
-  vpc_id                               = each.value.vpc_id
-  vpc_owner_id                         = each.value.vpc_owner_id
-  auto_publish_route_enabled           = each.value.auto_publish_route_enabled
-  force_delete                         = each.value.force_delete
-  tags                                 = local.attachment_tags[each.key]
+  vpc_id                                = each.value.vpc_id
+  vpc_owner_id                          = each.value.vpc_owner_id
+  auto_publish_route_enabled            = each.value.auto_publish_route_enabled
+  force_delete                          = each.value.force_delete
+  tags                                  = local.attachment_tags[each.key]
 
   dynamic "zone_mappings" {
     for_each = each.value.zone_mappings

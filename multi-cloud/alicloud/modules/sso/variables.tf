@@ -58,14 +58,14 @@ variable "groups" {
 variable "users" {
   description = "Optional local CloudSSO users keyed by stable identifier. Prefer SCIM for production identities."
   type = map(object({
-    user_name   = string
+    user_name    = string
     display_name = optional(string, null)
-    email       = optional(string, null)
-    first_name  = optional(string, null)
-    last_name   = optional(string, null)
-    description = optional(string, null)
-    status      = optional(string, null)
-    tags        = optional(map(string), {})
+    email        = optional(string, null)
+    first_name   = optional(string, null)
+    last_name    = optional(string, null)
+    description  = optional(string, null)
+    status       = optional(string, null)
+    tags         = optional(map(string), {})
   }))
   default = {}
 }
@@ -82,11 +82,11 @@ variable "group_memberships" {
 variable "access_configurations" {
   description = "CloudSSO access configurations keyed by stable identifier."
   type = map(object({
-    name                                     = string
-    description                              = optional(string, "")
-    session_duration                         = optional(number, 3600)
-    relay_state                              = optional(string, null)
-    force_remove_permission_policies         = optional(bool, true)
+    name                             = string
+    description                      = optional(string, "")
+    session_duration                 = optional(number, 3600)
+    relay_state                      = optional(string, null)
+    force_remove_permission_policies = optional(bool, true)
     permission_policies = optional(list(object({
       name     = string
       type     = string

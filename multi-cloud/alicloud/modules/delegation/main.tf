@@ -21,7 +21,7 @@ resource "alicloud_cloud_sso_delegate_account" "this" {
 resource "alicloud_resource_manager_resource_share" "this" {
   for_each = var.resource_shares
 
-  resource_share_name   = "${var.name_prefix}${each.value.name}"
+  resource_share_name    = "${var.name_prefix}${each.value.name}"
   allow_external_targets = each.value.allow_external_targets
   permission_names       = each.value.permission_names
   resource_arns          = each.value.resource_arns

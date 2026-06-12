@@ -87,13 +87,13 @@ variable "grant_attachments" {
 variable "route_entries" {
   description = "Explicit Transit Router route entries keyed by stable identifier."
   type = map(object({
-    route_table_key      = string
-    destination_cidr     = string
-    next_hop_type        = string
-    attachment_key       = optional(string, null)
-    next_hop_id          = optional(string, null)
-    name                 = optional(string, null)
-    description          = optional(string, null)
+    route_table_key  = string
+    destination_cidr = string
+    next_hop_type    = string
+    attachment_key   = optional(string, null)
+    next_hop_id      = optional(string, null)
+    name             = optional(string, null)
+    description      = optional(string, null)
   }))
   default = {}
 }

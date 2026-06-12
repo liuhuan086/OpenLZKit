@@ -55,11 +55,11 @@ resource "alicloud_config_aggregate_config_rule" "this" {
 resource "alicloud_config_aggregate_compliance_pack" "this" {
   for_each = var.compliance_packs
 
-  aggregator_id                = alicloud_config_aggregator.this.id
+  aggregator_id                  = alicloud_config_aggregator.this.id
   aggregate_compliance_pack_name = each.value.name
-  description                  = each.value.description
-  risk_level                   = each.value.risk_level
-  compliance_pack_template_id  = each.value.compliance_pack_template_id
+  description                    = each.value.description
+  risk_level                     = each.value.risk_level
+  compliance_pack_template_id    = each.value.compliance_pack_template_id
 
   dynamic "config_rule_ids" {
     for_each = local.compliance_pack_rule_ids[each.key]
@@ -79,15 +79,15 @@ resource "alicloud_config_aggregate_compliance_pack" "this" {
 resource "alicloud_config_aggregate_delivery" "this" {
   for_each = var.deliveries
 
-  aggregator_id                           = alicloud_config_aggregator.this.id
-  delivery_channel_name                   = each.value.name
-  description                             = each.value.description
-  delivery_channel_type                   = each.value.delivery_channel_type
-  delivery_channel_target_arn             = each.value.delivery_channel_target_arn
-  oversized_data_oss_target_arn           = each.value.oversized_data_oss_target_arn
-  delivery_channel_condition              = each.value.delivery_channel_condition
-  configuration_item_change_notification  = each.value.configuration_item_change_notification
-  configuration_snapshot                  = each.value.configuration_snapshot
-  non_compliant_notification              = each.value.non_compliant_notification
-  status                                  = each.value.status
+  aggregator_id                          = alicloud_config_aggregator.this.id
+  delivery_channel_name                  = each.value.name
+  description                            = each.value.description
+  delivery_channel_type                  = each.value.delivery_channel_type
+  delivery_channel_target_arn            = each.value.delivery_channel_target_arn
+  oversized_data_oss_target_arn          = each.value.oversized_data_oss_target_arn
+  delivery_channel_condition             = each.value.delivery_channel_condition
+  configuration_item_change_notification = each.value.configuration_item_change_notification
+  configuration_snapshot                 = each.value.configuration_snapshot
+  non_compliant_notification             = each.value.non_compliant_notification
+  status                                 = each.value.status
 }

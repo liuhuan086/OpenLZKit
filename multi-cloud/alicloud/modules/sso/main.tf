@@ -41,15 +41,15 @@ resource "alicloud_cloud_sso_group" "this" {
 resource "alicloud_cloud_sso_user" "this" {
   for_each = var.users
 
-  directory_id  = local.directory_id
-  user_name     = each.value.user_name
-  display_name  = each.value.display_name
-  email         = each.value.email
-  first_name    = each.value.first_name
-  last_name     = each.value.last_name
-  description   = each.value.description
-  status        = each.value.status
-  tags          = local.user_tags[each.key]
+  directory_id = local.directory_id
+  user_name    = each.value.user_name
+  display_name = each.value.display_name
+  email        = each.value.email
+  first_name   = each.value.first_name
+  last_name    = each.value.last_name
+  description  = each.value.description
+  status       = each.value.status
+  tags         = local.user_tags[each.key]
 }
 
 resource "alicloud_cloud_sso_user_attachment" "this" {
@@ -75,12 +75,12 @@ resource "alicloud_cloud_sso_user_attachment" "this" {
 resource "alicloud_cloud_sso_access_configuration" "this" {
   for_each = var.access_configurations
 
-  directory_id                              = local.directory_id
-  access_configuration_name                 = each.value.name
-  description                               = each.value.description
-  session_duration                          = each.value.session_duration
-  relay_state                               = each.value.relay_state
-  force_remove_permission_policies          = each.value.force_remove_permission_policies
+  directory_id                     = local.directory_id
+  access_configuration_name        = each.value.name
+  description                      = each.value.description
+  session_duration                 = each.value.session_duration
+  relay_state                      = each.value.relay_state
+  force_remove_permission_policies = each.value.force_remove_permission_policies
 
   dynamic "permission_policies" {
     for_each = each.value.permission_policies
@@ -95,13 +95,13 @@ resource "alicloud_cloud_sso_access_configuration" "this" {
 resource "alicloud_cloud_sso_access_assignment" "this" {
   for_each = var.assignments
 
-  directory_id             = local.directory_id
-  access_configuration_id  = alicloud_cloud_sso_access_configuration.this[each.value.access_configuration_key].access_configuration_id
-  principal_id             = local.assignment_principal_ids[each.key]
-  principal_type           = each.value.principal_type
-  target_id                = each.value.target_id
-  target_type              = each.value.target_type
-  deprovision_strategy     = each.value.deprovision_strategy
+  directory_id            = local.directory_id
+  access_configuration_id = alicloud_cloud_sso_access_configuration.this[each.value.access_configuration_key].access_configuration_id
+  principal_id            = local.assignment_principal_ids[each.key]
+  principal_type          = each.value.principal_type
+  target_id               = each.value.target_id
+  target_type             = each.value.target_type
+  deprovision_strategy    = each.value.deprovision_strategy
 
   lifecycle {
     precondition {
@@ -119,10 +119,10 @@ resource "alicloud_cloud_sso_access_assignment" "this" {
 resource "alicloud_cloud_sso_access_configuration_provisioning" "this" {
   for_each = var.provisionings
 
-  directory_id             = local.directory_id
-  access_configuration_id  = alicloud_cloud_sso_access_configuration.this[each.value.access_configuration_key].access_configuration_id
-  target_id                = each.value.target_id
-  target_type              = each.value.target_type
+  directory_id            = local.directory_id
+  access_configuration_id = alicloud_cloud_sso_access_configuration.this[each.value.access_configuration_key].access_configuration_id
+  target_id               = each.value.target_id
+  target_type             = each.value.target_type
 
   lifecycle {
     precondition {
