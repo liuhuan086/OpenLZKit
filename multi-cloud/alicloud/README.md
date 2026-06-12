@@ -32,6 +32,7 @@ alicloud/
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | `40-security` | [`modules/security`](modules/security) | ✅ 已实现（RAM 密码策略 + 安全偏好：强制 MFA、禁用户管 AK） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
+| `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（标签策略强制 FinOps 标签集） |
 | 其他层 | — | 🚧 占位，待实现 |
 
 所有已实现 stack 均通过 `terraform fmt + validate`（无需云账号）。参见 [examples/basic](examples/basic)。

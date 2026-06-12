@@ -26,6 +26,8 @@ terraform -chdir=live/40-security init -backend=false
 terraform -chdir=live/40-security validate
 terraform -chdir=live/50-logging init -backend=false
 terraform -chdir=live/50-logging validate
+terraform -chdir=live/60-finops init -backend=false
+terraform -chdir=live/60-finops validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -46,5 +48,6 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/security` + `live/40-security` | ✅ | ✅ | account | RAM password policy + security preference |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
+| `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
