@@ -28,6 +28,8 @@ terraform -chdir=live/50-logging init -backend=false
 terraform -chdir=live/50-logging validate
 terraform -chdir=live/60-finops init -backend=false
 terraform -chdir=live/60-finops validate
+terraform -chdir=live/70-workload-onboarding init -backend=false
+terraform -chdir=live/70-workload-onboarding validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -49,5 +51,6 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/security` + `live/40-security` | ✅ | ✅ | account | RAM password policy + security preference |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
+| `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | resource group + workload role + tags |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
