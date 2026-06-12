@@ -57,12 +57,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Auto-discover every cloud's policy directory so all clouds are gated.
+          # Auto-discover every policy dir that actually contains Rego, so all
+          # implemented clouds are gated while empty placeholder dirs are skipped.
           while IFS= read -r pol; do
             echo "::group::conftest verify ${pol}"
             conftest verify --policy "${pol}"
             echo "::endgroup::"
-          done < <(find multi-cloud -type d -name policies | sort)
+          done < <(find multi-cloud -name '*.rego' -exec dirname {} \; | sort -u)
 
   # TODO: add lint (tflint) and security scan (checkov/tfsec) jobs as those
   # toolchains are introduced.
