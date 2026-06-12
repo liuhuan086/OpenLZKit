@@ -53,6 +53,19 @@ jobs:
       - name: Run tflint (recursive)
         run: tflint --recursive --format compact
 
+  security:
+    name: checkov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: multi-cloud
+          config_file: .checkov.yaml
+          # Report-only during triage; flipped to a hard gate once findings are
+          # fixed or documented as skips.
+          soft_fail: true
+
   policy:
     name: conftest policy
     runs-on: ubuntu-latest

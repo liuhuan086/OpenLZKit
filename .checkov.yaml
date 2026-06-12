@@ -1,0 +1,8 @@
+# Checkov configuration for OpenLZKit Terraform.
+# Skips are documented and limited to checks that do not apply to reusable
+# Landing Zone template modules (concrete values are supplied by consumers).
+framework:
+  - terraform
+quiet: true
+compact: true
+download-external-modules: false
