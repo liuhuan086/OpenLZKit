@@ -32,6 +32,7 @@ azure/
 | `10-org` | [`modules/org`](modules/org), [`modules/subscription-vending`](modules/subscription-vending) | ✅ 已实现（管理组层级 + 订阅工厂 FP-1，订阅创建默认关闭） |
 | `15-departments` | [`modules/department`](modules/department) | ✅ 已实现（FP-3：部门管理组 + 部门 RBAC + 部门预算） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 RBAC 角色 + 分配，组优先） |
+| `24-cross-account-access` | [`modules/cross-account-access`](modules/cross-account-access) | ✅ 已实现（FP-4：托管身份联合 + 跨订阅 RBAC） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VNet/子网 + 默认拒绝 NSG） |
 | `40-security` | [`modules/policy-guardrails`](modules/policy-guardrails) | ✅ 已实现（Azure Policy 组织护栏 FP-2：允许地域 / 禁公网 blob） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央 Log Analytics 工作区 + 诊断设置路由） |

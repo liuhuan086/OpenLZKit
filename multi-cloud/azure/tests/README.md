@@ -14,6 +14,7 @@ terraform -chdir=live/00-bootstrap init -backend=false && terraform -chdir=live/
 terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/10-org      validate
 terraform -chdir=live/15-departments init -backend=false && terraform -chdir=live/15-departments validate
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
+terraform -chdir=live/24-cross-account-access init -backend=false && terraform -chdir=live/24-cross-account-access validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
@@ -36,6 +37,7 @@ terraform -chdir=live/10-org plan -var subscription_id=<sub-guid>
 | `modules/subscription-vending` | ✅ | ✅ | sub | subscription association/creation (off by default) |
 | `modules/department` + `live/15-departments` | ✅ | ✅ | sub | department MG + RBAC + budget |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | sub | custom RBAC roles + assignments |
+| `modules/cross-account-access` + `live/24-cross-account-access` | ✅ | ✅ | sub | managed identity federation + cross-sub RBAC |
 | `modules/network` + `live/30-network` | ✅ | ✅ | sub | Hub-Spoke VNets; default-deny NSG |
 | `modules/policy-guardrails` + `live/40-security` | ✅ | ✅ | sub | Azure Policy deny guardrails |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | sub | central Log Analytics + diagnostics |
