@@ -41,10 +41,11 @@
 
 ### FP-3 业务部门管理（Departments）
 
+- **状态**：✅ 已实现第一版（`modules/department` + `live/15-departments` + 静态示例）。
 - **场景**：不同业务部门各自的 folder + 部门级管控策略 + 部门 RAM 角色边界 + 部门成本归属（cost_center/owner 标签）。
 - **阿里云能力**：folder + control policy + RAM role + tag policy 组合。
-- **Terraform**：组合 `org`（folder）、`control-policies`、`identity`（role）与 `finops`（tag）。
-- **落地**：新增 `modules/department`（编排 folder + 部门角色 + 部门管控策略附加 + 标准标签）；在新 `live/15-departments` 或扩展 `10-org` 消费。
+- **Terraform**：`alicloud_resource_manager_folder`、`alicloud_ram_role`、`alicloud_resource_manager_control_policy_attachment`、`alicloud_tag_policy`、`alicloud_tag_policy_attachment`。
+- **落地**：`modules/department`（编排 folder + 部门角色 + 部门管控策略附加 + 部门标签策略）；在 `live/15-departments` 消费。
 - **验收**：每个部门一套隔离边界；部门角色 trust 限定到部门主体；fmt+validate 通过。
 
 ### FP-4 跨账号访问（Cross-account Access）

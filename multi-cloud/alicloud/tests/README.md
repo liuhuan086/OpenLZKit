@@ -23,11 +23,18 @@ terraform -chdir=examples/control-policies fmt -check -recursive
 terraform -chdir=examples/control-policies init -backend=false
 terraform -chdir=examples/control-policies validate
 
+# validate the department contract via its example
+terraform -chdir=examples/departments fmt -check -recursive
+terraform -chdir=examples/departments init -backend=false
+terraform -chdir=examples/departments validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
 terraform -chdir=live/10-org init -backend=false
 terraform -chdir=live/10-org validate
+terraform -chdir=live/15-departments init -backend=false
+terraform -chdir=live/15-departments validate
 terraform -chdir=live/20-identity init -backend=false
 terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network init -backend=false
@@ -60,6 +67,8 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/org` (via `examples/basic`) | ✅ | ✅ | account | folders only |
 | `modules/account-factory` (via `examples/account-factory`) | ✅ | ✅ | account | opt-in member accounts + required FinOps tags |
 | `live/10-org` | ✅ | ✅ | account | folders + account factory; OSS backend via `-backend-config` |
+| `modules/department` (via `examples/departments`) | ✅ | ✅ | account | department folders + roles + tag policies + guardrail attachments |
+| `live/15-departments` | ✅ | ✅ | account | opt-in department boundaries; OSS backend via `-backend-config` |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/security` + `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | RAM password policy + opt-in organization guardrails |
