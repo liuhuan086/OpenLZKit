@@ -30,9 +30,9 @@ aws/
 | `10-org` | [`live/10-org`](live/10-org), [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 第一版（Organizations OU / account vending） |
 | `20-identity` | [`modules/identity`](modules/identity) | 🟡 待实现（IAM roles / Identity Center 对接） |
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
-| `40-security` | [`modules/security`](modules/security) | 🟡 待实现（SCP / security guardrails） |
+| `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
 | `50-logging` | [`modules/logging`](modules/logging) | 🟡 待实现（CloudTrail / log archive） |
-| `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Tag Policy / Budgets / Cost Anomaly） |
+| `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Budgets / Cost Anomaly / Cost Categories） |
 | `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | 🟡 待实现（workload account/resource baseline） |
 
 ## 企业级深化

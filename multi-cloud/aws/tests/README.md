@@ -23,6 +23,17 @@ terraform -chdir=multi-cloud/aws/examples/account-factory validate
 terraform -chdir=multi-cloud/aws/live/10-org fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/10-org init -backend=false
 terraform -chdir=multi-cloud/aws/live/10-org validate
+
+# FP-2 Organizations policy guardrails
+terraform -chdir=multi-cloud/aws/examples/org-policies fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/org-policies init -backend=false
+terraform -chdir=multi-cloud/aws/examples/org-policies validate
+
+terraform -chdir=multi-cloud/aws/live/40-security fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/40-security init -backend=false
+terraform -chdir=multi-cloud/aws/live/40-security validate
+
+conftest verify --policy multi-cloud/aws/policies
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -38,6 +49,9 @@ run organization-level `apply` from a personal admin session.
 | `modules/org` | yes | via examples/basic | account | FP-1 OU hierarchy |
 | `modules/account-factory` | yes | via examples/account-factory | account | FP-1 account vending, apply requires approval |
 | `live/10-org` | yes | yes | account | FP-1 deployment entry; accounts default empty |
+| `modules/org-policies` | yes | via examples/org-policies | account | FP-2 SCP and Tag Policy |
+| `live/40-security` | yes | yes | account | FP-2 deployment entry; attachments default empty |
+| `policies/organizations.rego` | — | conftest verify | — | FP-2 Organizations policy guardrail tests |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | pending | pending | — | AWS Conftest/Rego guardrails pending |

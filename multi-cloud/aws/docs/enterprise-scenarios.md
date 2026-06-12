@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | AWS plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -34,10 +34,11 @@
 
 ### FP-2 组织护栏：SCP 与 Tag Policy
 
+- **状态**：✅ 第一版已实现（`modules/org-policies`、`live/40-security`、`examples/org-policies`、`policies/organizations.rego`）。
 - **场景**：组织层禁止高危动作：关闭 CloudTrail/Config/GuardDuty，离开允许 Region，删除日志归档，创建 root/user access key，公网开放高危端口。
 - **AWS 能力**：Organizations Service Control Policy；Organizations Tag Policy。
 - **Terraform**：`aws_organizations_policy`、`aws_organizations_policy_attachment`。
-- **落地**：新增 `modules/org-policies`；在 `live/40-security` 或 `live/10-org` 附加到 root/OU/account。
+- **落地**：`modules/org-policies`；在 `live/40-security` 附加到 root/OU/account。
 - **验收**：策略 JSON 合法；区分 SCP 与 Tag Policy；可按 OU/account 附加；Conftest 校验禁止过宽 deny 例外。
 
 ### FP-3 业务部门管理（Departments / Business Units）
