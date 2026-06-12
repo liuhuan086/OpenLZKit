@@ -1,0 +1,46 @@
+# 文档索引
+
+OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避免重复与漂移。
+
+## learning/ — 概念入门
+
+| 文档 | 内容 |
+|---|---|
+| [00-what-is-landing-zone](learning/00-what-is-landing-zone.md) | 什么是 Landing Zone、解决什么问题、成熟度演进 |
+| [01-from-zero-to-one](learning/01-from-zero-to-one.md) | 从 0 到 1 设计多云 Landing Zone（含各云资源层级示例） |
+| [02-multi-account-multi-cloud-role-management](learning/02-multi-account-multi-cloud-role-management.md) | 多账号、多云、多角色管理与权限矩阵 |
+| [03-cross-account-and-cross-service-access](learning/03-cross-account-and-cross-service-access.md) | 跨账号、跨服务访问原理与标准方案 |
+| [04-detailed-cloud-mapping](learning/04-detailed-cloud-mapping.md) | 五朵云概念映射 |
+| [05-multi-cloud-strategy](learning/05-multi-cloud-strategy.md) | 多云策略、目录策略、推荐优先级 |
+
+## design/ — 深入设计
+
+| 文档 | 内容 |
+|---|---|
+| [00-enterprise-principles](design/00-enterprise-principles.md) | 企业级设计原则（统一标准 + 独立实现） |
+| [01-identity-access-design](design/01-identity-access-design.md) | 身份与访问设计 |
+| [02-network-design](design/02-network-design.md) | 网络设计（含多云互联优先级） |
+| [03-security-governance-design](design/03-security-governance-design.md) | 安全治理与策略设计 |
+| [04-iac-and-cicd-design](design/04-iac-and-cicd-design.md) | IaC 与 CI/CD 设计 |
+| [05-repository-and-state-design](design/05-repository-and-state-design.md) | 仓库与 state 设计 |
+| [06-alicloud-landing-zone-design](design/06-alicloud-landing-zone-design.md) | 阿里云设计 |
+| [07-tencent-cloud-landing-zone-design](design/07-tencent-cloud-landing-zone-design.md) | 腾讯云设计 |
+| [08-azure-landing-zone-design](design/08-azure-landing-zone-design.md) | Azure 设计 |
+| [09-gcp-landing-zone-design](design/09-gcp-landing-zone-design.md) | Google Cloud 设计 |
+| [10-logging-audit-observability](design/10-logging-audit-observability.md) | 日志、审计与可观测性 |
+| [11-finops-cost-governance](design/11-finops-cost-governance.md) | FinOps 与成本治理 |
+
+## runbooks/ — 运维与问题处置
+
+| 文档 | 内容 |
+|---|---|
+| [01-operations-runbook](runbooks/01-operations-runbook.md) | 运维手册（新增账号/角色/策略、drift、break-glass） |
+| [02-common-problems-and-solutions](runbooks/02-common-problems-and-solutions.md) | 常见问题与标准解决方案 |
+
+## 跨切面文档
+
+| 文档 | 内容 |
+|---|---|
+| [testing-strategy](testing-strategy.md) | 测试分层、PR 门禁、生产发布门禁 |
+| [outputs-and-acceptance](outputs-and-acceptance.md) | 输出物与验收标准 |
+| [references](references.md) | 各云官方文档链接 |
