@@ -2,7 +2,7 @@
 
 OpenLZKit 是一个面向真实企业场景的多云 Landing Zone 开源项目模板。它的目标不是把五朵云“强行抽象成一种云”，而是为阿里云、AWS、腾讯云、Azure、Google Cloud 分别设计符合各自原生最佳实践的 Landing Zone，然后在统一仓库中沉淀共同的治理方法、文档标准、测试流程和交付物。
 
-> **AI 助手 / 开发者请先读 [AGENT.md](AGENT.md)**：它是本仓库的统一入口，指明必读顺序（CLAUDE.md、prompts.md、prd.md 等）和工作准则。
+> **AI 助手 / 开发者请先读 [AGENTS.md](AGENTS.md)**：它是本仓库的统一入口，指明必读顺序（CLAUDE.md、prompts.md、prd.md 等）和工作准则。
 
 ## 项目目标
 
@@ -24,7 +24,7 @@ OpenLZKit 是一个面向真实企业场景的多云 Landing Zone 开源项目�
 ```text
 OpenLZKit/
 ├── README.md
-├── AGENT.md
+├── AGENTS.md
 ├── CLAUDE.md
 ├── LICENSE
 ├── CONTRIBUTING.md

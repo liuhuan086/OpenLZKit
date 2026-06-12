@@ -54,7 +54,15 @@ jobs:
           sudo mv conftest /usr/local/bin/
           conftest --version
       - name: Verify policy unit tests
-        run: conftest verify --policy multi-cloud/alicloud/policies
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Auto-discover every cloud's policy directory so all clouds are gated.
+          while IFS= read -r pol; do
+            echo "::group::conftest verify ${pol}"
+            conftest verify --policy "${pol}"
+            echo "::endgroup::"
+          done < <(find multi-cloud -type d -name policies | sort)
 
   # TODO: add lint (tflint) and security scan (checkov/tfsec) jobs as those
   # toolchains are introduced.
