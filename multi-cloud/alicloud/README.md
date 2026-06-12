@@ -37,6 +37,10 @@ alicloud/
 
 所有已实现 stack 均通过 `terraform fmt + validate`（无需云账号）。参见 [examples/basic](examples/basic)。
 
+## 企业级深化
+
+在 MVP 七域之上，按企业级标准深化多账号、跨账号访问、业务部门管理、组织护栏、CloudSSO、网络互联与集中合规。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)（文档先行，逐 FP 推进）。
+
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
