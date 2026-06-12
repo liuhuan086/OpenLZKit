@@ -2,7 +2,7 @@
 
 ## 目标
 
-安全基线把企业护栏前移到 AWS Organizations 层，先阻断高风险动作，再用 AWS Config、Security Hub 和 GuardDuty 做运行时发现。FP-2 聚焦 Organizations SCP 与 Tag Policy；运行时合规服务在后续 FP-7 深化。
+安全基线把企业护栏前移到 AWS Organizations 层，先阻断高风险动作，再用 AWS Config、Security Hub 和 GuardDuty 做运行时发现。FP-2 聚焦 Organizations SCP 与 Tag Policy；运行时合规服务由 [compliance-model.md](compliance-model.md) 承载。
 
 ## 云原生服务
 
@@ -24,7 +24,7 @@
 
 - 生成所有企业策略目录。
 - 启用 Control Tower。
-- 启用 Config、Security Hub、GuardDuty 或日志归档。
+- 启用日志归档；Config、Security Hub、GuardDuty 由 `modules/compliance` 承载。
 
 ## 默认策略
 

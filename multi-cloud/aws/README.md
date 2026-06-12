@@ -35,6 +35,7 @@ aws/
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
 | `35-connectivity` | [`live/35-connectivity`](live/35-connectivity), [`modules/connectivity`](modules/connectivity) | ✅ 第一版（Transit Gateway / RAM sharing） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
+| `45-compliance` | [`live/45-compliance`](live/45-compliance), [`modules/compliance`](modules/compliance) | ✅ 第一版（AWS Config / Security Hub / GuardDuty） |
 | `50-logging` | [`modules/logging`](modules/logging) | 🟡 待实现（CloudTrail / log archive） |
 | `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Budgets / Cost Anomaly / Cost Categories） |
 | `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | 🟡 待实现（workload account/resource baseline） |
@@ -54,9 +55,10 @@ aws/
 7. `30-network`：网络基线。
 8. `35-connectivity`：Transit Gateway、路由表隔离、AWS RAM 网络共享。
 9. `40-security`：安全基线和 Guardrails。
-10. `50-logging`：日志审计与集中归档。
-11. `60-finops`：标签、预算、成本告警。
-12. `70-workload-onboarding`：业务接入模板。
+10. `45-compliance`：AWS Config、Security Hub、GuardDuty 运行时合规。
+11. `50-logging`：日志审计与集中归档。
+12. `60-finops`：标签、预算、成本告警。
+13. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 

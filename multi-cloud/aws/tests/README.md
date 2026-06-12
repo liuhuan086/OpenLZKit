@@ -70,6 +70,15 @@ terraform -chdir=multi-cloud/aws/examples/connectivity validate
 terraform -chdir=multi-cloud/aws/live/35-connectivity fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/35-connectivity init -backend=false
 terraform -chdir=multi-cloud/aws/live/35-connectivity validate
+
+# FP-7 runtime compliance
+terraform -chdir=multi-cloud/aws/examples/compliance fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/compliance init -backend=false
+terraform -chdir=multi-cloud/aws/examples/compliance validate
+
+terraform -chdir=multi-cloud/aws/live/45-compliance fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/45-compliance init -backend=false
+terraform -chdir=multi-cloud/aws/live/45-compliance validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -97,6 +106,8 @@ run organization-level `apply` from a personal admin session.
 | `live/25-sso` | yes | yes | account | FP-5 deployment entry; maps default empty |
 | `modules/connectivity` | yes | via examples/connectivity | account | FP-6 Transit Gateway, route table isolation and AWS RAM sharing |
 | `live/35-connectivity` | yes | yes | account | FP-6 deployment entry; maps default empty |
+| `modules/compliance` | yes | via examples/compliance | account | FP-7 AWS Config, Security Hub and GuardDuty |
+| `live/45-compliance` | yes | yes | account | FP-7 deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |

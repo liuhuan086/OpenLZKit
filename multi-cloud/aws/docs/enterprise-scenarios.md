@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -79,10 +79,11 @@
 
 ### FP-7 集中合规：AWS Config / Security Hub / GuardDuty
 
+- **状态**：✅ 第一版已实现（`modules/compliance`、`live/45-compliance`、`examples/compliance`、`docs/compliance-model.md`）。
 - **场景**：跨账号持续检测未打标签、公开 S3、未加密 EBS/RDS、SG 公网高危、CloudTrail/Config 关闭等问题。
 - **AWS 能力**：AWS Config recorder / aggregator / conformance pack；Security Hub；GuardDuty。
 - **Terraform**：`aws_config_configuration_recorder`、`aws_config_configuration_aggregator`、`aws_config_conformance_pack`、`aws_securityhub_organization_admin_account`、`aws_guardduty_organization_admin_account`。
-- **落地**：新增 `modules/compliance`；在 `live/45-compliance` 消费（委派到 security/compliance account）。
+- **落地**：`modules/compliance`；在 `live/45-compliance` 消费（委派到 security/compliance account）。
 - **验收**：托管规则覆盖标签/加密/公网/审计；与 plan-time Conftest 互补；fmt+validate 通过。
 
 ### FP-8 委派管理与资源共享（Delegated Admin / RAM）
