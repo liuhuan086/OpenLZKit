@@ -22,6 +22,18 @@ gcp/
 └── tests/
 ```
 
+## 实现状态
+
+🚧 实现进行中（文档先行）。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)，按 FP 逐轮交付，每个 stack 通过 CI 五道门禁（fmt / validate / tflint / checkov / conftest）。
+
+| 层 | 实现 | 状态 |
+|---|---|---|
+| 全部 | — | 🚧 待实现（见路线图） |
+
+## 企业级深化
+
+与阿里云 / AWS / Azure 保持同一套治理标准，按 GCP 原生模型深化多账号（项目工厂）、组织护栏（Organization Policy）、业务部门、跨项目访问、Cloud Identity 组、Shared VPC/NCC 互联、Security Command Center 合规、Folder 委派与 Shared VPC 接入。详见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)。
+
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
