@@ -40,5 +40,21 @@ jobs:
             echo "::endgroup::"
           done < <(find multi-cloud -type f -name '*.tf' -exec dirname {} \; | sort -u)
 
-  # TODO: add lint (tflint), security scan (checkov/tfsec) and policy (conftest)
-  # jobs as those toolchains are introduced.
+  policy:
+    name: conftest policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install conftest
+        run: |
+          set -euo pipefail
+          ver=0.56.0
+          curl -sSL "https://github.com/open-policy-agent/conftest/releases/download/v${ver}/conftest_${ver}_Linux_x86_64.tar.gz" \
+            | tar -xz conftest
+          sudo mv conftest /usr/local/bin/
+          conftest --version
+      - name: Verify policy unit tests
+        run: conftest verify --policy multi-cloud/alicloud/policies
+
+  # TODO: add lint (tflint) and security scan (checkov/tfsec) jobs as those
+  # toolchains are introduced.

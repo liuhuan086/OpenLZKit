@@ -30,6 +30,9 @@ terraform -chdir=live/60-finops init -backend=false
 terraform -chdir=live/60-finops validate
 terraform -chdir=live/70-workload-onboarding init -backend=false
 terraform -chdir=live/70-workload-onboarding validate
+
+# policy-as-code unit tests (Conftest/Rego)
+conftest verify --policy policies
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -52,5 +55,6 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | required-tags tag policy |
 | `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | resource group + workload role + tags |
+| `policies/` (Conftest) | — | `verify` | — | tags / public-ingress / encryption rules + unit tests |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
