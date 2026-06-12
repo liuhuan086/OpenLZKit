@@ -61,6 +61,15 @@ terraform -chdir=multi-cloud/aws/examples/identity-center validate
 terraform -chdir=multi-cloud/aws/live/25-sso fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/25-sso init -backend=false
 terraform -chdir=multi-cloud/aws/live/25-sso validate
+
+# FP-6 Transit Gateway connectivity
+terraform -chdir=multi-cloud/aws/examples/connectivity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/connectivity init -backend=false
+terraform -chdir=multi-cloud/aws/examples/connectivity validate
+
+terraform -chdir=multi-cloud/aws/live/35-connectivity fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/35-connectivity init -backend=false
+terraform -chdir=multi-cloud/aws/live/35-connectivity validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -86,6 +95,8 @@ run organization-level `apply` from a personal admin session.
 | `policies/iam_trust.rego` | — | conftest verify | — | FP-4 trust policy wildcard principal guardrail tests |
 | `modules/identity-center` | yes | via examples/identity-center | account | FP-5 permission sets, assignments and optional Identity Store objects |
 | `live/25-sso` | yes | yes | account | FP-5 deployment entry; maps default empty |
+| `modules/connectivity` | yes | via examples/connectivity | account | FP-6 Transit Gateway, route table isolation and AWS RAM sharing |
+| `live/35-connectivity` | yes | yes | account | FP-6 deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |

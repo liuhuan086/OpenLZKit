@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6 已有第一版，其余功能点待补齐 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -70,10 +70,11 @@
 
 ### FP-6 网络互联：Transit Gateway / RAM
 
+- **状态**：✅ 第一版已实现（`modules/connectivity`、`live/35-connectivity`、`examples/connectivity`、`docs/network-model.md`）。
 - **场景**：Hub-Spoke 跨账号互联；prod↔shared 私网；sandbox↔prod 默认拒绝；跨账号共享 TGW。
 - **AWS 能力**：Transit Gateway、TGW route table、VPC attachment、RAM Resource Share。
 - **Terraform**：`aws_ec2_transit_gateway`、`aws_ec2_transit_gateway_route_table`、`aws_ec2_transit_gateway_vpc_attachment`、`aws_ec2_transit_gateway_route_table_association`、`aws_ec2_transit_gateway_route_table_propagation`、`aws_ram_resource_share`。
-- **落地**：新增 `modules/connectivity`；在 `live/35-connectivity` 消费。
+- **落地**：`modules/connectivity`；在 `live/35-connectivity` 消费。
 - **验收**：route table 表达 prod/nonprod/sandbox/shared 隔离；sandbox 不传播到 prod；fmt+validate 通过。
 
 ### FP-7 集中合规：AWS Config / Security Hub / GuardDuty

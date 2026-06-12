@@ -33,6 +33,7 @@ aws/
 | `24-cross-account-access` | [`live/24-cross-account-access`](live/24-cross-account-access), [`modules/cross-account-access`](modules/cross-account-access) | ✅ 第一版（STS / OIDC / RAM sharing） |
 | `25-sso` | [`live/25-sso`](live/25-sso), [`modules/identity-center`](modules/identity-center) | ✅ 第一版（IAM Identity Center permission sets / assignments） |
 | `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
+| `35-connectivity` | [`live/35-connectivity`](live/35-connectivity), [`modules/connectivity`](modules/connectivity) | ✅ 第一版（Transit Gateway / RAM sharing） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
 | `50-logging` | [`modules/logging`](modules/logging) | 🟡 待实现（CloudTrail / log archive） |
 | `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Budgets / Cost Anomaly / Cost Categories） |
@@ -51,10 +52,11 @@ aws/
 5. `24-cross-account-access`：安全、CI/CD、日志、网络等跨账号访问路径。
 6. `25-sso`：IAM Identity Center permission set 与账号分配。
 7. `30-network`：网络基线。
-8. `40-security`：安全基线和 Guardrails。
-9. `50-logging`：日志审计与集中归档。
-10. `60-finops`：标签、预算、成本告警。
-11. `70-workload-onboarding`：业务接入模板。
+8. `35-connectivity`：Transit Gateway、路由表隔离、AWS RAM 网络共享。
+9. `40-security`：安全基线和 Guardrails。
+10. `50-logging`：日志审计与集中归档。
+11. `60-finops`：标签、预算、成本告警。
+12. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 
