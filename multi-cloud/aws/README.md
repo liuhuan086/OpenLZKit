@@ -38,7 +38,7 @@ aws/
 | `45-compliance` | [`live/45-compliance`](live/45-compliance), [`modules/compliance`](modules/compliance) | ✅ 第一版（AWS Config / Security Hub / GuardDuty） |
 | `50-logging` | [`live/50-logging`](live/50-logging), [`modules/logging`](modules/logging) | ✅ 第一版（CloudTrail / log archive / Object Lock） |
 | `55-delegation` | [`live/55-delegation`](live/55-delegation), [`modules/delegation`](modules/delegation) | ✅ 第一版（Delegated Admin / governed RAM sharing） |
-| `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Budgets / Cost Anomaly / Cost Categories） |
+| `60-finops` | [`live/60-finops`](live/60-finops), [`modules/finops`](modules/finops) | ✅ 第一版（Budgets / Cost Anomaly / Cost Categories） |
 | `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | 🟡 待实现（workload account/resource baseline） |
 
 ## 企业级深化

@@ -97,6 +97,15 @@ terraform -chdir=multi-cloud/aws/examples/logging validate
 terraform -chdir=multi-cloud/aws/live/50-logging fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/50-logging init -backend=false
 terraform -chdir=multi-cloud/aws/live/50-logging validate
+
+# FP-10 FinOps
+terraform -chdir=multi-cloud/aws/examples/finops fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/finops init -backend=false
+terraform -chdir=multi-cloud/aws/examples/finops validate
+
+terraform -chdir=multi-cloud/aws/live/60-finops fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/60-finops init -backend=false
+terraform -chdir=multi-cloud/aws/live/60-finops validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -130,6 +139,8 @@ run organization-level `apply` from a personal admin session.
 | `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |
 | `modules/logging` | yes | via examples/logging | account | FP-9 CloudTrail, S3 log archive, KMS and Object Lock |
 | `live/50-logging` | yes | yes | account | FP-9 deployment entry |
+| `modules/finops` | yes | via examples/finops | account | FP-10 budgets, cost anomaly detection and cost categories |
+| `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |

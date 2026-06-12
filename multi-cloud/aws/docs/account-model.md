@@ -9,7 +9,7 @@
 - AWS Organizations：管理组织 root、OU 和成员账号。
 - Control Tower / AFT：生产环境建议作为账号售卖的托管入口；本仓库模块保持兼容，不强制替代官方能力。
 - IAM Identity Center / STS：后续功能点用于人员和机器跨账号访问。
-- AWS Budgets / Cost Explorer / Tag Policy：后续功能点用于成本和标签治理。
+- AWS Budgets / Cost Explorer / Tag Policy：FinOps 与标签治理能力。
 
 ## 推荐 OU 基线
 

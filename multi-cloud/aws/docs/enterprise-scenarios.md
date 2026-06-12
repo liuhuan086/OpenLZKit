@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | 🟡 | FP-1、FP-2、FP-3、FP-4、FP-5、FP-6、FP-7、FP-8、FP-9 已有第一版，其余功能点待补齐 |
+| modules/live/examples/tests | ✅ | FP-1..FP-10 均已有第一版；VPC baseline、Security Lake、CUR/BI 等可继续深化 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）
@@ -106,6 +106,7 @@
 
 ### FP-10 FinOps 与预算治理深化
 
+- **状态**：✅ 第一版已实现（`modules/finops`、`live/60-finops`、`examples/finops`、`docs/finops-model.md`）。
 - **场景**：强制成本标签、预算告警、异常检测、部门成本归集、sandbox 限额。
 - **AWS 能力**：Organizations Tag Policy、AWS Budgets、Cost Anomaly Detection、Cost Categories。
 - **Terraform**：`aws_budgets_budget`、`aws_ce_anomaly_monitor`、`aws_ce_anomaly_subscription`、`aws_ce_cost_category`。
