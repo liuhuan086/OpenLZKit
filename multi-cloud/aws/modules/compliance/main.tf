@@ -54,6 +54,51 @@ resource "aws_config_configuration_aggregator" "organization" {
   }
 }
 
+resource "aws_config_configuration_recorder" "this" {
+  for_each = var.config_recorders
+
+  name     = each.value.name
+  role_arn = each.value.role_arn
+
+  recording_group {
+    all_supported                 = each.value.all_supported
+    include_global_resource_types = each.value.include_global_resource_types
+    resource_types                = length(each.value.resource_types) == 0 ? null : each.value.resource_types
+  }
+
+  recording_mode {
+    recording_frequency = each.value.recording_frequency
+  }
+}
+
+resource "aws_config_delivery_channel" "this" {
+  for_each = var.config_recorders
+
+  name           = each.value.delivery_channel_name == null ? "${each.value.name}-delivery" : each.value.delivery_channel_name
+  s3_bucket_name = each.value.s3_bucket_name
+  s3_key_prefix  = each.value.s3_key_prefix
+  s3_kms_key_arn = each.value.s3_kms_key_arn
+  sns_topic_arn  = each.value.sns_topic_arn
+
+  snapshot_delivery_properties {
+    delivery_frequency = each.value.snapshot_delivery_frequency
+  }
+
+  depends_on = [aws_config_configuration_recorder.this]
+}
+
+resource "aws_config_configuration_recorder_status" "this" {
+  for_each = {
+    for key, recorder in var.config_recorders : key => recorder
+    if recorder.enabled
+  }
+
+  name       = aws_config_configuration_recorder.this[each.key].name
+  is_enabled = true
+
+  depends_on = [aws_config_delivery_channel.this]
+}
+
 resource "aws_config_config_rule" "managed" {
   for_each = var.config_managed_rules
 

@@ -8,6 +8,16 @@ output "config_rule_names" {
   value       = module.compliance.config_rule_names
 }
 
+output "config_recorder_names" {
+  description = "AWS Config recorder names by key."
+  value       = module.compliance.config_recorder_names
+}
+
+output "config_delivery_channel_names" {
+  description = "AWS Config delivery channel names by key."
+  value       = module.compliance.config_delivery_channel_names
+}
+
 output "conformance_pack_names" {
   description = "AWS Config conformance pack names by key."
   value       = module.compliance.conformance_pack_names

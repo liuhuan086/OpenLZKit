@@ -35,7 +35,7 @@ aws/
 | `30-network` | [`live/30-network`](live/30-network), [`modules/network`](modules/network) | ✅ 第一版（VPC / subnet / endpoint / flow log baseline） |
 | `35-connectivity` | [`live/35-connectivity`](live/35-connectivity), [`modules/connectivity`](modules/connectivity) | ✅ 第一版（Transit Gateway / RAM sharing） |
 | `40-security` | [`live/40-security`](live/40-security), [`modules/org-policies`](modules/org-policies) | ✅ 第一版（SCP / Tag Policy guardrails） |
-| `45-compliance` | [`live/45-compliance`](live/45-compliance), [`modules/compliance`](modules/compliance) | ✅ 第一版（AWS Config / Security Hub / GuardDuty） |
+| `45-compliance` | [`live/45-compliance`](live/45-compliance), [`modules/compliance`](modules/compliance) | ✅ 第一版（AWS Config recorder / Security Hub / GuardDuty） |
 | `50-logging` | [`live/50-logging`](live/50-logging), [`modules/logging`](modules/logging) | ✅ 第一版（CloudTrail / log archive / Object Lock） |
 | `55-delegation` | [`live/55-delegation`](live/55-delegation), [`modules/delegation`](modules/delegation) | ✅ 第一版（Delegated Admin / governed RAM sharing） |
 | `60-finops` | [`live/60-finops`](live/60-finops), [`modules/finops`](modules/finops) | ✅ 第一版（Budgets / Cost Anomaly / Cost Categories / CUR） |

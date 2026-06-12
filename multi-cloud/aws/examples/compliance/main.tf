@@ -19,6 +19,17 @@ module "compliance" {
     }
   }
 
+  config_recorders = {
+    default = {
+      role_arn                      = "arn:aws:iam::111122223333:role/config-recorder"
+      s3_bucket_name                = "example-openlzkit-config"
+      s3_key_prefix                 = "config"
+      include_global_resource_types = true
+      snapshot_delivery_frequency   = "TwentyFour_Hours"
+      enabled                       = true
+    }
+  }
+
   config_managed_rules = {
     required_tags = {
       name              = "required-tags"

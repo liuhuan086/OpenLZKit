@@ -168,7 +168,7 @@ run organization-level `apply` from a personal admin session.
 | `live/30-network` | yes | yes | account | VPC baseline deployment entry |
 | `modules/connectivity` | yes | via examples/connectivity | account | FP-6 Transit Gateway, route table isolation and AWS RAM sharing |
 | `live/35-connectivity` | yes | yes | account | FP-6 deployment entry; maps default empty |
-| `modules/compliance` | yes | via examples/compliance | account | FP-7 AWS Config, Security Hub and GuardDuty |
+| `modules/compliance` | yes | via examples/compliance | account | FP-7 AWS Config recorder/delivery, Security Hub and GuardDuty |
 | `live/45-compliance` | yes | yes | account | FP-7 deployment entry; maps default empty |
 | `modules/delegation` | yes | via examples/delegation | account | FP-8 Organizations delegated admin and governed RAM sharing |
 | `live/55-delegation` | yes | yes | account | FP-8 deployment entry; maps default empty |

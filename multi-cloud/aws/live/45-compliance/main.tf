@@ -7,6 +7,7 @@ module "compliance" {
   enable_guardduty_detector     = var.enable_guardduty_detector
   guardduty_admin_account_id    = var.guardduty_admin_account_id
   config_aggregators            = var.config_aggregators
+  config_recorders              = var.config_recorders
   config_managed_rules          = var.config_managed_rules
   conformance_packs             = var.conformance_packs
 }

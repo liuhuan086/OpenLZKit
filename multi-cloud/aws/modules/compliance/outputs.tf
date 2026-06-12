@@ -13,6 +13,16 @@ output "config_aggregator_names" {
   value       = { for key, aggregator in aws_config_configuration_aggregator.organization : key => aggregator.name }
 }
 
+output "config_recorder_names" {
+  description = "AWS Config recorder names by key."
+  value       = { for key, recorder in aws_config_configuration_recorder.this : key => recorder.name }
+}
+
+output "config_delivery_channel_names" {
+  description = "AWS Config delivery channel names by key."
+  value       = { for key, channel in aws_config_delivery_channel.this : key => channel.name }
+}
+
 output "config_rule_names" {
   description = "AWS Config managed rule names by key."
   value       = { for key, rule in aws_config_config_rule.managed : key => rule.name }

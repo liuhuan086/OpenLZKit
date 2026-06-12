@@ -10,11 +10,12 @@ Builds runtime compliance and detective controls for AWS Landing Zone accounts.
 - Enable GuardDuty in the current account.
 - Register a GuardDuty organization admin account.
 - Create AWS Config organization aggregators.
+- Create AWS Config recorders and delivery channels.
 - Create AWS Config managed rules and conformance packs.
 
 It does **not**:
 
-- Create S3 buckets, KMS keys or delivery channels for Config recordings.
+- Create S3 buckets or KMS keys for Config recordings.
 - Replace SCP guardrails from `modules/org-policies`.
 - Configure all delegated administrator services; that is handled by the future
   delegation module.
