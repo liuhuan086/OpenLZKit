@@ -39,6 +39,8 @@ terraform -chdir=multi-cloud/aws/live/40-security init -backend=false
 terraform -chdir=multi-cloud/aws/live/40-security validate
 
 conftest verify --policy multi-cloud/aws/policies
+# or, when conftest is unavailable:
+opa test multi-cloud/aws/policies
 
 # FP-3 business departments
 terraform -chdir=multi-cloud/aws/examples/departments fmt -check -recursive
@@ -178,6 +180,6 @@ run organization-level `apply` from a personal admin session.
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
 | `modules/workload-onboarding` | yes | via examples/workload-onboarding | account | workload access role and metadata handoff |
 | `live/70-workload-onboarding` | yes | yes | account | workload onboarding deployment entry; maps default empty |
-| `policies/` | yes | conftest verify | — | Organizations, IAM trust, IAM policy, S3 state and tag guardrail tests |
+| `policies/` | yes | conftest verify / opa test | — | Organizations, IAM trust, IAM policy, S3 state and tag guardrail tests |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).

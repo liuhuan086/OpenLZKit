@@ -20,6 +20,9 @@ Each policy ships with a `*_test.rego` file for offline unit tests.
 
 ```bash
 conftest verify --policy multi-cloud/aws/policies
+
+# If conftest is unavailable, run the Rego unit tests directly:
+opa test multi-cloud/aws/policies
 ```
 
 ## Plan enforcement

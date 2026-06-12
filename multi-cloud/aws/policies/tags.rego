@@ -6,7 +6,7 @@ deny contains msg if {
   resource := input.resource_changes[_]
   tags := resource.change.after.tags
   is_object(tags)
-  not non_empty(tags.managed_by)
+  not has_non_empty_tag(tags, "managed_by")
   msg := sprintf("%s must include a non-empty managed_by tag", [resource.address])
 }
 
@@ -16,29 +16,30 @@ deny contains msg if {
   is_object(tags)
   has_enterprise_tag(tags)
   required := {"owner", "cost_center", "env", "project"}
-  present := {key | required[key]; non_empty(tags[key])}
+  present := {key | required[key]; has_non_empty_tag(tags, key)}
   missing := required - present
   count(missing) > 0
   msg := sprintf("%s must include complete owner/cost_center/env/project tags", [resource.address])
 }
 
 has_enterprise_tag(tags) if {
-  non_empty(tags.owner)
+  has_non_empty_tag(tags, "owner")
 }
 
 has_enterprise_tag(tags) if {
-  non_empty(tags.cost_center)
+  has_non_empty_tag(tags, "cost_center")
 }
 
 has_enterprise_tag(tags) if {
-  non_empty(tags.env)
+  has_non_empty_tag(tags, "env")
 }
 
 has_enterprise_tag(tags) if {
-  non_empty(tags.project)
+  has_non_empty_tag(tags, "project")
 }
 
-non_empty(value) if {
+has_non_empty_tag(tags, key) if {
+  value := tags[key]
   is_string(value)
   value != ""
 }
