@@ -18,7 +18,7 @@
 | 域 | 状态 | 说明 |
 |---|---|---|
 | docs | 🟡 | 已有基础设计文档，多个文件仍是 TODO |
-| modules/live/examples/tests | ✅ | FP-1..FP-10 均已有第一版；VPC baseline、Security Lake、CUR/BI 等可继续深化 |
+| modules/live/examples/tests | ✅ | FP-1..FP-10、VPC baseline、workload onboarding 均已有第一版；Security Lake、CUR/BI 等可继续深化 |
 | policies | 🟡 | FP-2 已有 Organizations guardrail；其余 plan-time guardrails 待补齐 |
 
 ## 深化功能点（计划）

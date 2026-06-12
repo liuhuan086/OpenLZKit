@@ -114,6 +114,15 @@ terraform -chdir=multi-cloud/aws/examples/finops validate
 terraform -chdir=multi-cloud/aws/live/60-finops fmt -check -recursive
 terraform -chdir=multi-cloud/aws/live/60-finops init -backend=false
 terraform -chdir=multi-cloud/aws/live/60-finops validate
+
+# Workload onboarding handoff
+terraform -chdir=multi-cloud/aws/examples/workload-onboarding fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/workload-onboarding init -backend=false
+terraform -chdir=multi-cloud/aws/examples/workload-onboarding validate
+
+terraform -chdir=multi-cloud/aws/live/70-workload-onboarding fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/70-workload-onboarding init -backend=false
+terraform -chdir=multi-cloud/aws/live/70-workload-onboarding validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -151,6 +160,8 @@ run organization-level `apply` from a personal admin session.
 | `live/50-logging` | yes | yes | account | FP-9 deployment entry |
 | `modules/finops` | yes | via examples/finops | account | FP-10 budgets, cost anomaly detection and cost categories |
 | `live/60-finops` | yes | yes | account | FP-10 deployment entry; maps default empty |
+| `modules/workload-onboarding` | yes | via examples/workload-onboarding | account | workload access role and metadata handoff |
+| `live/70-workload-onboarding` | yes | yes | account | workload onboarding deployment entry; maps default empty |
 | `modules/*` | pending | pending | account | remaining feature points |
 | `live/*` | pending | pending | account | remaining feature points |
 | `policies/` | partial | conftest verify | — | FP-2 Organizations guardrail present; more guardrails pending |
