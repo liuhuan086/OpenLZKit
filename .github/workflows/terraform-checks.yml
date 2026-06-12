@@ -40,6 +40,19 @@ jobs:
             echo "::endgroup::"
           done < <(find multi-cloud -type f -name '*.tf' -exec dirname {} \; | sort -u)
 
+  lint:
+    name: tflint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+      - name: Init plugins
+        run: tflint --init
+      - name: Run tflint (recursive)
+        run: tflint --recursive --format compact
+
   policy:
     name: conftest policy
     runs-on: ubuntu-latest
