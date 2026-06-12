@@ -31,6 +31,7 @@ alicloud/
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（可假设 RAM 角色，SSO/联邦导向，不建长期用户） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | `40-security` | [`modules/security`](modules/security) | ✅ 已实现（RAM 密码策略 + 安全偏好：强制 MFA、禁用户管 AK） |
+| `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
 | 其他层 | — | 🚧 占位，待实现 |
 
 所有已实现 stack 均通过 `terraform fmt + validate`（无需云账号）。参见 [examples/basic](examples/basic)。
