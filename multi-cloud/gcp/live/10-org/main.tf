@@ -11,12 +11,11 @@ variable "org_id" {
 variable "projects" {
   description = "Optional projects to create through the project factory. Empty by default (billing impact)."
   type = map(object({
-    name                = string
-    project_id          = string
-    folder_key          = string
-    billing_account     = optional(string)
-    auto_create_network = optional(bool, false)
-    labels              = optional(map(string), {})
+    name            = string
+    project_id      = string
+    folder_key      = string
+    billing_account = optional(string)
+    labels          = optional(map(string), {})
   }))
   default = {}
 }
@@ -66,12 +65,11 @@ module "projects" {
   projects = {
     for key, p in var.projects :
     key => {
-      name                = p.name
-      project_id          = p.project_id
-      folder_id           = module.org.folder_names[p.folder_key]
-      billing_account     = p.billing_account
-      auto_create_network = p.auto_create_network
-      labels              = p.labels
+      name            = p.name
+      project_id      = p.project_id
+      folder_id       = module.org.folder_names[p.folder_key]
+      billing_account = p.billing_account
+      labels          = p.labels
     }
   }
 }

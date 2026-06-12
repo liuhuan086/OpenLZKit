@@ -77,3 +77,4 @@ skip-check:
   # --- GCP state-bootstrap context (controls depend on resources not yet created) ---
   - CKV_GCP_62   # GCS bucket access logging — bootstrap predates the central log-sink bucket
   - CKV_GCP_125  # WIF trust policy — a repo-restricted attribute_condition is set (var indirection hides it)
+  - CKV2_GCP_5   # Per-project audit logging — configured centrally via org/folder log sinks (50-logging)
