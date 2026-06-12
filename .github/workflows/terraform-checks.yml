@@ -87,6 +87,3 @@ jobs:
             conftest verify --policy "${pol}"
             echo "::endgroup::"
           done < <(find multi-cloud -name '*.rego' -exec dirname {} \; | sort -u)
-
-  # TODO: add lint (tflint) and security scan (checkov/tfsec) jobs as those
-  # toolchains are introduced.

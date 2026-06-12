@@ -50,7 +50,7 @@ OpenLZKit/
 ├── multi-cloud/        # 五朵云各自独立的 Landing Zone（aws / alicloud / tencentcloud / azure / gcp）
 │   └── <cloud>/        # README + docs + modules + live + policies + examples + tests
 ├── tests/              # 跨云测试用例（TEST_CASES.md）
-└── .github/workflows/  # CI 检查（terraform fmt / validate / conftest policy）
+└── .github/workflows/  # CI 检查（fmt / validate / tflint / checkov / conftest policy）
 ```
 
 每朵云目录内部结构一致（工程组织统一），但**资源模型各自独立**。详见 [README.md](README.md) 的“云目录设计”。
@@ -75,7 +75,7 @@ OpenLZKit/
 - [ ] 无硬编码账号、区域、密钥或个人信息
 - [ ] 无权限过大、默认公网暴露、日志未开启等风险
 - [ ] README、变量说明、输出说明、测试已同步更新
-- [ ] 通过 `terraform fmt` / `validate` / `conftest`（CI 三个 job）
+- [ ] 通过 CI 五道门禁：`terraform fmt`、`validate`、`tflint`、`checkov`、`conftest`
 - [ ] 不破坏 state 兼容性
 - [ ] 重大设计决策已记录 ADR
 
@@ -83,6 +83,6 @@ OpenLZKit/
 
 - **阿里云、AWS**：MVP 七域 + 企业级深化（FP-1~FP-8：账号工厂、组织护栏、业务部门、跨账号访问、SSO、网络互联、集中合规、委派与共享）均已落地，全部通过 `terraform fmt + validate`，并配 Conftest 策略用例（见各云 `docs/enterprise-scenarios.md`）。
 - **腾讯云、Azure、GCP**：设计文档与目录骨架就位，HCL 待实现。
-- CI（[.github/workflows/terraform-checks.yml](.github/workflows/terraform-checks.yml)）对全仓库执行 `fmt`、`validate`、`conftest policy` 三道门禁。
+- CI（[.github/workflows/terraform-checks.yml](.github/workflows/terraform-checks.yml)）对全仓库执行五道门禁：`fmt`、`validate`、`tflint`、`checkov`、`conftest policy`。
 
 继续实现时严格沿用上述标准与各云 `enterprise-scenarios.md` 的功能点节奏。
