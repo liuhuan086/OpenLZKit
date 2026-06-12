@@ -63,6 +63,14 @@ terraform -chdir=multi-cloud/aws/live/25-sso init -backend=false
 terraform -chdir=multi-cloud/aws/live/25-sso validate
 
 # FP-6 Transit Gateway connectivity
+terraform -chdir=multi-cloud/aws/examples/network fmt -check -recursive
+terraform -chdir=multi-cloud/aws/examples/network init -backend=false
+terraform -chdir=multi-cloud/aws/examples/network validate
+
+terraform -chdir=multi-cloud/aws/live/30-network fmt -check -recursive
+terraform -chdir=multi-cloud/aws/live/30-network init -backend=false
+terraform -chdir=multi-cloud/aws/live/30-network validate
+
 terraform -chdir=multi-cloud/aws/examples/connectivity fmt -check -recursive
 terraform -chdir=multi-cloud/aws/examples/connectivity init -backend=false
 terraform -chdir=multi-cloud/aws/examples/connectivity validate
@@ -131,6 +139,8 @@ run organization-level `apply` from a personal admin session.
 | `policies/iam_trust.rego` | — | conftest verify | — | FP-4 trust policy wildcard principal guardrail tests |
 | `modules/identity-center` | yes | via examples/identity-center | account | FP-5 permission sets, assignments and optional Identity Store objects |
 | `live/25-sso` | yes | yes | account | FP-5 deployment entry; maps default empty |
+| `modules/network` | yes | via examples/network | account | VPC, subnet, route table, endpoints, flow logs baseline |
+| `live/30-network` | yes | yes | account | VPC baseline deployment entry |
 | `modules/connectivity` | yes | via examples/connectivity | account | FP-6 Transit Gateway, route table isolation and AWS RAM sharing |
 | `live/35-connectivity` | yes | yes | account | FP-6 deployment entry; maps default empty |
 | `modules/compliance` | yes | via examples/compliance | account | FP-7 AWS Config, Security Hub and GuardDuty |
