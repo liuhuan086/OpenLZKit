@@ -33,6 +33,7 @@ alicloud/
 | `24-cross-account-access` | [`modules/cross-account-access`](modules/cross-account-access) | ✅ 已实现（跨账号 RAM 角色 + STS trust condition + Resource Share） |
 | `25-sso` | [`modules/sso`](modules/sso) | ✅ 已实现（CloudSSO directory + group + access configuration + assignment） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
+| `35-connectivity` | [`modules/connectivity`](modules/connectivity) | ✅ 已实现（CEN + Transit Router + VPC attachment + 跨账号 grant + 路由表） |
 | `40-security` | [`modules/security`](modules/security) + [`modules/control-policies`](modules/control-policies) | ✅ 已实现（RAM 密码策略 + 安全偏好 + opt-in 组织管控策略） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（标签策略强制 FinOps 标签集） |
@@ -53,10 +54,11 @@ alicloud/
 5. `24-cross-account-access`：跨账号角色、STS trust、资源共享。
 6. `25-sso`：CloudSSO 人员访问、权限配置、账号分配。
 7. `30-network`：网络基线。
-8. `40-security`：安全基线和 Guardrails。
-9. `50-logging`：日志审计与集中归档。
-10. `60-finops`：标签、预算、成本告警。
-11. `70-workload-onboarding`：业务接入模板。
+8. `35-connectivity`：CEN/Transit Router 跨账号网络互联。
+9. `40-security`：安全基线和 Guardrails。
+10. `50-logging`：日志审计与集中归档。
+11. `60-finops`：标签、预算、成本告警。
+12. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 

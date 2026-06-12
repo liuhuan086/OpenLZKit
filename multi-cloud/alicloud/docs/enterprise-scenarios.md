@@ -68,10 +68,11 @@
 
 ### FP-6 网络互联（CEN / Transit Router）
 
+- **状态**：✅ 已实现第一版（`modules/connectivity` + `live/35-connectivity` + 静态示例）。
 - **场景**：Hub-Spoke 跨账号互联；prod↔shared 私网；sandbox↔prod 默认拒绝；跨账号网络授权。
 - **阿里云能力**：CEN 实例 + Transit Router + VPC 挂载 + 路由策略 + 跨账号授权。
-- **Terraform**：`alicloud_cen_instance`、`alicloud_cen_transit_router`、`alicloud_cen_transit_router_vpc_attachment`、`alicloud_cen_transit_router_grant_attachment`。
-- **落地**：扩展 `modules/network` 或新增 `modules/connectivity`；在 `live/30-network` 编排 hub/spoke 挂载。
+- **Terraform**：`alicloud_cen_instance`、`alicloud_cen_transit_router`、`alicloud_cen_transit_router_route_table`、`alicloud_cen_transit_router_vpc_attachment`、`alicloud_cen_transit_router_grant_attachment`、`alicloud_cen_transit_router_route_table_association`、`alicloud_cen_transit_router_route_table_propagation`、`alicloud_cen_transit_router_route_entry`。
+- **落地**：`modules/connectivity`；在 `live/35-connectivity` 编排 hub/spoke 挂载。
 - **验收**：CIDR 不重叠；sandbox→prod 路由拒绝；fmt+validate 通过。
 
 ### FP-7 集中合规（Cloud Config）
