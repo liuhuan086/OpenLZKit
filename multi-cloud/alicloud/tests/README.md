@@ -33,6 +33,11 @@ terraform -chdir=examples/cross-account-access fmt -check -recursive
 terraform -chdir=examples/cross-account-access init -backend=false
 terraform -chdir=examples/cross-account-access validate
 
+# validate the CloudSSO contract via its example
+terraform -chdir=examples/sso fmt -check -recursive
+terraform -chdir=examples/sso init -backend=false
+terraform -chdir=examples/sso validate
+
 # validate the live stacks (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false
 terraform -chdir=live/00-bootstrap validate
@@ -44,6 +49,8 @@ terraform -chdir=live/20-identity init -backend=false
 terraform -chdir=live/20-identity validate
 terraform -chdir=live/24-cross-account-access init -backend=false
 terraform -chdir=live/24-cross-account-access validate
+terraform -chdir=live/25-sso init -backend=false
+terraform -chdir=live/25-sso validate
 terraform -chdir=live/30-network init -backend=false
 terraform -chdir=live/30-network validate
 terraform -chdir=live/40-security init -backend=false
@@ -79,6 +86,8 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
 | `modules/cross-account-access` (via `examples/cross-account-access`) | ✅ | ✅ | account | target-account RAM roles + Resource Share |
 | `live/24-cross-account-access` | ✅ | ✅ | account | opt-in cross-account trust and resource sharing |
+| `modules/sso` (via `examples/sso`) | ✅ | ✅ | account | CloudSSO directory + groups + access configurations + assignments |
+| `live/25-sso` | ✅ | ✅ | account | opt-in CloudSSO human access |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/security` + `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | RAM password policy + opt-in organization guardrails |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | SLS audit project + ActionTrail trail |

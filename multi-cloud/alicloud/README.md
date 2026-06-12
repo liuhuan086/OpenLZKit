@@ -31,6 +31,7 @@ alicloud/
 | `15-departments` | [`modules/department`](modules/department) | ✅ 已实现（部门 folder + 部门角色 + 部门标签策略 + 部门级管控策略附加） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（可假设 RAM 角色，SSO/联邦导向，不建长期用户） |
 | `24-cross-account-access` | [`modules/cross-account-access`](modules/cross-account-access) | ✅ 已实现（跨账号 RAM 角色 + STS trust condition + Resource Share） |
+| `25-sso` | [`modules/sso`](modules/sso) | ✅ 已实现（CloudSSO directory + group + access configuration + assignment） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | `40-security` | [`modules/security`](modules/security) + [`modules/control-policies`](modules/control-policies) | ✅ 已实现（RAM 密码策略 + 安全偏好 + opt-in 组织管控策略） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（SLS 审计项目/日志库 + ActionTrail 组织级审计） |
@@ -50,11 +51,12 @@ alicloud/
 3. `15-departments`：业务部门 folder、部门角色、部门标签策略。
 4. `20-identity`：SSO、角色、权限边界。
 5. `24-cross-account-access`：跨账号角色、STS trust、资源共享。
-6. `30-network`：网络基线。
-7. `40-security`：安全基线和 Guardrails。
-8. `50-logging`：日志审计与集中归档。
-9. `60-finops`：标签、预算、成本告警。
-10. `70-workload-onboarding`：业务接入模板。
+6. `25-sso`：CloudSSO 人员访问、权限配置、账号分配。
+7. `30-network`：网络基线。
+8. `40-security`：安全基线和 Guardrails。
+9. `50-logging`：日志审计与集中归档。
+10. `60-finops`：标签、预算、成本告警。
+11. `70-workload-onboarding`：业务接入模板。
 
 ## MVP 范围
 

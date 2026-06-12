@@ -59,10 +59,11 @@
 
 ### FP-5 人员 SSO（CloudSSO 访问）
 
+- **状态**：✅ 已实现第一版（`modules/sso` + `live/25-sso` + 静态示例）。
 - **场景**：人员通过 CloudSSO 登录，按权限配置（permission set）分配到账号，不在成员账号里建 RAM 用户。
 - **阿里云能力**：CloudSSO 目录、用户/组、访问配置、访问分配。
-- **Terraform**：`alicloud_cloud_sso_directory`、`alicloud_cloud_sso_group`、`alicloud_cloud_sso_access_configuration`、`alicloud_cloud_sso_access_assignment`。
-- **落地**：新增 `modules/sso`；在新 `live/25-sso` 消费。
+- **Terraform**：`alicloud_cloud_sso_directory`、`alicloud_cloud_sso_group`、`alicloud_cloud_sso_user`、`alicloud_cloud_sso_user_attachment`、`alicloud_cloud_sso_access_configuration`、`alicloud_cloud_sso_access_assignment`、`alicloud_cloud_sso_access_configuration_provisioning`。
+- **落地**：`modules/sso`；在 `live/25-sso` 消费。
 - **验收**：访问配置映射到统一角色模型；分配到 folder/account；fmt+validate 通过。
 
 ### FP-6 网络互联（CEN / Transit Router）
