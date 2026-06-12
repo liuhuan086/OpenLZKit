@@ -50,10 +50,11 @@
 
 ### FP-4 跨账号访问（Cross-account Access）
 
+- **状态**：✅ 已实现第一版（`modules/cross-account-access` + `live/24-cross-account-access` + 静态示例）。
 - **场景**：安全账号只读审计所有成员账号；CI/CD 从自动化账号假设角色到工作负载账号 apply；日志账号集中收集。
 - **阿里云能力**：RAM 角色跨账号信任 + STS AssumeRole；可选 Resource Share 共享资源。
 - **Terraform**：`alicloud_ram_role`（跨账号 trust）、`alicloud_resource_manager_resource_share` + `shared_target`。
-- **落地**：新增 `modules/cross-account-access`（按 `{source_account, target_role, permissions, conditions}` 声明角色与信任）。
+- **落地**：`modules/cross-account-access`（按 `{source_account, target_role, permissions, conditions}` 声明角色与信任）。
 - **验收**：trust 文档限定来源账号/条件；最小权限；正反 Conftest 用例（禁止过宽 trust）。
 
 ### FP-5 人员 SSO（CloudSSO 访问）
