@@ -22,6 +22,23 @@ aws/
 └── tests/
 ```
 
+## 实现状态
+
+| 层 | 实现 | 状态 |
+|---|---|---|
+| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | 🟡 骨架目录 |
+| `10-org` | [`modules/org`](modules/org) | 🟡 待实现（Organizations OU / account vending） |
+| `20-identity` | [`modules/identity`](modules/identity) | 🟡 待实现（IAM roles / Identity Center 对接） |
+| `30-network` | [`modules/network`](modules/network) | 🟡 待实现（VPC baseline） |
+| `40-security` | [`modules/security`](modules/security) | 🟡 待实现（SCP / security guardrails） |
+| `50-logging` | [`modules/logging`](modules/logging) | 🟡 待实现（CloudTrail / log archive） |
+| `60-finops` | [`modules/finops`](modules/finops) | 🟡 待实现（Tag Policy / Budgets / Cost Anomaly） |
+| `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | 🟡 待实现（workload account/resource baseline） |
+
+## 企业级深化
+
+在 MVP 七域之上，按企业级标准深化多账号、跨账号访问、业务部门管理、组织护栏、IAM Identity Center、Transit Gateway、AWS Config/Security Hub/GuardDuty、委派管理、日志归档与 FinOps。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)（文档先行，逐 FP 推进）。
+
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
