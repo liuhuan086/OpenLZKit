@@ -20,6 +20,8 @@ terraform -chdir=live/10-org init -backend=false
 terraform -chdir=live/10-org validate
 terraform -chdir=live/20-identity init -backend=false
 terraform -chdir=live/20-identity validate
+terraform -chdir=live/30-network init -backend=false
+terraform -chdir=live/30-network validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -37,5 +39,6 @@ terraform -chdir=examples/basic plan -var region=cn-hangzhou
 | `modules/org` (via `examples/basic`) | ✅ | ✅ | account | folders only; accounts off by default |
 | `live/10-org` | ✅ | ✅ | account | OSS backend via `-backend-config` |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | assumable RAM roles; no long-lived users |
+| `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).

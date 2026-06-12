@@ -29,6 +29,7 @@ alicloud/
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（启用 Resource Directory、OSS state 桶、GitHub OIDC + CI/CD plan 角色） |
 | `10-org` | [`modules/org`](modules/org) | ✅ 已实现（Resource Directory 文件夹层级，账号创建默认关闭） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（可假设 RAM 角色，SSO/联邦导向，不建长期用户） |
+| `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/VSwitch + 默认拒绝安全组） |
 | 其他层 | — | 🚧 占位，待实现 |
 
 所有已实现 stack 均通过 `terraform fmt + validate`（无需云账号）。参见 [examples/basic](examples/basic)。
