@@ -33,6 +33,7 @@ gcp/
 | `15-departments` | [`modules/department`](modules/department) | ✅ 已实现（FP-3：部门 Folder + 部门 IAM + 部门预算） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（自定义 IAM 角色 + 绑定，组优先） |
 | `24-cross-account-access` | [`modules/cross-account-access`](modules/cross-account-access) | ✅ 已实现（FP-4：服务账号 + WIF 模拟 + 跨项目 IAM） |
+| `25-sso` | [`modules/identity-groups`](modules/identity-groups) | ✅ 已实现（FP-5：Cloud Identity 组 + IAM，人员走组不走用户） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Shared VPC 自定义网络 + 子网流日志 + 默认拒绝防火墙） |
 | `40-security` | [`modules/org-policies`](modules/org-policies) | ✅ 已实现（Organization Policy 组织护栏 FP-2：禁 SA key/默认网络/外网 IP，限地域） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央日志归档桶 + 聚合 Folder 日志 sink） |

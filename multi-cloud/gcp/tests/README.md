@@ -15,6 +15,7 @@ terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/1
 terraform -chdir=live/15-departments init -backend=false && terraform -chdir=live/15-departments validate
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/24-cross-account-access init -backend=false && terraform -chdir=live/24-cross-account-access validate
+terraform -chdir=live/25-sso init -backend=false && terraform -chdir=live/25-sso validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
@@ -38,6 +39,7 @@ terraform -chdir=live/10-org plan -var project_id=<seed-project> -var org_id=<or
 | `modules/department` + `live/15-departments` | ✅ | ✅ | proj | department folder + IAM + budget |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | proj | custom IAM roles + bindings |
 | `modules/cross-account-access` + `live/24-cross-account-access` | ✅ | ✅ | proj | service accounts + WIF + cross-project IAM |
+| `modules/identity-groups` + `live/25-sso` | ✅ | ✅ | proj | Cloud Identity groups + IAM |
 | `modules/network` + `live/30-network` | ✅ | ✅ | proj | custom VPC; flow logs; default-deny firewall |
 | `modules/org-policies` + `live/40-security` | ✅ | ✅ | proj | Organization Policy guardrails |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | proj | central log archive + aggregated sink |
