@@ -23,6 +23,7 @@ terraform -chdir=live/45-compliance init -backend=false && terraform -chdir=live
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 terraform -chdir=live/55-delegation init -backend=false && terraform -chdir=live/55-delegation validate
 terraform -chdir=live/60-finops   init -backend=false && terraform -chdir=live/60-finops   validate
+terraform -chdir=live/70-workload-onboarding init -backend=false && terraform -chdir=live/70-workload-onboarding validate
 ```
 
 ## Plan / integration (sandbox project) — manual
@@ -50,5 +51,6 @@ terraform -chdir=live/10-org plan -var project_id=<seed-project> -var org_id=<or
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | proj | central log archive + aggregated sink |
 | `modules/delegation` + `live/55-delegation` | ✅ | ✅ | proj | folder IAM delegation + subnet sharing |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | proj | Cloud Billing budgets |
+| `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | proj | workload SA + team IAM + labels |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
