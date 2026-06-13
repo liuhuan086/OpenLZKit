@@ -14,6 +14,7 @@ resource "google_storage_bucket" "log_archive" {
 
   retention_policy {
     retention_period = var.retention_days * 86400
+    is_locked        = var.lock_retention
   }
 }
 

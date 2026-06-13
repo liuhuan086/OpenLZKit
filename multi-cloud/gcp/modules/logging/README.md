@@ -36,6 +36,7 @@ module "logging" {
 | `log_bucket_name` | `string` | — | Globally-unique archive bucket name. |
 | `location` | `string` | `US` | Bucket location. |
 | `retention_days` | `number` | `365` | Bucket retention policy. |
+| `lock_retention` | `bool` | `false` | Lock retention (Bucket Lock) — **irreversible**; enable in production. |
 | `sinks` | `map(object)` | `{}` | Aggregated folder sinks (`parent`, `filter`, `include_children`). |
 
 ## Outputs

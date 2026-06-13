@@ -26,6 +26,12 @@ variable "retention_days" {
   default     = 365
 }
 
+variable "lock_retention" {
+  description = "Lock the retention policy (Bucket Lock). IRREVERSIBLE: the policy can no longer be removed or shortened and the bucket cannot be deleted. Enable in production for immutable audit logs."
+  type        = bool
+  default     = false
+}
+
 variable "sinks" {
   description = <<-EOT
     Aggregated log sinks keyed by stable id. `parent` is a folder/org resource id

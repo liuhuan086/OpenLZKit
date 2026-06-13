@@ -78,3 +78,6 @@ skip-check:
   - CKV_GCP_62   # GCS bucket access logging — bootstrap predates the central log-sink bucket
   - CKV_GCP_125  # WIF trust policy — a repo-restricted attribute_condition is set (var indirection hides it)
   - CKV2_GCP_5   # Per-project audit logging — configured centrally via org/folder log sinks (50-logging)
+  - CKV2_GCP_4   # Log bucket Bucket Lock — opt-in via lock_retention (irreversible); template default unlocked
+  - CKV_GCP_117  # Basic role at project level — intentional workload-team editor on its own project; override with predefined roles
+  - CKV_GCP_49   # SA impersonation at project level — workloadIdentityUser is granted at service-account scope, not project (false positive)
