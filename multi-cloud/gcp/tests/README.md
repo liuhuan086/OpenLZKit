@@ -12,6 +12,7 @@ terraform fmt -check -recursive
 # validate every module and live stack (backend disabled)
 terraform -chdir=live/00-bootstrap init -backend=false && terraform -chdir=live/00-bootstrap validate
 terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/10-org      validate
+terraform -chdir=live/15-departments init -backend=false && terraform -chdir=live/15-departments validate
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
@@ -33,6 +34,7 @@ terraform -chdir=live/10-org plan -var project_id=<seed-project> -var org_id=<or
 | `live/00-bootstrap` | ✅ | ✅ | proj | local state → migrate to GCS; WIF CI identity |
 | `modules/org` + `live/10-org` | ✅ | ✅ | proj | folder hierarchy |
 | `modules/project-factory` | ✅ | ✅ | proj | project vending (off by default) |
+| `modules/department` + `live/15-departments` | ✅ | ✅ | proj | department folder + IAM + budget |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | proj | custom IAM roles + bindings |
 | `modules/network` + `live/30-network` | ✅ | ✅ | proj | custom VPC; flow logs; default-deny firewall |
 | `modules/org-policies` + `live/40-security` | ✅ | ✅ | proj | Organization Policy guardrails |
