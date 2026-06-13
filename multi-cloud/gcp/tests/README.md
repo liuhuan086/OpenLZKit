@@ -15,6 +15,7 @@ terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/1
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
+terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 ```
 
 ## Plan / integration (sandbox project) — manual
@@ -34,5 +35,6 @@ terraform -chdir=live/10-org plan -var project_id=<seed-project> -var org_id=<or
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | proj | custom IAM roles + bindings |
 | `modules/network` + `live/30-network` | ✅ | ✅ | proj | custom VPC; flow logs; default-deny firewall |
 | `modules/org-policies` + `live/40-security` | ✅ | ✅ | proj | Organization Policy guardrails |
+| `modules/logging` + `live/50-logging` | ✅ | ✅ | proj | central log archive + aggregated sink |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
