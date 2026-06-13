@@ -39,6 +39,7 @@ gcp/
 | `40-security` | [`modules/org-policies`](modules/org-policies) | ✅ 已实现（Organization Policy 组织护栏 FP-2：禁 SA key/默认网络/外网 IP，限地域） |
 | `45-compliance` | [`modules/compliance`](modules/compliance) | ✅ 已实现（FP-7：SCC findings BigQuery 导出 + Pub/Sub 通知） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央日志归档桶 + 聚合 Folder 日志 sink） |
+| `55-delegation` | [`modules/delegation`](modules/delegation) | ✅ 已实现（FP-8：Folder IAM 委派禁 owner + 子网级 Shared VPC 接入） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（Cloud Billing 预算 + 阈值告警） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
