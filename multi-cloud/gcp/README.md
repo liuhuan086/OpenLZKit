@@ -37,6 +37,7 @@ gcp/
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Shared VPC 自定义网络 + 子网流日志 + 默认拒绝防火墙） |
 | `35-connectivity` | [`modules/connectivity`](modules/connectivity) | ✅ 已实现（FP-6：Shared VPC host/service 接入，隔离层不接入） |
 | `40-security` | [`modules/org-policies`](modules/org-policies) | ✅ 已实现（Organization Policy 组织护栏 FP-2：禁 SA key/默认网络/外网 IP，限地域） |
+| `45-compliance` | [`modules/compliance`](modules/compliance) | ✅ 已实现（FP-7：SCC findings BigQuery 导出 + Pub/Sub 通知） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（中央日志归档桶 + 聚合 Folder 日志 sink） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（Cloud Billing 预算 + 阈值告警） |
 | 其他层 | — | 🚧 待实现（见路线图） |
