@@ -2,7 +2,7 @@
 
 ## 1. 目标
 
-建立一套跨 AWS、Azure、GCP 的统一身份访问模型，使人类用户和机器身份都能被标准化管理。
+建立一套覆盖阿里云、AWS、腾讯云、Azure、GCP 的统一身份访问方法论，使人类用户和机器身份都能被标准化管理，同时保留各云原生权限模型。
 
 ## 2. 设计原则
 
@@ -28,7 +28,16 @@ Organization Roles
 └── break-glass-admin
 ```
 
-## 4. 机器身份设计
+## 4. 云厂商映射
+
+| 能力 | 阿里云 | AWS | 腾讯云 | Azure | GCP |
+|---|---|---|---|---|---|
+| 人员身份 | RAM / CloudSSO | IAM Identity Center | CAM / 企业 IdP | Entra ID | Cloud Identity / Workforce Identity Federation |
+| 机器身份 | RAM Role / STS | IAM Role / STS | CAM Role / STS | Managed Identity / Federated Credential | Service Account / Workload Identity Federation |
+| 权限边界 | RAM Policy / 管控策略 | IAM Policy / SCP | CAM Policy / 组织策略 | RBAC / Azure Policy | IAM Policy / Organization Policy |
+| 临时凭证 | STS AssumeRole | STS AssumeRole | STS AssumeRole | OIDC Token / Managed Identity Token | WIF / Service Account Impersonation |
+
+## 5. 机器身份设计
 
 ### CI/CD 身份
 
@@ -46,7 +55,7 @@ CI/CD 不应该使用人类账号，也不应该默认使用长期 AK/SK。
 - apply 角色：可变更资源，但只在受保护环境执行。
 - security scan 角色：读取配置和 plan，不写资源。
 
-## 5. Break-glass 设计
+## 6. Break-glass 设计
 
 Break-glass 账号用于紧急情况，不用于日常维护。
 
@@ -58,7 +67,7 @@ Break-glass 账号用于紧急情况，不用于日常维护。
 - 使用后复盘。
 - 权限定期验证。
 
-## 6. OpenLZKit 中的身份建模
+## 7. OpenLZKit 中的身份建模
 
 ```yaml
 identity:
@@ -80,7 +89,7 @@ identity:
         - cicd-deployer
 ```
 
-## 7. 验收规则
+## 8. 验收规则
 
 - 每个 prod scope 至少有 auditor。
 - 每个 deployer 必须声明 auth 类型。

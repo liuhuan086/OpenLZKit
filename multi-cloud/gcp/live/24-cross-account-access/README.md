@@ -17,6 +17,6 @@ terraform validate
 terraform plan \
   -var project_id=<automation-project> \
   -var workload_identity_pool_name=<pool-name-from-bootstrap> \
-  -var github_owner=liuhuan086 -var github_repo=OpenLZKit
+  -var github_owner=example-org -var github_repo=openlzkit-example
 # apply after PR review + approval; scope project_bindings to specific projects
 ```

@@ -23,12 +23,14 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 | [03-security-governance-design](design/03-security-governance-design.md) | 安全治理与策略设计 |
 | [04-iac-and-cicd-design](design/04-iac-and-cicd-design.md) | IaC 与 CI/CD 设计 |
 | [05-repository-and-state-design](design/05-repository-and-state-design.md) | 仓库与 state 设计 |
+| [05-repository-and-state-design-en](design/05-repository-and-state-design-en.md) | 仓库与 state 设计英文版 |
 | [06-alicloud-landing-zone-design](design/06-alicloud-landing-zone-design.md) | 阿里云设计 |
-| [07-tencent-cloud-landing-zone-design](design/07-tencent-cloud-landing-zone-design.md) | 腾讯云设计 |
-| [08-azure-landing-zone-design](design/08-azure-landing-zone-design.md) | Azure 设计 |
-| [09-gcp-landing-zone-design](design/09-gcp-landing-zone-design.md) | Google Cloud 设计 |
-| [10-logging-audit-observability](design/10-logging-audit-observability.md) | 日志、审计与可观测性 |
-| [11-finops-cost-governance](design/11-finops-cost-governance.md) | FinOps 与成本治理 |
+| [07-aws-landing-zone-design](design/07-aws-landing-zone-design.md) | AWS 设计 |
+| [08-tencent-cloud-landing-zone-design](design/08-tencent-cloud-landing-zone-design.md) | 腾讯云设计 |
+| [09-azure-landing-zone-design](design/09-azure-landing-zone-design.md) | Azure 设计 |
+| [10-gcp-landing-zone-design](design/10-gcp-landing-zone-design.md) | Google Cloud 设计 |
+| [11-logging-audit-observability](design/11-logging-audit-observability.md) | 日志、审计与可观测性 |
+| [12-finops-cost-governance](design/12-finops-cost-governance.md) | FinOps 与成本治理 |
 
 ## runbooks/ — 运维与问题处置
 

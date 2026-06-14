@@ -58,12 +58,8 @@ gcp/
 7. `60-finops`：标签、预算、成本告警。
 8. `70-workload-onboarding`：业务接入模板。
 
-## MVP 范围
+## 后续重点
 
-- 设计文档。
-- 模块接口草案。
-- 最小组织结构。
-- 最小身份模型。
-- 最小日志审计。
-- 基础安全基线。
-- 一个 workload onboarding 示例。
+- 扩展 Organization Policy、SCC findings、IAM 过宽授权和标签类 Rego 用例。
+- 增加 sandbox apply / rollback 脚本化证据。
+- 完善 Shared VPC service project、WIF 和 project factory 企业流程示例。

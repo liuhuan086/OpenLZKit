@@ -4,7 +4,12 @@ resource "tencentcloud_ccn" "this" {
   tags        = var.tags
 }
 
-resource "tencentcloud_ccn_attachment" "this" {
+moved {
+  from = tencentcloud_ccn_attachment.this
+  to   = tencentcloud_ccn_attachment_v2.this
+}
+
+resource "tencentcloud_ccn_attachment_v2" "this" {
   for_each = var.attachments
 
   ccn_id          = tencentcloud_ccn.this.id

@@ -18,6 +18,6 @@ terraform init \
 
 ```bash
 terraform validate
-terraform plan -var subscription_id=<sub-guid> -var github_owner=liuhuan086 -var github_repo=OpenLZKit
+terraform plan -var subscription_id=<sub-guid> -var github_owner=example-org -var github_repo=openlzkit-example
 # apply after PR review + approval; scope workload_role_assignments to specific subscriptions
 ```

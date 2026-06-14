@@ -76,15 +76,15 @@ Landing Zone 会预先定义：
 
 ## 3. 各云厂商如何表达 Landing Zone
 
-| 领域 | AWS | Azure | Google Cloud |
-|---|---|---|---|
-| 官方方案 | Control Tower / Organizations | Azure Landing Zone / CAF | Cloud Foundation / Landing Zone |
-| 组织分组 | OU | Management Group | Folder |
-| 资源容器 | Account | Subscription | Project |
-| 策略 | SCP / Controls | Azure Policy | Organization Policy |
-| 身份 | IAM / IAM Identity Center | Microsoft Entra ID / RBAC | Cloud IAM / Cloud Identity |
-| 网络 | VPC / Transit Gateway | VNet / Hub-Spoke / Virtual WAN | VPC / Shared VPC |
-| 日志 | CloudTrail / Config / CloudWatch | Monitor / Log Analytics | Cloud Logging / Audit Logs |
+| 领域 | 阿里云 | AWS | 腾讯云 | Azure | Google Cloud |
+|---|---|---|---|---|---|
+| 官方方案 | Cloud Governance Center / Resource Directory | Control Tower / Organizations | Control Center / Organization | Azure Landing Zone / CAF | Cloud Foundation / Landing Zone |
+| 组织分组 | 资源夹 | OU | 组织节点/成员账号 | Management Group | Folder |
+| 资源容器 | 成员账号 | Account | 成员账号 | Subscription | Project |
+| 策略 | 管控策略 / RAM Policy | SCP / Controls | 组织策略 / CAM Policy | Azure Policy | Organization Policy |
+| 身份 | RAM / CloudSSO | IAM / IAM Identity Center | CAM / 企业 IdP | Microsoft Entra ID / RBAC | Cloud IAM / Cloud Identity |
+| 网络 | VPC / CEN / Transit Router | VPC / Transit Gateway | VPC / CCN | VNet / Hub-Spoke / Virtual WAN | VPC / Shared VPC |
+| 日志 | ActionTrail / SLS | CloudTrail / Config / CloudWatch | CloudAudit / CLS | Monitor / Log Analytics | Cloud Logging / Audit Logs |
 
 ## 4. Landing Zone 不是一次性项目
 
@@ -114,4 +114,4 @@ Landing Zone 会随着企业成熟度演进：
 
 如果面试官问“什么是 Landing Zone”，可以这样答：
 
-> Landing Zone 是企业上云前的标准化基础环境。它不只是创建几个云账号，而是把多账号结构、身份权限、网络拓扑、安全基线、日志审计、成本标签、策略治理和 IaC 自动化统一设计好，让业务应用可以在一个可控、可审计、可扩展的环境中落地。AWS 里通常对应 Organizations/Control Tower，Azure 里对应 CAF/Azure Landing Zone，GCP 里对应 Cloud Foundation/Resource Hierarchy。
+> Landing Zone 是企业上云前的标准化基础环境。它不只是创建几个云账号，而是把多账号结构、身份权限、网络拓扑、安全基线、日志审计、成本标签、策略治理和 IaC 自动化统一设计好，让业务应用可以在一个可控、可审计、可扩展的环境中落地。阿里云里通常对应 Resource Directory/Cloud Governance Center，AWS 里对应 Organizations/Control Tower，腾讯云里对应 Organization/Control Center，Azure 里对应 CAF/Azure Landing Zone，GCP 里对应 Cloud Foundation/Resource Hierarchy。

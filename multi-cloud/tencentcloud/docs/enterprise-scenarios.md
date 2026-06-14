@@ -72,7 +72,7 @@
 
 - **场景**：Hub-Spoke 跨账号互联；prod↔shared 私网；sandbox↔prod 默认隔离；跨账号网络授权。
 - **腾讯云能力**：CCN（云联网）+ VPC 实例挂载 + 路由表。
-- **Terraform**：`tencentcloud_ccn`、`tencentcloud_ccn_attachment`、`tencentcloud_ccn_route_table`。
+- **Terraform**：`tencentcloud_ccn`、`tencentcloud_ccn_attachment_v2`、`tencentcloud_ccn_route_table`。
 - **落地**：`modules/connectivity`；在 `live/35-connectivity` 编排 CCN 与 VPC 挂载。
 - **验收**：CIDR 不重叠；sandbox VPC 不挂载到 prod CCN；fmt+validate 通过。
 

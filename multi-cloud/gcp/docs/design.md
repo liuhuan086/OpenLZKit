@@ -1,67 +1,42 @@
 # Google Cloud Landing Zone Design
 
-## 1. 设计目标
+Google Cloud Landing Zone 使用 Organization / Folders / Projects / Cloud Identity / IAM / Organization Policy / Shared VPC / Cloud Logging / Security Command Center 等原生能力。Folder 是策略继承边界，Project 是资源、API、配额、IAM 和账单边界。
 
-- 建立企业级云上组织结构。
-- 建立统一身份和权限模型。
-- 建立安全、日志、网络、成本治理基线。
-- 支持业务团队按标准流程接入。
+## 阅读顺序
 
-## 2. 原生模型
+1. [account-model.md](account-model.md)
+2. [identity-model.md](identity-model.md)
+3. [network-model.md](network-model.md)
+4. [security-baseline.md](security-baseline.md)
+5. [operations-runbook.md](operations-runbook.md)
+6. [enterprise-scenarios.md](enterprise-scenarios.md)
 
-Google Cloud 的 Landing Zone 应基于其原生模型：Organization / Folders / Projects / Cloud Foundation。
+## 目标结构
 
-关键能力包括：Organization, Folders, Projects, IAM, Org Policy, Shared VPC, Cloud Logging, SCC。
+```text
+organizations/<org-id>
+├── folders/platform
+│   ├── security
+│   ├── logging
+│   └── network
+├── folders/workloads
+│   ├── prod
+│   └── nonprod
+├── folders/sandbox
+└── folders/decommissioned
+```
 
-## 3. 账号/订阅/项目结构
+## 设计原则
 
-推荐分层：
+- Project factory 默认不创建真实 project，必须显式传入 billing 和 labels。
+- 人员访问走 Cloud Identity group；自动化走 Workload Identity Federation。
+- Org Policy 禁止 service account key、默认网络、未批准区域和公开存储。
+- Shared VPC host/service project 严格区分 prod、nonprod 和 sandbox。
+- Cloud Audit Logs 和 SCC findings 进入集中日志/安全 project。
 
-- Management / Root。
-- Security。
-- Log Archive。
-- Network / Connectivity。
-- Shared Services。
-- Sandbox。
-- Workloads Dev。
-- Workloads Staging。
-- Workloads Prod。
+## 实施门禁
 
-## 4. 身份模型
-
-- 人员访问走 SSO/Federation。
-- 自动化访问走 OIDC/Federated Role。
-- 工作负载访问走云原生服务角色/托管身份/服务账号。
-- 禁止长期 Access Key 作为默认方案。
-
-## 5. 网络模型
-
-- 默认生产与非生产隔离。
-- 集中网络账号/订阅/项目承载共享网络能力。
-- 默认开启网络日志。
-- 云服务优先私网访问。
-
-## 6. 安全基线
-
-- 操作审计开启。
-- 配置审计开启。
-- 日志集中归档。
-- 存储和磁盘默认加密。
-- 禁止公网高危暴露。
-- 强制标签。
-
-## 7. CI/CD
-
-- PR 阶段执行 fmt、validate、lint、security scan、policy check。
-- Merge 后允许 plan。
-- Apply 需要环境审批。
-- 生产环境单独保护。
-
-## 8. 常见坑
-
-- 直接使用主账号/Root 账号操作。
-- 把所有环境放在一个账号/订阅/项目。
-- Terraform state 不隔离。
-- 手工创建资源后不纳管。
-- 权限策略过大。
-- 没有日志归档账号。
+- `00-bootstrap` 创建 GCS state 和 WIF 基础，真实 apply 需要 seed project。
+- Project id 全局唯一且不可复用，命名前必须评审。
+- Org Policy 先在 folder 层验证，再推广到 organization。
+- 生产禁止下载 service account key；发现 key 视为安全事件。

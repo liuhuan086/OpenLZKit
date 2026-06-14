@@ -17,6 +17,24 @@
 
 ## 第二步：设计资源层级
 
+### 阿里云推荐起点
+
+```text
+Resource Directory
+├── Security Folder
+│   ├── Audit Log Account
+│   └── Security Tooling Account
+├── Infrastructure Folder
+│   ├── Network Account
+│   └── Shared Services Account
+├── Workloads Folder
+│   ├── Dev Account
+│   ├── Test Account
+│   └── Prod Account
+└── Sandbox Folder
+    └── Sandbox Account
+```
+
 ### AWS 推荐起点
 
 ```text
@@ -32,6 +50,24 @@ Root
 │   ├── Test Account
 │   └── Prod Account
 └── Sandbox OU
+    └── Sandbox Account
+```
+
+### 腾讯云推荐起点
+
+```text
+Organization
+├── Security
+│   ├── Audit Account
+│   └── Security Tooling Account
+├── Infrastructure
+│   ├── Network Account
+│   └── Shared Services Account
+├── Workloads
+│   ├── Dev Account
+│   ├── Test Account
+│   └── Prod Account
+└── Sandbox
     └── Sandbox Account
 ```
 

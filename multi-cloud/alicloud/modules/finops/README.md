@@ -10,7 +10,7 @@ every resource must carry the standard cost-attribution tag set.
 
 It does **not** create budgets (Alibaba budget alerts are configured outside
 Terraform) — pair this with cost reports and the tag spec in
-[docs/design/11](../../../../docs/design/11-finops-cost-governance.md).
+[docs/design/12](../../../../docs/design/12-finops-cost-governance.md).
 
 ## Usage
 

@@ -98,13 +98,13 @@ multi-cloud/<cloud>/
 ### MVP
 
 - 完成所有文档、目录、测试策略和 CI 检查。
-- 优先实现阿里云与 AWS 的最小 Landing Zone 骨架。
-- 每朵云至少提供 `README.md`、设计文档、模块接口草案和测试用例。
+- 五朵云均提供 `README.md`、设计文档、模块 README、live stack 和测试说明。
+- AWS 与阿里云提供更完整的策略即代码样例，作为后续扩展其他云策略测试的参考。
 
 ### V1
 
-- 完成五朵云的基础 Landing Zone：组织结构、身份权限、日志审计、安全基线、网络基线、成本标签和工作负载接入。
-- 引入 OPA/Conftest、TFLint、Checkov/tfsec、terraform-docs。
+- 强化五朵云的 sandbox 集成测试、provider-specific policy-as-code 和真实云账号验证。
+- 引入 terraform-docs 生成变量/输出文档，并继续扩展 OPA/Conftest、TFLint、Checkov/tfsec。
 - 输出跨云治理矩阵和对外 Demo 文档。
 
 ### V2

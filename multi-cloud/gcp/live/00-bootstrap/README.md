@@ -31,7 +31,7 @@ terraform validate             # static, no project
 terraform apply \
   -var project_id=my-seed-project \
   -var state_bucket_name=my-lz-tfstate \
-  -var github_owner=liuhuan086 -var github_repo=OpenLZKit
+  -var github_owner=example-org -var github_repo=openlzkit-example
 
 # then migrate state into the new bucket
 terraform init -migrate-state \

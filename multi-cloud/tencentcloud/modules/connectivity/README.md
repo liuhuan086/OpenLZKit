@@ -7,7 +7,7 @@ interconnect.
 ## Responsibilities
 
 - Create a CCN (hub).
-- Attach VPCs to the CCN.
+- Attach VPCs to the CCN with `tencentcloud_ccn_attachment_v2`.
 
 It does **not**: create VPCs/subnets (see `modules/network`) or manage CCN
 bandwidth packages / route tables in depth.
@@ -45,5 +45,7 @@ module "connectivity" {
 
 - Attach only VPCs that should interconnect; **never** attach the sandbox VPC to the hub CCN.
 - Use CCN route tables to segment traffic between attached VPCs.
+- The module includes a Terraform `moved` block from the deprecated
+  `tencentcloud_ccn_attachment` resource to `tencentcloud_ccn_attachment_v2`.
 
 Validated via [live/35-connectivity](../../live/35-connectivity); see [../../tests](../../tests).

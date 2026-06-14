@@ -58,12 +58,8 @@ azure/
 7. `60-finops`：标签、预算、成本告警。
 8. `70-workload-onboarding`：业务接入模板。
 
-## MVP 范围
+## 后续重点
 
-- 设计文档。
-- 模块接口草案。
-- 最小组织结构。
-- 最小身份模型。
-- 最小日志审计。
-- 基础安全基线。
-- 一个 workload onboarding 示例。
+- 扩展 Azure Policy initiative、exemption 生命周期和 Defender for Cloud 策略测试。
+- 增加 sandbox apply / rollback 脚本化证据。
+- 完善 Private Endpoint + Private DNS、Azure Lighthouse 和 subscription vending 企业流程示例。

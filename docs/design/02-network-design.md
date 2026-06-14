@@ -28,6 +28,10 @@ Hub Network
 ```text
 AWS Transit Gateway / Cloud WAN
         |
+Alibaba Cloud CEN / Transit Router
+        |
+Tencent Cloud CCN
+        |
     On-prem / SD-WAN
         |
 Azure Virtual WAN / Hub VNet
@@ -54,7 +58,17 @@ GCP Cloud VPN / Interconnect / NCC
 - 为未来扩容预留空间。
 - 不要直接使用公司办公网段常见范围而不登记，例如 192.168.0.0/16。
 
-## 4. 网络安全边界
+## 4. 云厂商网络能力映射
+
+| 能力 | 阿里云 | AWS | 腾讯云 | Azure | GCP |
+|---|---|---|---|---|---|
+| 基础网络 | VPC / vSwitch | VPC / Subnet | VPC / Subnet | VNet / Subnet | VPC / Subnet |
+| Hub-Spoke / Transit | CEN / Transit Router | Transit Gateway / Cloud WAN | CCN | Virtual WAN / Hub VNet | Shared VPC / NCC |
+| 专线 | Express Connect | Direct Connect | Direct Connect | ExpressRoute | Cloud Interconnect |
+| 私网服务访问 | PrivateLink | PrivateLink / VPC Endpoint | PrivateLink | Private Link / Private Endpoint | Private Service Connect |
+| 网络日志 | Flow Log / SLS | VPC Flow Logs | Flow Logs / CLS | NSG Flow Logs / Monitor | VPC Flow Logs / Cloud Logging |
+
+## 5. 网络安全边界
 
 - prod 不直接接受 sandbox 访问。
 - 公网入口必须经过 WAF/Load Balancer/API Gateway。
@@ -62,7 +76,7 @@ GCP Cloud VPN / Interconnect / NCC
 - 管理入口使用 VPN/ZTNA/Bastion，不直接暴露 SSH/RDP。
 - DNS 和证书统一管理。
 
-## 5. OpenLZKit 中的网络建模
+## 6. OpenLZKit 中的网络建模
 
 ```yaml
 network:
@@ -80,14 +94,14 @@ network:
       type: denied
 ```
 
-## 6. 校验规则
+## 7. 校验规则
 
 - CIDR 重叠报错。
 - sandbox -> prod 直连报错。
 - prod 公网入口没有 reason 报 warning 或 error。
 - 没有 egress 策略报 warning。
 
-## 7. 多云互联建议（优先级）
+## 8. 多云互联建议（优先级）
 
 MVP 不建议一开始做五云全互联。优先让每朵云内部 Landing Zone 成熟后，再做跨云互联，且必须经过集中网络层。
 

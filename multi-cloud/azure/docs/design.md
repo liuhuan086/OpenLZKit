@@ -1,67 +1,42 @@
 # Azure Landing Zone Design
 
-## 1. 设计目标
+Azure Landing Zone 使用 Management Groups / Subscriptions / Microsoft Entra ID / RBAC / Azure Policy / Log Analytics / Defender for Cloud / Hub-Spoke 或 Virtual WAN 等原生能力。管理组是策略继承边界，订阅是资源、账单和配额边界。
 
-- 建立企业级云上组织结构。
-- 建立统一身份和权限模型。
-- 建立安全、日志、网络、成本治理基线。
-- 支持业务团队按标准流程接入。
+## 阅读顺序
 
-## 2. 原生模型
+1. [account-model.md](account-model.md)
+2. [identity-model.md](identity-model.md)
+3. [network-model.md](network-model.md)
+4. [security-baseline.md](security-baseline.md)
+5. [operations-runbook.md](operations-runbook.md)
+6. [enterprise-scenarios.md](enterprise-scenarios.md)
 
-Azure 的 Landing Zone 应基于其原生模型：Management Groups / Subscriptions / Azure Landing Zones。
+## 目标结构
 
-关键能力包括：Management Groups, Subscriptions, Entra ID, RBAC, Azure Policy, Log Analytics, Hub-Spoke/vWAN。
+```text
+Tenant Root Group
+├── Platform
+│   ├── Identity
+│   ├── Management
+│   └── Connectivity
+├── LandingZones
+│   ├── Corp
+│   └── Online
+├── Sandbox
+└── Decommissioned
+```
 
-## 3. 账号/订阅/项目结构
+## 设计原则
 
-推荐分层：
+- 平台订阅承载共享服务，应用订阅通过 vending 流程接入。
+- 人员访问走 Entra group + RBAC/PIM，自动化走 federated credential。
+- Azure Policy 在管理组层前移，exemption 必须有 owner、reason、expiry。
+- Activity Log、诊断日志和 Defender findings 进入集中 Log Analytics/归档。
+- Hub-Spoke 和 Private DNS/Private Endpoint 同步设计，避免只建网络不解 DNS。
 
-- Management / Root。
-- Security。
-- Log Archive。
-- Network / Connectivity。
-- Shared Services。
-- Sandbox。
-- Workloads Dev。
-- Workloads Staging。
-- Workloads Prod。
+## 实施门禁
 
-## 4. 身份模型
-
-- 人员访问走 SSO/Federation。
-- 自动化访问走 OIDC/Federated Role。
-- 工作负载访问走云原生服务角色/托管身份/服务账号。
-- 禁止长期 Access Key 作为默认方案。
-
-## 5. 网络模型
-
-- 默认生产与非生产隔离。
-- 集中网络账号/订阅/项目承载共享网络能力。
-- 默认开启网络日志。
-- 云服务优先私网访问。
-
-## 6. 安全基线
-
-- 操作审计开启。
-- 配置审计开启。
-- 日志集中归档。
-- 存储和磁盘默认加密。
-- 禁止公网高危暴露。
-- 强制标签。
-
-## 7. CI/CD
-
-- PR 阶段执行 fmt、validate、lint、security scan、policy check。
-- Merge 后允许 plan。
-- Apply 需要环境审批。
-- 生产环境单独保护。
-
-## 8. 常见坑
-
-- 直接使用主账号/Root 账号操作。
-- 把所有环境放在一个账号/订阅/项目。
-- Terraform state 不隔离。
-- 手工创建资源后不纳管。
-- 权限策略过大。
-- 没有日志归档账号。
+- `00-bootstrap` 创建 state 存储和 OIDC 基础，真实 apply 需要企业订阅权限。
+- 订阅售卖默认不自动购买真实订阅。
+- 生产 apply 身份和 plan 身份分离。
+- Policy 在 sandbox 管理组验证后再推广。

@@ -34,7 +34,7 @@ terraform validate              # static, no subscription
 terraform apply \
   -var subscription_id=00000000-0000-0000-0000-000000000000 \
   -var state_storage_account_name=mylztfstate \
-  -var github_owner=liuhuan086 -var github_repo=OpenLZKit
+  -var github_owner=example-org -var github_repo=openlzkit-example
 
 # then migrate state into the new storage account
 terraform init -migrate-state \

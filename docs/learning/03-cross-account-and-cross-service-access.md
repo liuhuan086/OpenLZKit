@@ -40,9 +40,63 @@ GitHub Actions -> OIDC -> AWS IAM Role -> Terraform apply -> workload account
 - 权限策略限制到具体资源和动作。
 - CloudTrail 记录 AssumeRole 和后续操作。
 
-## 3. Azure 跨订阅访问
+## 3. 阿里云跨账号访问
 
 ### 3.1 核心机制
+
+阿里云常用 RAM Role + STS AssumeRole，并结合 Resource Directory 或 CloudSSO 管理成员账号访问。
+
+原理：
+
+1. 目标成员账号创建 RAM Role。
+2. RAM Role 的信任策略允许来源账号、身份提供方或自动化身份扮演。
+3. 来源身份通过 STS 获取临时凭证。
+4. 来源身份使用临时凭证访问目标账号资源。
+5. ActionTrail 记录 AssumeRole 和后续操作。
+
+### 3.2 示例场景
+
+```text
+GitHub Actions -> OIDC/Federation -> RAM Role -> Terraform apply -> workload account
+```
+
+### 3.3 最佳实践
+
+- 不使用长期 AccessKey 作为 CI/CD 默认认证。
+- RAM Role 信任策略限制来源账号、仓库、分支和环境。
+- 跨账号角色按 plan/apply/audit 拆分。
+- ActionTrail 日志集中写入审计账号的 SLS。
+
+## 4. 腾讯云跨账号访问
+
+### 4.1 核心机制
+
+腾讯云常用 CAM Role + STS 临时凭证，并结合 Organization 管理成员账号访问。
+
+原理：
+
+1. 目标成员账号创建 CAM Role。
+2. CAM Role 信任来源账号、身份提供方或自动化身份。
+3. 来源身份调用 STS AssumeRole 获取临时凭证。
+4. 来源身份用临时凭证访问目标账号资源。
+5. CloudAudit 记录角色扮演和资源操作。
+
+### 4.2 示例场景
+
+```text
+GitHub Actions -> OIDC/Federation -> CAM Role -> Terraform apply -> workload account
+```
+
+### 4.3 最佳实践
+
+- 不在 CI/CD 保存永久 SecretId/SecretKey。
+- trust policy 限制 repo、branch、environment。
+- 按组织节点和成员账号收敛权限范围。
+- CloudAudit 和 CLS 日志集中到安全/日志账号。
+
+## 5. Azure 跨订阅访问
+
+### 5.1 核心机制
 
 Azure 常见方式：
 
@@ -51,22 +105,22 @@ Azure 常见方式：
 - Azure RBAC 在 subscription/resource group/resource scope 授权。
 - GitHub Actions 可通过 OIDC federated credential 换取访问令牌。
 
-### 3.2 示例场景
+### 5.2 示例场景
 
 ```text
 GitHub Actions -> OIDC -> Entra App Federated Credential -> Azure Login -> Subscription RBAC -> Terraform apply
 ```
 
-### 3.3 最佳实践
+### 5.3 最佳实践
 
 - 不存储 client secret。
 - 使用 federated credential。
 - 角色绑定尽量在 subscription/resource group，而不是 tenant root。
 - 生产环境使用审批和环境保护规则。
 
-## 4. GCP 跨项目访问
+## 6. GCP 跨项目访问
 
-### 4.1 核心机制
+### 6.1 核心机制
 
 GCP 常见方式：
 
@@ -75,40 +129,42 @@ GCP 常见方式：
 - IAM binding 绑定到 project/folder/org。
 - Shared VPC 允许 service project 使用 host project 网络。
 
-### 4.2 示例场景
+### 6.2 示例场景
 
 ```text
 GitHub Actions -> OIDC -> Workload Identity Pool -> Service Account Impersonation -> GCP Project
 ```
 
-### 4.3 最佳实践
+### 6.3 最佳实践
 
 - 不下载 service account key。
 - 使用 Workload Identity Federation。
 - 把 workload identity pool 放在专用项目中管理。
 - service account 权限最小化。
 
-## 5. 跨服务访问
+## 7. 跨服务访问
 
-### 5.1 典型例子
+### 7.1 典型例子
 
 - 应用访问对象存储。
 - EKS/AKS/GKE Pod 访问云数据库。
 - Lambda/Function 访问消息队列。
 - CI/CD 访问镜像仓库。
 
-### 5.2 标准思路
+### 7.2 标准思路
 
 不要把密钥写到环境变量里，而是使用 workload identity：
 
 | 平台 | 推荐方式 |
 |---|---|
+| 阿里云 ACK | RRSA / RAM Role / STS |
 | AWS EKS | IRSA / Pod Identity |
+| 腾讯云 TKE | CAM Role / STS / 服务角色 |
 | Azure AKS | Workload Identity / Managed Identity |
 | GCP GKE | Workload Identity Federation for GKE |
 | CI/CD | OIDC/WIF |
 
-## 6. 多云访问的统一抽象
+## 8. 多云访问的统一抽象
 
 在 OpenLZKit 中可以抽象成：
 
@@ -130,7 +186,7 @@ access_bindings:
       approval_required: true
 ```
 
-## 7. 常见错误
+## 9. 常见错误
 
 | 错误 | 风险 | 修正 |
 |---|---|---|

@@ -76,13 +76,13 @@ Condition: branch == main && environment == dev && token == OIDC
 
 ## 5. 跨云角色映射
 
-| 统一角色 | AWS | Azure | GCP |
-|---|---|---|---|
-| platform-admin | IAM Role / Permission Set | Azure RBAC custom role | IAM custom role |
-| security-auditor | SecurityAudit / ReadOnlyAccess | Security Reader | Security Reviewer / Viewer |
-| network-admin | VPC/TransitGateway scoped role | Network Contributor | Compute Network Admin |
-| app-developer | workload account role | RG/subscription scoped contributor | project scoped editor/custom |
-| cicd-deployer | AssumeRole / OIDC role | Federated credential + RBAC | WIF + service account impersonation |
+| 统一角色 | 阿里云 | AWS | 腾讯云 | Azure | GCP |
+|---|---|---|---|---|---|
+| platform-admin | RAM Role / CloudSSO 权限集 | IAM Role / Permission Set | CAM Role / 用户组策略 | Azure RBAC custom role | IAM custom role |
+| security-auditor | ActionTrail/SLS/Config 只读角色 | SecurityAudit / ReadOnlyAccess | CloudAudit/CLS 只读角色 | Security Reader | Security Reviewer / Viewer |
+| network-admin | VPC/CEN/TR scoped role | VPC/TransitGateway scoped role | VPC/CCN scoped role | Network Contributor | Compute Network Admin |
+| app-developer | workload account scoped role | workload account role | workload account scoped role | RG/subscription scoped contributor | project scoped editor/custom |
+| cicd-deployer | OIDC/Federation + RAM Role | AssumeRole / OIDC role | OIDC/Federation + CAM Role | Federated credential + RBAC | WIF + service account impersonation |
 
 ## 6. 多角色管理原则
 
@@ -121,12 +121,12 @@ Break-glass 不是日常管理员，而是事故时使用的紧急通道。
 
 ## 7. 权限矩阵示例
 
-| Principal | Role | AWS Scope | Azure Scope | GCP Scope | Condition |
-|---|---|---|---|---|---|
-| platform-team | platform-admin | Infrastructure OU | Platform MG | Common Folder | JIT for prod |
-| security-team | security-auditor | Security OU | Management Sub | logging-project | read-only |
-| app-team-a | app-developer | app-a-dev/prod | app-a subscriptions | app-a projects | prod via PR |
-| github-actions | cicd-deployer | workload accounts | workload subs | workload projects | OIDC + main branch |
+| Principal | Role | 阿里云 Scope | AWS Scope | 腾讯云 Scope | Azure Scope | GCP Scope | Condition |
+|---|---|---|---|---|---|---|---|
+| platform-team | platform-admin | Infrastructure 资源夹 | Infrastructure OU | Infrastructure 组织节点 | Platform MG | Common Folder | JIT for prod |
+| security-team | security-auditor | Security 资源夹 | Security OU | Security 组织节点 | Management Sub | logging-project | read-only |
+| app-team-a | app-developer | app-a dev/prod 账号 | app-a dev/prod accounts | app-a dev/prod 账号 | app-a subscriptions | app-a projects | prod via PR |
+| github-actions | cicd-deployer | workload accounts | workload accounts | workload accounts | workload subs | workload projects | OIDC + main branch |
 
 ## 8. 在项目中的实现方式
 

@@ -1,138 +1,147 @@
-# Repository and State Design
+# 仓库与 State 设计
 
-## Design Goal
+## 1. 设计目标
 
-OpenLZKit must look and behave like a real cloud platform engineering project, not a collection of unrelated Terraform examples. The repository structure should show clear boundaries between:
+OpenLZKit 必须像真实的云平台工程项目，而不是一组互不相关的 Terraform 示例。仓库结构需要清晰区分：
 
-- cloud-neutral intent
-- cloud-specific implementation
-- environment-specific live deployment
-- reusable modules
-- generated outputs
-- policy and test assets
+- 跨云通用的治理意图。
+- 每朵云自己的原生实现。
+- 面向环境的 live 部署入口。
+- 可复用模块。
+- 文档、策略和测试输出物。
+- 可选的生成器或报告工具。
 
-## Directory Strategy
+## 2. 目录策略
 
-Each cloud is self-contained under `multi-cloud/<cloud>/`, with an identical
-engineering layout but an independent resource model:
+每朵云都独立放在 `multi-cloud/<cloud>/` 下。工程组织保持一致，但资源模型不共享：
 
 ```text
 multi-cloud/<cloud>/
-├── docs/        # design.md, account/identity/network/security/operations docs
-├── modules/     # reusable modules: org, identity, network, security, logging, finops, workload-onboarding
-├── live/        # executable root modules, layered 00-bootstrap … 70-workload-onboarding
-├── policies/    # policy-as-code
-├── examples/    # examples (examples/basic)
-└── tests/       # tests
+├── docs/        # design.md、账号/身份/网络/安全/运维等文档
+├── modules/     # org、identity、network、security、logging、finops、workload-onboarding
+├── live/        # 可执行 root modules，按 00-bootstrap 到 70-workload-onboarding 分层
+├── policies/    # Policy as Code
+├── examples/    # 示例用法
+└── tests/       # 测试用例
 ```
 
-Optional, non-core tooling (report/IaC/doc generators) lives separately under
-`tools/` and never enters the core IaC layer — see the root `README.md`.
+可选工具层放在 `tools/`，例如报告生成、IaC 生成、文档渲染等。它不进入核心 IaC 层，也不替代每朵云的原生模块设计。
 
-## Live Directory Convention
+## 3. Live 目录约定
 
-Use this convention:
+Live 层使用固定路径：
 
 ```text
 multi-cloud/{cloud}/live/{NN-layer}/
 ```
 
-The layer order is fixed (`00-bootstrap` … `70-workload-onboarding`):
+层级顺序固定为 `00-bootstrap` 到 `70-workload-onboarding`。例如：
 
 ```text
-multi-cloud/aws/live/00-bootstrap/     # remote state, CI/CD roles, initial audit
-multi-cloud/aws/live/10-org/           # organization, accounts/OUs
-multi-cloud/aws/live/50-logging/       # central logging / audit
-multi-cloud/azure/live/30-network/     # network baseline (connectivity subscription)
-multi-cloud/gcp/live/30-network/       # network baseline (shared VPC host project)
+multi-cloud/aws/live/00-bootstrap/        # remote state、CI/CD 角色、初始审计
+multi-cloud/aws/live/10-org/              # Organizations、OU、账号
+multi-cloud/aws/live/50-logging/          # 集中日志和审计
+multi-cloud/alicloud/live/30-network/     # VPC、交换机、CEN/TR 网络基线
+multi-cloud/azure/live/30-network/        # connectivity subscription 网络基线
+multi-cloud/gcp/live/30-network/          # Shared VPC host project 网络基线
 ```
 
-Environments (dev/staging/prod) are **not** directory layers — they are separate
-accounts/subscriptions/projects, each with its own isolated state.
+`dev`、`staging`、`prod` 不作为目录层级。它们应由独立账号、订阅或项目表达，并拥有各自隔离的 Terraform state。
 
-## Why Split by Cloud?
+## 4. 为什么按云拆分
 
-Each cloud provider has its own primitives:
+每朵云的治理原语不同：
 
-- AWS: Organization, OU, Account, IAM Role, SCP, VPC, Transit Gateway.
-- Azure: Tenant, Management Group, Subscription, Entra ID, Azure Policy, VNet Hub.
-- GCP: Organization, Folder, Project, IAM, Organization Policy, Shared VPC.
+| 云 | 组织与资源容器 | 身份与策略 | 网络基线 |
+|---|---|---|---|
+| 阿里云 | Resource Directory、资源夹、成员账号 | RAM、CloudSSO、管控策略 | VPC、CEN、Transit Router |
+| AWS | Organizations、OU、Account | IAM、IAM Identity Center、SCP | VPC、Transit Gateway、Cloud WAN |
+| 腾讯云 | Organization、成员账号 | CAM、组织策略 | VPC、CCN、云联网 |
+| Azure | Tenant、Management Group、Subscription | Entra ID、Azure RBAC、Azure Policy | VNet、Virtual WAN、Hub-Spoke |
+| GCP | Organization、Folder、Project | Cloud IAM、Organization Policy | VPC、Shared VPC、NCC |
 
-A single flat directory would hide these differences and make the project less credible.
+如果把这些能力压平成一个通用目录或通用模块，会隐藏关键差异，降低项目可信度，也会让权限边界、网络边界和 state 边界变得含糊。
 
-## Why Separate by Environment?
+## 5. 为什么按环境隔离 State
 
-Environments are separated as distinct accounts/subscriptions/projects (each with
-its own state), not as directory layers, because dev, staging, and prod have different:
+环境应通过不同账号、订阅或项目隔离，而不是靠同一个 state 里的变量切换。原因是不同环境通常有不同的：
 
-- state files
-- approval workflows
-- credentials
-- policy strictness
-- blast radius
-- audit requirements
+- state 文件。
+- 审批流程。
+- 凭证和角色。
+- 策略严格程度。
+- 变更爆炸半径。
+- 审计要求。
 
-## Why Split by Layer?
+推荐规则：
 
-Landing Zone layers have different risk levels and change frequencies:
+> 一个 Terraform state 只对应一朵云、一个环境、一个层级、一个职责单元。
 
-| Layer | Risk | Change Frequency |
+例如：
+
+```text
+aws/prod/network
+aws/dev/workload-onboarding
+alicloud/prod/logging
+azure/dev/identity
+gcp/prod/org-policy
+```
+
+## 6. 为什么按层拆分
+
+Landing Zone 各层的风险和变更频率不同：
+
+| 层级 | 风险 | 变更频率 |
 |---|---:|---:|
-| org | very high | low |
-| identity | high | low/medium |
-| network | high | medium |
-| security | high | low/medium |
-| logging | medium/high | low |
-| workload | medium | high |
+| org/account | 很高 | 低 |
+| identity | 高 | 低/中 |
+| network | 高 | 中 |
+| security | 高 | 低/中 |
+| logging | 中/高 | 低 |
+| finops | 中 | 中 |
+| workload-onboarding | 中 | 高 |
 
-## State Design
+按层拆分可以缩小 plan/apply 范围，使审批、回滚和事故定位更清楚。
 
-Recommended rule:
+## 7. 生成代码与手写代码
 
-> One state per cloud + environment + layer + unit.
+未来可选的 `tools/` 生成器可以从 `blueprint.yaml` 生成 `multi-cloud/<cloud>/live` 下的 IaC。但生成器不是 MVP 的核心前提，也不能替代云厂商原生模块。
 
-This enables smaller blast radius, clearer ownership, safer CI/CD, and easier rollback.
+当团队启用生成器时，建议支持两种模式：
 
-## Generated vs Hand-Written IaC
+1. 生成式 IaC：由 `blueprint.yaml` 生成 live 目录代码。
+2. 手工维护 IaC：生成后由开发者继续维护，生成器只作为初始脚手架。
 
-The optional `tools/` generator layer (e.g. an `openlzkit` CLI driven by a
-`blueprint.yaml`) is a future capability, not part of the core IaC. When used, it
-supports two modes:
-
-1. Generated IaC: from `blueprint.yaml` into `multi-cloud/<cloud>/live`.
-2. Hand-maintained IaC: developers can take generated files and continue maintaining them manually.
-
-Generated files should include comments like:
+生成文件应写明来源，例如：
 
 ```hcl
 # Generated by OpenLZKit.
 # Safe to edit only if your team has chosen hand-maintained mode.
 ```
 
-## CI/CD Mapping
+## 8. CI/CD 路由
 
-Recommended GitHub Actions trigger rules:
+推荐 GitHub Actions 按变更路径触发不同门禁：
 
-| Changed Path | Pipeline |
+| 变更路径 | Pipeline |
 |---|---|
-| `multi-cloud/<cloud>/examples/**` | validate, policy-check (+ optional render-docs) |
+| `multi-cloud/<cloud>/examples/**` | validate、policy check、可选文档渲染 |
 | `multi-cloud/<cloud>/policies/**` | policy tests |
-| `multi-cloud/<cloud>/modules/**` | fmt, validate, module tests |
-| `multi-cloud/<cloud>/live/**` | plan; apply gated by GitHub Environment protection + approval |
+| `multi-cloud/<cloud>/modules/**` | fmt、validate、module tests |
+| `multi-cloud/<cloud>/live/**` | plan；apply 需要 GitHub Environment 审批 |
+| `docs/**` | 文档链接、目录索引和内容一致性检查 |
 
-Because environments are separate accounts/subscriptions/projects (not paths),
-the dev-auto / prod-approval distinction is enforced via branch strategy and
-GitHub Environment protection rules, not via the directory path.
+环境差异不靠目录名表达，而由账号/订阅/项目、分支策略和 GitHub Environment protection 共同约束。
 
-## Security Notes
+## 9. 安全注意事项
 
-Do not commit:
+仓库禁止提交：
 
-- `*.tfstate`
-- `*.tfvars`
-- cloud credentials
-- private keys
-- kubeconfigs
-- generated plan files containing secrets
+- `*.tfstate`。
+- `*.tfvars`。
+- 云访问密钥。
+- 私钥和证书私钥。
+- kubeconfig。
+- 可能包含敏感信息的 plan 文件。
 
-The repository includes `.gitignore` rules for these files.
+`.gitignore` 应覆盖这些文件类型；PR Review 和 CI 还需要继续检查硬编码账号、密钥、租户 ID 和个人信息。

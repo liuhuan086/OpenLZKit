@@ -1,67 +1,42 @@
 # Tencent Cloud Landing Zone Design
 
-## 1. 设计目标
+Tencent Cloud Landing Zone 使用腾讯云组织 / 组织节点 / 成员账号 / CAM / 管控策略 / VPC / CCN / CloudAudit / CLS / CSIP / 分账标签等原生能力。组织节点是策略继承边界，成员账号是资源、账单和权限边界。
 
-- 建立企业级云上组织结构。
-- 建立统一身份和权限模型。
-- 建立安全、日志、网络、成本治理基线。
-- 支持业务团队按标准流程接入。
+## 阅读顺序
 
-## 2. 原生模型
+1. [account-model.md](account-model.md)
+2. [identity-model.md](identity-model.md)
+3. [network-model.md](network-model.md)
+4. [security-baseline.md](security-baseline.md)
+5. [operations-runbook.md](operations-runbook.md)
+6. [enterprise-scenarios.md](enterprise-scenarios.md)
 
-Tencent Cloud 的 Landing Zone 应基于其原生模型：Control Center / Organization / CAM。
+## 目标结构
 
-关键能力包括：Organization, core accounts, CAM roles, finance, security rules, audit, VPC。
+```text
+root
+├── platform
+│   ├── security
+│   ├── logging
+│   └── network
+├── workloads
+│   ├── prod
+│   └── nonprod
+├── sandbox
+└── suspended
+```
 
-## 3. 账号/订阅/项目结构
+## 设计原则
 
-推荐分层：
+- 主账号只做组织和应急治理，业务资源进入成员账号。
+- 人员访问走 CAM 组/SSO，自动化走 STS 临时凭证。
+- 管控策略先在 sandbox 节点验证，再推广到生产节点。
+- CCN 挂载必须显式声明，sandbox 不接入生产路由域。
+- CloudAudit 和 CLS 是上线前硬门禁。
 
-- Management / Root。
-- Security。
-- Log Archive。
-- Network / Connectivity。
-- Shared Services。
-- Sandbox。
-- Workloads Dev。
-- Workloads Staging。
-- Workloads Prod。
+## 实施门禁
 
-## 4. 身份模型
-
-- 人员访问走 SSO/Federation。
-- 自动化访问走 OIDC/Federated Role。
-- 工作负载访问走云原生服务角色/托管身份/服务账号。
-- 禁止长期 Access Key 作为默认方案。
-
-## 5. 网络模型
-
-- 默认生产与非生产隔离。
-- 集中网络账号/订阅/项目承载共享网络能力。
-- 默认开启网络日志。
-- 云服务优先私网访问。
-
-## 6. 安全基线
-
-- 操作审计开启。
-- 配置审计开启。
-- 日志集中归档。
-- 存储和磁盘默认加密。
-- 禁止公网高危暴露。
-- 强制标签。
-
-## 7. CI/CD
-
-- PR 阶段执行 fmt、validate、lint、security scan、policy check。
-- Merge 后允许 plan。
-- Apply 需要环境审批。
-- 生产环境单独保护。
-
-## 8. 常见坑
-
-- 直接使用主账号/Root 账号操作。
-- 把所有环境放在一个账号/订阅/项目。
-- Terraform state 不隔离。
-- 手工创建资源后不纳管。
-- 权限策略过大。
-- 没有日志归档账号。
+- 成员账号创建涉及实名、计费和联系人信息，默认不自动创建真实账号。
+- 长期 SecretKey 不能作为 CI/CD 默认方式。
+- 任何跨账号 trust document 必须限定来源 UIN 和条件。
+- 管控策略、日志和分账标签在 sandbox 验证后再推广。

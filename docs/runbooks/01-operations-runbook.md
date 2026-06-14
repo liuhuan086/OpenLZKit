@@ -28,7 +28,7 @@ openlzkit generate-iac blueprint.yaml --out multi-cloud/<cloud>/live
 ## 2. 新增一个角色
 
 1. 在统一角色模型中定义 role。
-2. 映射到 AWS/Azure/GCP 原生权限。
+2. 映射到阿里云、AWS、腾讯云、Azure、GCP 原生权限。
 3. 增加策略校验。
 4. 更新 role-matrix。
 5. 测试最小权限。

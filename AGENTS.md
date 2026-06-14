@@ -46,7 +46,7 @@ OpenLZKit/
 │   ├── testing-strategy.md / outputs-and-acceptance.md / references.md
 ├── architecture/
 │   ├── adr/            # 架构决策记录
-│   └── diagrams/       # 架构图（规划中）
+│   └── diagrams/       # Mermaid 架构图谱
 ├── multi-cloud/        # 五朵云各自独立的 Landing Zone（aws / alicloud / tencentcloud / azure / gcp）
 │   └── <cloud>/        # README + docs + modules + live + policies + examples + tests
 ├── tests/              # 跨云测试用例（TEST_CASES.md）
@@ -81,8 +81,9 @@ OpenLZKit/
 
 ## 当前状态
 
-- **阿里云、AWS**：MVP 七域 + 企业级深化（FP-1~FP-8：账号工厂、组织护栏、业务部门、跨账号访问、SSO、网络互联、集中合规、委派与共享）均已落地，全部通过 `terraform fmt + validate`，并配 Conftest 策略用例（见各云 `docs/enterprise-scenarios.md`）。
-- **腾讯云、Azure、GCP**：设计文档与目录骨架就位，HCL 待实现。
+- **五朵云**：均已具备 `00-bootstrap` 到 `70-workload-onboarding` 的基础 Terraform/OpenTofu HCL、模块 README、live stack、云内设计文档和企业级深化路线图（见各云 `docs/enterprise-scenarios.md`）。
+- **阿里云、AWS**：企业级深化和 Conftest 策略用例更完整，覆盖账号工厂、组织护栏、业务部门、跨账号访问、SSO、网络互联、集中合规、委派与共享等核心场景。
+- **腾讯云、Azure、GCP**：基础 HCL 与 FP-1~FP-8 文档/模块已落地，后续重点是补充更多 provider-specific policy-as-code、sandbox 集成测试和真实企业场景验证。
 - CI（[.github/workflows/terraform-checks.yml](.github/workflows/terraform-checks.yml)）对全仓库执行五道门禁：`fmt`、`validate`、`tflint`、`checkov`、`conftest policy`。
 
 继续实现时严格沿用上述标准与各云 `enterprise-scenarios.md` 的功能点节奏。

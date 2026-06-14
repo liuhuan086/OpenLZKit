@@ -1,67 +1,43 @@
 # AWS Landing Zone Design
 
-## 1. 设计目标
+AWS Landing Zone 使用 AWS Organizations / OU / Account / IAM Identity Center / SCP / Transit Gateway / CloudTrail / Config / Security Hub 等原生能力。AWS 账号是主要隔离边界，OU 是策略继承边界，管理账号不承载业务资源。
 
-- 建立企业级云上组织结构。
-- 建立统一身份和权限模型。
-- 建立安全、日志、网络、成本治理基线。
-- 支持业务团队按标准流程接入。
+## 阅读顺序
 
-## 2. 原生模型
+1. [account-model.md](account-model.md)
+2. [identity-model.md](identity-model.md)
+3. [network-model.md](network-model.md)
+4. [security-baseline.md](security-baseline.md)
+5. [operations-runbook.md](operations-runbook.md)
+6. [enterprise-scenarios.md](enterprise-scenarios.md)
 
-AWS 的 Landing Zone 应基于其原生模型：AWS Organizations / Control Tower / AFT。
+## 目标结构
 
-关键能力包括：Account, OU, IAM Identity Center, SCP, CloudTrail, Config, Security Hub, Transit Gateway。
+```text
+management account
+├── security
+│   ├── log-archive
+│   └── security-tooling
+├── infrastructure
+│   ├── network
+│   └── shared-services
+├── workloads
+│   ├── prod
+│   └── nonprod
+└── sandbox
+```
 
-## 3. 账号/订阅/项目结构
+## 设计原则
 
-推荐分层：
+- 账号按安全、环境、业务和成本边界拆分，不按临时组织架构硬拆。
+- 人员访问走 IAM Identity Center，机器访问走 OIDC/STS AssumeRole。
+- SCP 和 Tag Policy 先在 sandbox OU 验证，再推广到生产 OU/root。
+- 日志进入专用 log archive account，启用版本化、加密和保留策略。
+- 网络集中在 network account，用 Transit Gateway 明确 route table、association 和 propagation。
 
-- Management / Root。
-- Security。
-- Log Archive。
-- Network / Connectivity。
-- Shared Services。
-- Sandbox。
-- Workloads Dev。
-- Workloads Staging。
-- Workloads Prod。
+## 实施门禁
 
-## 4. 身份模型
-
-- 人员访问走 SSO/Federation。
-- 自动化访问走 OIDC/Federated Role。
-- 工作负载访问走云原生服务角色/托管身份/服务账号。
-- 禁止长期 Access Key 作为默认方案。
-
-## 5. 网络模型
-
-- 默认生产与非生产隔离。
-- 集中网络账号/订阅/项目承载共享网络能力。
-- 默认开启网络日志。
-- 云服务优先私网访问。
-
-## 6. 安全基线
-
-- 操作审计开启。
-- 配置审计开启。
-- 日志集中归档。
-- 存储和磁盘默认加密。
-- 禁止公网高危暴露。
-- 强制标签。
-
-## 7. CI/CD
-
-- PR 阶段执行 fmt、validate、lint、security scan、policy check。
-- Merge 后允许 plan。
-- Apply 需要环境审批。
-- 生产环境单独保护。
-
-## 8. 常见坑
-
-- 直接使用主账号/Root 账号操作。
-- 把所有环境放在一个账号/订阅/项目。
-- Terraform state 不隔离。
-- 手工创建资源后不纳管。
-- 权限策略过大。
-- 没有日志归档账号。
+- `00-bootstrap` 先建立远程 state 和 CI OIDC。
+- 每个 live stack 独立 state，生产 apply 需要审批。
+- `terraform fmt`、`validate`、TFLint、Checkov、Conftest 是 PR 基线。
+- 任何会迁移 state 地址或替换生产资源的变更必须有 ADR 或迁移说明。

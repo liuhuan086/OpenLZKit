@@ -5,5 +5,5 @@ output "ccn_id" {
 
 output "attachment_ids" {
   description = "Map of attachment key to id."
-  value       = { for k, a in tencentcloud_ccn_attachment.this : k => a.id }
+  value       = { for k, a in tencentcloud_ccn_attachment_v2.this : k => a.id }
 }

@@ -26,7 +26,7 @@ terraform init                       # local state
 terraform validate                   # static, no account
 terraform apply \
   -var state_bucket_name=my-lz-tfstate \
-  -var github_owner=liuhuan086 -var github_repo=OpenLZKit
+  -var github_owner=example-org -var github_repo=openlzkit-example
 
 # then migrate state into the new bucket
 terraform init -migrate-state \
