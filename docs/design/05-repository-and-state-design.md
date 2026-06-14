@@ -18,12 +18,14 @@ OpenLZKit 必须像真实的云平台工程项目，而不是一组互不相关�
 ```text
 multi-cloud/<cloud>/
 ├── docs/        # design.md、账号/身份/网络/安全/运维等文档
-├── modules/     # org、identity、network、security、logging、finops、workload-onboarding
+├── modules/     # 各云原生实现模块（org/identity/network/security/logging/finops/workload-onboarding 等，按云扩展）
 ├── live/        # 可执行 root modules，按 00-bootstrap 到 70-workload-onboarding 分层
 ├── policies/    # Policy as Code
 ├── examples/    # 示例用法
 └── tests/       # 测试用例
 ```
+
+`modules/` 的具体集合按云原生模型扩展：例如阿里云、腾讯云额外有 `account-factory`、`control-policies`，AWS 有 `identity-center`、`org-policies`，Azure 有 `subscription-vending`、`policy-guardrails`、`entra-access`，GCP 有 `project-factory`、`org-policies`、`identity-groups`。共享的是层级顺序与工程组织，不共享统一资源模型。
 
 可选工具层放在 `tools/`，例如报告生成、IaC 生成、文档渲染等。它不进入核心 IaC 层，也不替代每朵云的原生模块设计。
 
@@ -35,7 +37,26 @@ Live 层使用固定路径：
 multi-cloud/{cloud}/live/{NN-layer}/
 ```
 
-层级顺序固定为 `00-bootstrap` 到 `70-workload-onboarding`。例如：
+层级顺序固定如下（五朵云统一，与 [architecture/diagrams/live-stack-flow.md](../../architecture/diagrams/live-stack-flow.md) 一致）：
+
+```text
+00-bootstrap            # 远程 state、CI/CD 身份、初始审计
+10-org                  # 组织层级与账号/项目/订阅售卖
+15-departments          # 业务部门边界
+20-identity             # 基础角色与权限边界
+24-cross-account-access # 自动化与安全跨账号访问
+25-sso                  # 人员访问组与分配
+30-network              # VPC/VNet/网络基线
+35-connectivity         # 互联（TGW、CEN/TR、CCN、Peering、Shared VPC）
+40-security             # 预防性护栏
+45-compliance           # 运行时合规检测
+50-logging              # 审计与日志归档
+55-delegation           # 委派管理与共享
+60-finops               # 标签、预算、成本责任
+70-workload-onboarding  # 团队交付与工作负载基线
+```
+
+具体路径示例：
 
 ```text
 multi-cloud/aws/live/00-bootstrap/        # remote state、CI/CD 角色、初始审计

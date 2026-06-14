@@ -25,14 +25,20 @@ Python/Go/Node 只在以下场景作为可选工具：
 
 不同云、不同阶段、不同环境必须拆分 Terraform state。不要把五朵云和所有环境放进一个 state。
 
-建议拆分：
+五朵云统一的 14 层拆分（权威定义见 [05-repository-and-state-design](05-repository-and-state-design.md)）：
 
 - `00-bootstrap`
 - `10-org`
+- `15-departments`
 - `20-identity`
+- `24-cross-account-access`
+- `25-sso`
 - `30-network`
+- `35-connectivity`
 - `40-security`
+- `45-compliance`
 - `50-logging`
+- `55-delegation`
 - `60-finops`
 - `70-workload-onboarding`
 

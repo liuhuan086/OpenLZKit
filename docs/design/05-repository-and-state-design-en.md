@@ -19,12 +19,19 @@ engineering layout but an independent resource model:
 ```text
 multi-cloud/<cloud>/
 ├── docs/        # design.md, account/identity/network/security/operations docs
-├── modules/     # reusable modules: org, identity, network, security, logging, finops, workload-onboarding
+├── modules/     # cloud-native implementation modules (org/identity/network/security/logging/finops/workload-onboarding, extended per cloud)
 ├── live/        # executable root modules, layered 00-bootstrap … 70-workload-onboarding
 ├── policies/    # policy-as-code
 ├── examples/    # examples (examples/basic)
 └── tests/       # tests
 ```
+
+The exact `modules/` set extends per cloud-native model: e.g. Alibaba Cloud and
+Tencent Cloud add `account-factory` and `control-policies`, AWS adds
+`identity-center` and `org-policies`, Azure adds `subscription-vending`,
+`policy-guardrails` and `entra-access`, GCP adds `project-factory`,
+`org-policies` and `identity-groups`. What is shared is the layer order and
+engineering layout, not a unified resource model.
 
 Optional, non-core tooling (report/IaC/doc generators) lives separately under
 `tools/` and never enters the core IaC layer — see the root `README.md`.
@@ -37,7 +44,27 @@ Use this convention:
 multi-cloud/{cloud}/live/{NN-layer}/
 ```
 
-The layer order is fixed (`00-bootstrap` … `70-workload-onboarding`):
+The layer order is fixed and identical across all five clouds (kept in sync with
+[architecture/diagrams/live-stack-flow.md](../../architecture/diagrams/live-stack-flow.md)):
+
+```text
+00-bootstrap            # remote state, CI/CD identity, initial audit
+10-org                  # org hierarchy and account/project/subscription vending
+15-departments          # business department boundaries
+20-identity             # base roles and permission boundaries
+24-cross-account-access # automation and secure cross-account access
+25-sso                  # human access groups and assignments
+30-network              # VPC/VNet network baseline
+35-connectivity         # interconnect (TGW, CEN/TR, CCN, peering, Shared VPC)
+40-security             # preventive guardrails
+45-compliance           # runtime compliance detection
+50-logging              # audit and log archive
+55-delegation           # delegated administration and sharing
+60-finops               # tags, budgets, cost ownership
+70-workload-onboarding  # team delivery and workload baseline
+```
+
+Concrete path examples:
 
 ```text
 multi-cloud/aws/live/00-bootstrap/     # remote state, CI/CD roles, initial audit

@@ -71,23 +71,24 @@ multi-cloud/<cloud>/
 │   ├── network-model.md
 │   ├── security-baseline.md
 │   └── operations-runbook.md
-├── modules/
-│   ├── org/
-│   ├── identity/
-│   ├── network/
-│   ├── security/
-│   ├── logging/
-│   ├── finops/
-│   └── workload-onboarding/
-├── live/
-│   ├── 00-bootstrap/
-│   ├── 10-org/
-│   ├── 20-identity/
-│   ├── 30-network/
-│   ├── 40-security/
-│   ├── 50-logging/
-│   ├── 60-finops/
-│   └── 70-workload-onboarding/
+├── modules/                # 云原生实现模块（按云扩展，如 org、identity、network、
+│                           # security、logging、finops、workload-onboarding、
+│                           # account-factory/identity-center/connectivity 等）
+├── live/                   # 统一 14 层（五朵云一致）
+│   ├── 00-bootstrap/       # 远程 state、CI/CD 身份、初始审计
+│   ├── 10-org/             # 组织层级与账号/项目/订阅售卖
+│   ├── 15-departments/     # 业务部门边界
+│   ├── 20-identity/        # 基础角色与权限边界
+│   ├── 24-cross-account-access/  # 自动化与安全跨账号访问
+│   ├── 25-sso/             # 人员访问组与分配
+│   ├── 30-network/         # VPC/VNet/网络基线
+│   ├── 35-connectivity/    # 互联（TGW、CEN/TR、CCN、Peering、Shared VPC）
+│   ├── 40-security/        # 预防性护栏
+│   ├── 45-compliance/      # 运行时合规检测
+│   ├── 50-logging/         # 审计与日志归档
+│   ├── 55-delegation/      # 委派管理与共享
+│   ├── 60-finops/          # 标签、预算、成本责任
+│   └── 70-workload-onboarding/  # 团队交付与工作负载基线
 ├── policies/
 ├── examples/
 └── tests/
