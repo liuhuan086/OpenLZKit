@@ -33,6 +33,7 @@ tencentcloud/
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（CAM 自定义策略 + 角色 + 附加） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/子网 + 默认拒绝安全组） |
 | `40-security` | [`modules/control-policies`](modules/control-policies) | ✅ 已实现（管控策略组织护栏 FP-2：禁关审计/禁退组织） |
+| `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（CLS 审计日志集/主题 + CloudAudit 跟踪集） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化

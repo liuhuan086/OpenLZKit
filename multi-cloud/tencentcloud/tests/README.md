@@ -15,6 +15,7 @@ terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/1
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
+terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -34,5 +35,6 @@ terraform -chdir=live/10-org plan -var root_node_id=<root-node-id>
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | CAM policies + roles |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | org manage-policy guardrails |
+| `modules/logging` + `live/50-logging` | ✅ | ✅ | account | CLS audit logset/topic + CloudAudit track |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).
