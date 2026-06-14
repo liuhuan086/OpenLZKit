@@ -28,7 +28,9 @@ tencentcloud/
 
 | 层 | 实现 | 状态 |
 |---|---|---|
-| 全部 | — | 🚧 待实现（见路线图） |
+| `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（COS state 桶 + CAM CI 角色） |
+| `10-org` | [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 已实现（组织节点层级 + 成员账号工厂 FP-1，创建默认关闭） |
+| 其他层 | — | 🚧 待实现（见路线图） |
 
 ## 企业级深化
 
