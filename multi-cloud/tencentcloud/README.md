@@ -33,6 +33,7 @@ tencentcloud/
 | `15-departments` | [`modules/department`](modules/department) | ✅ 已实现（FP-3：部门组织节点 + 部门角色 + 管控策略附加） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（CAM 自定义策略 + 角色 + 附加） |
 | `24-cross-account-access` | [`modules/cross-account-access`](modules/cross-account-access) | ✅ 已实现（FP-4：跨账号 CAM 角色 + 策略附加） |
+| `25-sso` | [`modules/identity-groups`](modules/identity-groups) | ✅ 已实现（FP-5：CAM 用户组 + 策略，人员走组不走用户） |
 | `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/子网 + 默认拒绝安全组） |
 | `40-security` | [`modules/control-policies`](modules/control-policies) | ✅ 已实现（管控策略组织护栏 FP-2：禁关审计/禁退组织） |
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（CLS 审计日志集/主题 + CloudAudit 跟踪集） |

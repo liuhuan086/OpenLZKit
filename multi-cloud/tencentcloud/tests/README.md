@@ -15,6 +15,7 @@ terraform -chdir=live/10-org      init -backend=false && terraform -chdir=live/1
 terraform -chdir=live/15-departments init -backend=false && terraform -chdir=live/15-departments validate
 terraform -chdir=live/20-identity init -backend=false && terraform -chdir=live/20-identity validate
 terraform -chdir=live/24-cross-account-access init -backend=false && terraform -chdir=live/24-cross-account-access validate
+terraform -chdir=live/25-sso init -backend=false && terraform -chdir=live/25-sso validate
 terraform -chdir=live/30-network  init -backend=false && terraform -chdir=live/30-network  validate
 terraform -chdir=live/40-security init -backend=false && terraform -chdir=live/40-security validate
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
@@ -38,6 +39,7 @@ terraform -chdir=live/10-org plan -var root_node_id=<root-node-id>
 | `modules/department` + `live/15-departments` | ✅ | ✅ | account | department node + role + policy |
 | `modules/identity` + `live/20-identity` | ✅ | ✅ | account | CAM policies + roles |
 | `modules/cross-account-access` + `live/24-cross-account-access` | ✅ | ✅ | account | cross-account CAM roles |
+| `modules/identity-groups` + `live/25-sso` | ✅ | ✅ | account | CAM groups + policies |
 | `modules/network` + `live/30-network` | ✅ | ✅ | account | Hub-Spoke VPCs; default-deny SG |
 | `modules/control-policies` + `live/40-security` | ✅ | ✅ | account | org manage-policy guardrails |
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | CLS audit logset/topic + CloudAudit track |
