@@ -23,6 +23,7 @@ terraform -chdir=live/45-compliance init -backend=false && terraform -chdir=live
 terraform -chdir=live/50-logging  init -backend=false && terraform -chdir=live/50-logging  validate
 terraform -chdir=live/55-delegation init -backend=false && terraform -chdir=live/55-delegation validate
 terraform -chdir=live/60-finops   init -backend=false && terraform -chdir=live/60-finops   validate
+terraform -chdir=live/70-workload-onboarding init -backend=false && terraform -chdir=live/70-workload-onboarding validate
 ```
 
 ## Plan / integration (sandbox account) — manual
@@ -50,5 +51,6 @@ terraform -chdir=live/10-org plan -var root_node_id=<root-node-id>
 | `modules/logging` + `live/50-logging` | ✅ | ✅ | account | CLS audit logset/topic + CloudAudit track |
 | `modules/delegation` + `live/55-delegation` | ✅ | ✅ | account | org share unit + member delegation |
 | `modules/finops` + `live/60-finops` | ✅ | ✅ | account | cost-allocation tags + budgets |
+| `modules/workload-onboarding` + `live/70-workload-onboarding` | ✅ | ✅ | account | workload CAM role + tags |
 
 See the repository-wide cases in [tests/TEST_CASES.md](../../../tests/TEST_CASES.md).

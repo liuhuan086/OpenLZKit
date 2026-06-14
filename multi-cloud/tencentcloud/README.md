@@ -24,7 +24,7 @@ tencentcloud/
 
 ## 实现状态
 
-🚧 实现进行中（文档先行）。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)，按 FP 逐轮交付，每个 stack 通过 CI 五道门禁（fmt / validate / tflint / checkov / conftest）。
+✅ MVP 七域 + 企业级深化 FP-1~FP-8 全部落地（文档先行）。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)，按 FP 逐轮交付，每个 stack 通过 CI 五道门禁（fmt / validate / tflint / checkov / conftest）。
 
 | 层 | 实现 | 状态 |
 |---|---|---|
@@ -41,7 +41,7 @@ tencentcloud/
 | `50-logging` | [`modules/logging`](modules/logging) | ✅ 已实现（CLS 审计日志集/主题 + CloudAudit 跟踪集） |
 | `55-delegation` | [`modules/delegation`](modules/delegation) | ✅ 已实现（FP-8：组织 Share Unit + 成员委派，最小权限） |
 | `60-finops` | [`modules/finops`](modules/finops) | ✅ 已实现（成本分账标签 + 可选预算） |
-| 其他层 | — | 🚧 待实现（见路线图） |
+| `70-workload-onboarding` | [`modules/workload-onboarding`](modules/workload-onboarding) | ✅ 已实现（工作负载 CAM 角色 + 标准标签模板） |
 
 ## 企业级深化
 
