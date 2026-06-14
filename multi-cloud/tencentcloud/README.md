@@ -31,6 +31,7 @@ tencentcloud/
 | `00-bootstrap` | [`live/00-bootstrap`](live/00-bootstrap) | ✅ 已实现（COS state 桶 + CAM CI 角色） |
 | `10-org` | [`modules/org`](modules/org), [`modules/account-factory`](modules/account-factory) | ✅ 已实现（组织节点层级 + 成员账号工厂 FP-1，创建默认关闭） |
 | `20-identity` | [`modules/identity`](modules/identity) | ✅ 已实现（CAM 自定义策略 + 角色 + 附加） |
+| `30-network` | [`modules/network`](modules/network) | ✅ 已实现（Hub-Spoke VPC/子网 + 默认拒绝安全组） |
 | `40-security` | [`modules/control-policies`](modules/control-policies) | ✅ 已实现（管控策略组织护栏 FP-2：禁关审计/禁退组织） |
 | 其他层 | — | 🚧 待实现（见路线图） |
 
