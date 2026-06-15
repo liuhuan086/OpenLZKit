@@ -45,6 +45,12 @@ aws/
 
 在 MVP 七域之上，按企业级标准深化多账号、跨账号访问、业务部门管理、组织护栏、IAM Identity Center、Transit Gateway、AWS Config/Security Hub/GuardDuty、委派管理、日志归档与 FinOps。功能点路线图见 [docs/enterprise-scenarios.md](docs/enterprise-scenarios.md)（文档先行，逐 FP 推进）。
 
+## Verified path
+
+AWS 是 OpenLZKit 第一条优先打穿的可信样板路径。当前目录已具备 `00-bootstrap` 到 `70-workload-onboarding` 的静态可验证实现；真实 sandbox apply、dry-run-only 范围、证据和 rollback 结果记录在 [../../docs/demo/aws-sandbox-apply-report.md](../../docs/demo/aws-sandbox-apply-report.md)。
+
+无 AWS 账号的读者可先看 [../../examples/demo](../../examples/demo)：它用一家 80 人公司上 AWS 的申请、OU 树、网络和控制清单说明 account vending 与 workload onboarding 流程。
+
 ## live stack 顺序
 
 1. `00-bootstrap`：远程 state、CI/CD 角色、初始审计。
@@ -64,6 +70,6 @@ aws/
 
 ## 后续重点
 
-- 扩展合规框架映射（CIS、等保、ISO/SOC2）和对应 Rego 用例。
-- 增加 sandbox apply / rollback 脚本化证据。
+- 按 [../../docs/compliance/control-mapping.md](../../docs/compliance/control-mapping.md) 扩展合规框架映射（CIS、等保、ISO/SOC2）和对应 Rego 用例。
+- 增加 sandbox apply / rollback 脚本化证据，并将脱敏摘要写入 AWS apply report。
 - 完善 Security Lake、CUR/BI handoff 与企业 SIEM/FinOps 工具集成示例。

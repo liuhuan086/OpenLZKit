@@ -38,6 +38,26 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 |---|---|
 | [01-operations-runbook](runbooks/01-operations-runbook.md) | 运维手册（新增账号/角色/策略、drift、break-glass） |
 | [02-common-problems-and-solutions](runbooks/02-common-problems-and-solutions.md) | 常见问题与标准解决方案 |
+| [aws-apply-order](runbooks/aws-apply-order.md) | AWS verified path apply 顺序、验收与证据 |
+| [aws-rollback](runbooks/aws-rollback.md) | AWS 常见回滚路径 |
+| [aws-break-glass-access](runbooks/aws-break-glass-access.md) | AWS break-glass 访问流程 |
+| [aws-drift-detection](runbooks/aws-drift-detection.md) | AWS drift 检测与处置 |
+| [aws-account-vending-failure](runbooks/aws-account-vending-failure.md) | AWS account vending 失败处理 |
+| [aws-cloudtrail-audit-check](runbooks/aws-cloudtrail-audit-check.md) | AWS CloudTrail 审计检查 |
+| [terraform-state-recovery](runbooks/terraform-state-recovery.md) | Terraform state 恢复流程 |
+| [ci-oidc-permission-troubleshooting](runbooks/ci-oidc-permission-troubleshooting.md) | CI OIDC 权限排障 |
+
+## demo/ — 可验证样板与演示
+
+| 文档 | 内容 |
+|---|---|
+| [aws-sandbox-apply-report](demo/aws-sandbox-apply-report.md) | AWS sandbox apply / dry-run / evidence 报告模板 |
+
+## compliance/ — 控制映射
+
+| 文档 | 内容 |
+|---|---|
+| [control-mapping](compliance/control-mapping.md) | 跨云控制目标、云原生实现、Rego 检查与证据映射 |
 
 ## 跨切面文档
 
@@ -45,4 +65,5 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 |---|---|
 | [testing-strategy](testing-strategy.md) | 测试分层、PR 门禁、生产发布门禁 |
 | [outputs-and-acceptance](outputs-and-acceptance.md) | 输出物与验收标准 |
+| [releases](releases.md) | release 路线与发布清单 |
 | [references](references.md) | 各云官方文档链接 |

@@ -9,6 +9,9 @@
 - 多云策略文档。
 - 从 0 到 1 实施文档。
 - 跨账号/跨服务访问说明。
+- Demo Mode：业务申请、预期组织/网络/控制和无云账号可读的演示路径。
+- Sandbox apply evidence report：真实执行时只提交脱敏摘要。
+- Control mapping：控制目标、云原生实现、Rego 检查和证据映射。
 - 测试策略。
 - 参考资料。
 - LICENSE、CONTRIBUTING、SECURITY、CODE_OF_CONDUCT。
@@ -56,3 +59,14 @@
 | L2 Sandbox 可运行 | 在 sandbox 账号/订阅/项目完成最小 apply 和回滚演练。 |
 | L3 生产可控 | 有审批、plan artifact、日志、告警、例外、break-glass 和成本归因。 |
 | L4 持续治理 | 定期 drift、权限复核、策略例外清理、成本优化和架构复盘。 |
+
+## 证据链验收
+
+| 证据 | L1 静态可验证 | L2 Sandbox 可运行 |
+|---|---|---|
+| Terraform | fmt/validate 通过 | plan/apply/destroy 或受控 rollback 摘要 |
+| Policy-as-code | Rego unit tests / Conftest 输出 | 基于脱敏 plan JSON 的 Conftest 输出 |
+| 云上资源 | README 与模块说明完整 | CLI/API/控制台脱敏摘要 |
+| 审计 | runbook 描述审计路径 | CloudTrail/ActionTrail/Activity Log 等脱敏事件摘要 |
+| 成本 | 标签和预算设计完整 | budget/CUR/export 脱敏摘要 |
+| 回滚 | 文档说明 | 实际演练记录或明确不能删除的原因 |

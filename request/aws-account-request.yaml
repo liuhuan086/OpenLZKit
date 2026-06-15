@@ -1,0 +1,18 @@
+schema_version: 1
+cloud: aws
+request_type: account
+account_name: app-prod-payments
+email: aws-app-prod-payments@example.com
+owner: payments-team
+environment: prod
+ou: workloads/prod
+network_tier: spoke-prod
+budget_limit_usd: 1000
+required_access_groups:
+  - platform-admins
+  - payments-operators
+tags:
+  managed_by: openlzkit
+  owner: payments-team
+  cost_center: cc-payments
+  environment: prod

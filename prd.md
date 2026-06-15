@@ -94,9 +94,10 @@ OpenLZKit 是一个“文档优先 + IaC 优先”的多云 Landing Zone Bluepri
 
 ### V1
 
-- 五朵云均完成 sandbox 最小 apply、rollback 演练和证据留存。
-- 增加更多 provider-specific 策略即代码与自动化测试。
-- 增加 Demo 业务接入流程。
+- AWS 先完成一条 verified sandbox path：apply 顺序、rollback 演练、脱敏 plan/output/审计/成本证据留存。
+- 增加无云账号也能阅读的 Demo Mode，演示从业务申请到 workload handoff 的完整流程。
+- 增加跨云控制映射，把风险、云原生能力、Rego 检查和证据关联起来。
+- 阿里云作为第二条 verified path；Azure、GCP、腾讯云先保持 static validation，并补 provider-specific 策略即代码。
 
 ### V2
 

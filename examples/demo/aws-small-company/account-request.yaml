@@ -1,0 +1,54 @@
+schema_version: 1
+cloud: aws
+request_type: account-vending
+requests:
+  - account_name: security-tooling
+    email: aws-security-tooling@example.com
+    ou: security/security-tooling
+    owner: security-team
+    environment: shared
+    cost_center: cc-security
+    budget_limit_usd: 500
+    required_access_groups:
+      - platform-admins
+      - security-readonly
+  - account_name: log-archive
+    email: aws-log-archive@example.com
+    ou: security/log-archive
+    owner: security-team
+    environment: shared
+    cost_center: cc-security
+    budget_limit_usd: 300
+    required_access_groups:
+      - platform-admins
+      - audit-readonly
+  - account_name: network
+    email: aws-network@example.com
+    ou: infrastructure/network
+    owner: platform-network
+    environment: shared
+    cost_center: cc-platform
+    budget_limit_usd: 800
+    required_access_groups:
+      - platform-admins
+      - network-admins
+  - account_name: app-dev-payments
+    email: aws-app-dev-payments@example.com
+    ou: workloads/dev
+    owner: payments-team
+    environment: dev
+    cost_center: cc-payments
+    budget_limit_usd: 300
+    required_access_groups:
+      - platform-admins
+      - payments-developers
+  - account_name: app-prod-payments
+    email: aws-app-prod-payments@example.com
+    ou: workloads/prod
+    owner: payments-team
+    environment: prod
+    cost_center: cc-payments
+    budget_limit_usd: 1000
+    required_access_groups:
+      - platform-admins
+      - payments-operators

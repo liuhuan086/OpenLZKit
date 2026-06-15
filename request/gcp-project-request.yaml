@@ -1,0 +1,19 @@
+schema_version: 1
+cloud: gcp
+request_type: project
+project_id: example-prod-payments
+project_name: app-prod-payments
+billing_account: example-billing-account
+owner: payments-team
+environment: prod
+folder: workloads/prod
+network_tier: spoke-prod
+budget_limit_usd: 1000
+required_access_groups:
+  - platform-admins@example.com
+  - payments-operators@example.com
+labels:
+  managed_by: openlzkit
+  owner: payments-team
+  cost_center: cc-payments
+  environment: prod

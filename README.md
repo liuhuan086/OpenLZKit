@@ -1,8 +1,36 @@
 # OpenLZKit: Enterprise Multi-Cloud Landing Zone Blueprint
 
+OpenLZKit helps platform teams design, validate and explain enterprise Landing Zones across AWS, Alibaba Cloud, Tencent Cloud, Azure and Google Cloud.
+
+它提供：
+
+- 云原生 Landing Zone blueprint，而不是错误的“万能多云抽象”。
+- Terraform/OpenTofu modules 与按层拆分的 live stacks。
+- 多账号 / 订阅 / 项目治理、身份、网络、安全、日志、FinOps 和 workload onboarding 模式。
+- Policy-as-code guardrails、CI/CD 静态验证和可审计交付清单。
+- 面向简历、面试、开源展示和后续企业落地的文档优先工程资产。
+
 OpenLZKit 是一个面向真实企业场景的多云 Landing Zone 开源项目模板。它的目标不是把五朵云“强行抽象成一种云”，而是为阿里云、AWS、腾讯云、Azure、Google Cloud 分别设计符合各自原生最佳实践的 Landing Zone，然后在统一仓库中沉淀共同的治理方法、文档标准、测试流程和交付物。
 
 > **AI 助手 / 开发者请先读 [AGENTS.md](AGENTS.md)**：它是本仓库的统一入口，指明必读顺序（CLAUDE.md、prompts.md、prd.md 等）和工作准则。
+
+## 30 秒看懂项目
+
+```text
+Business / Platform Request
+        ↓
+Account / Subscription / Project Factory
+        ↓
+Identity + Network + Security + Logging + FinOps
+        ↓
+Policy-as-Code + CI Static Validation
+        ↓
+Sandbox Evidence + Operational Runbooks
+        ↓
+Workload Onboarding Handoff
+```
+
+当前优先级：先把 AWS 做成第一条可信、可验证、可演示的样板路径，再把同一套验证和证据方法推广到阿里云、Azure、GCP 与腾讯云。见 [docs/demo/aws-sandbox-apply-report.md](docs/demo/aws-sandbox-apply-report.md)、[examples/demo](examples/demo) 与 [docs/compliance/control-mapping.md](docs/compliance/control-mapping.md)。
 
 ## 项目目标
 
@@ -38,8 +66,11 @@ OpenLZKit/
 │   ├── learning/       # 概念入门（00-what-is-landing-zone … 05-multi-cloud-strategy）
 │   ├── design/         # 深入设计（00-enterprise-principles、身份/网络/安全/IaC-CICD/仓库与 state、各云设计、日志、FinOps）
 │   ├── runbooks/       # 运维手册与常见问题处置
+│   ├── demo/           # sandbox apply 报告模板与演示说明
+│   ├── compliance/     # 控制目标、云原生实现、Rego 与证据映射
 │   ├── testing-strategy.md
 │   ├── outputs-and-acceptance.md
+│   ├── releases.md
 │   └── references.md
 ├── architecture/
 │   ├── adr/
@@ -50,6 +81,9 @@ OpenLZKit/
 │   ├── tencentcloud/
 │   ├── azure/
 │   └── gcp/
+├── examples/
+│   └── demo/           # 无云账号可阅读的业务接入 Demo
+├── request/            # 账号/订阅/项目售卖请求样例
 ├── tests/
 │   └── TEST_CASES.md
 └── .github/
@@ -101,10 +135,12 @@ multi-cloud/<cloud>/
 - 完成所有文档、目录、测试策略和 CI 检查。
 - 五朵云均提供 `README.md`、设计文档、模块 README、live stack 和测试说明。
 - AWS 与阿里云提供更完整的策略即代码样例，作为后续扩展其他云策略测试的参考。
+- 输出无云账号也能阅读的 Demo Mode，说明业务申请、预期 OU/账号/网络/控制和 policy-as-code 检查。
 
 ### V1
 
-- 强化五朵云的 sandbox 集成测试、provider-specific policy-as-code 和真实云账号验证。
+- 先完成 AWS sandbox apply / rollback / evidence path，把 `00-bootstrap` 到 `70-workload-onboarding` 的真实验证状态写入报告。
+- 强化 provider-specific policy-as-code、控制映射和真实云账号验证，再推广到第二朵云。
 - 引入 terraform-docs 生成变量/输出文档，并继续扩展 OPA/Conftest、TFLint、Checkov/tfsec。
 - 输出跨云治理矩阵和对外 Demo 文档。
 
@@ -113,6 +149,16 @@ multi-cloud/<cloud>/
 - 增加 Account/Subscription/Project Vending Machine。
 - 增加成本治理报告、合规报告、架构图生成和 Web 控制台。
 - 支持企业定制包、培训包、审计包和咨询交付包。
+
+## Release 路线
+
+| 版本 | 目标 | 验收重点 |
+|---|---|---|
+| `v0.1.0` | Documentation + Static Validation Release | README、Demo Mode、控制映射、静态门禁和 runbook 齐备 |
+| `v0.2.0` | AWS Verified Sandbox Release | AWS sandbox apply 报告、sanitized evidence、rollback 演练 |
+| `v0.3.0` | Alibaba Cloud Verified Sandbox Release | 第二朵云复用同一证据链方法 |
+| `v0.4.0` | Policy-as-Code Compliance Mapping Release | 跨云控制矩阵与更多 provider-specific Rego |
+| `v1.0.0` | Multi-cloud Governance Blueprint Release | 多云静态治理完整，至少两朵云完成 verified path |
 
 ## 适合写进简历的描述
 

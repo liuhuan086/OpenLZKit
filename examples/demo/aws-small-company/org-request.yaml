@@ -1,0 +1,34 @@
+schema_version: 1
+cloud: aws
+scenario: aws-small-company
+organization:
+  root_name: openlzkit-example
+  management_account_email: aws-management@example.com
+  ous:
+    security:
+      description: Security tooling and audit ownership.
+      children:
+        - log-archive
+        - security-tooling
+    infrastructure:
+      description: Network and shared services.
+      children:
+        - network
+        - shared-services
+    workloads:
+      description: Business workload accounts.
+      children:
+        - dev
+        - prod
+    sandbox:
+      description: Isolated experimentation boundary.
+required_tags:
+  managed_by: openlzkit
+  owner: platform-team
+  cost_center: cc-platform
+  environment: shared
+guardrails:
+  - deny-public-object-storage
+  - require-state-encryption
+  - require-oidc-ci
+  - require-cost-tags

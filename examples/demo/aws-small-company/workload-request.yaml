@@ -1,0 +1,34 @@
+schema_version: 1
+cloud: aws
+request_type: workload-onboarding
+workload:
+  name: payments-api
+  owner: payments-team
+  business_unit: payments
+  environment: prod
+  account_name: app-prod-payments
+  account_email: aws-app-prod-payments@example.com
+  network_tier: spoke-prod
+  connectivity:
+    attach_to_tgw: true
+    allow_to_shared_services: true
+    allow_to_dev: false
+    allow_to_sandbox: false
+  access:
+    ci_provider: github-actions
+    oidc_subjects:
+      - repo:example-org/payments-api:environment:prod
+    human_access_groups:
+      - payments-operators
+      - security-readonly
+  tags:
+    managed_by: openlzkit
+    owner: payments-team
+    cost_center: cc-payments
+    environment: prod
+  evidence_required:
+    - terraform_plan_json
+    - conftest_output
+    - cloudtrail_event_summary
+    - budget_created
+    - workload_handoff_output
