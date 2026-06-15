@@ -9,7 +9,7 @@ module "workload_onboarding" {
       name                = "payments-api"
       description         = "Payments API production workload onboarding contract."
       department          = "payments"
-      owner               = "payments-platform@example.invalid"
+      owner               = "payments-platform@example.com"
       cost_center         = "cc-4200"
       env                 = "prod"
       project             = "payments-api"

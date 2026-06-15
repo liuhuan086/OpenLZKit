@@ -8,7 +8,7 @@ module "accounts" {
   accounts = {
     payment_dev = {
       name   = "payment-dev"
-      email  = "aws-payment-dev@example.invalid"
+      email  = "aws-payment-dev@example.com"
       ou_key = "workloads/nonprod"
       tags = {
         owner               = "payments-platform"

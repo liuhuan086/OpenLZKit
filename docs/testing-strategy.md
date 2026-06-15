@@ -45,11 +45,12 @@
 
 文档变更也要测试：
 
-- 本地 Markdown 链接检查。
+- 本地 Markdown 链接检查：`python tools/static_release_gate.py`。
 - `TODO` / `TBD` 扫描，确认不是权威页残留。
 - 命令示例使用假值和相对正确路径。
 - 每个云的 `docs/` 至少覆盖 account、identity、network、security、operations 和 enterprise-scenarios。
 - 模块 README 的输入、输出、安全注意事项与 `variables.tf` / `outputs.tf` 保持一致。
+- Demo Mode、request 样例、release 文档和 runbook 必须满足 v0.1.0 static release gate。
 
 ## 回归策略
 

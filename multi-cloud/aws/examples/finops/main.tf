@@ -12,7 +12,7 @@ module "finops" {
         comparison_operator        = "GREATER_THAN"
         threshold                  = 80
         notification_type          = "FORECASTED"
-        subscriber_email_addresses = ["cloud-finops@example.invalid"]
+        subscriber_email_addresses = ["cloud-finops@example.com"]
       }]
     }
   }
@@ -30,7 +30,7 @@ module "finops" {
       name              = "daily-anomalies"
       frequency         = "DAILY"
       monitor_keys      = ["service"]
-      subscriber_emails = ["cloud-finops@example.invalid"]
+      subscriber_emails = ["cloud-finops@example.com"]
     }
   }
 
