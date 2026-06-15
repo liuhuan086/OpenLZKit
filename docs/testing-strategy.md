@@ -19,7 +19,7 @@
 - fmt。
 - validate。
 - tflint。
-- checkov/tfsec。
+- checkov/tfsec（Checkov 使用 `--skip-download` 离线运行，避免依赖 Prisma Cloud 网络）。
 - conftest。
 - README 是否更新。
 - examples 是否可初始化。

@@ -20,11 +20,11 @@ module "compliance" {
   source = "../../modules/compliance"
 
   defender_plans = {
-    VirtualMachines = { tier = "Standard" }
-    StorageAccounts = { tier = "Standard" }
-    KeyVaults       = { tier = "Standard" }
-    Containers      = { tier = "Standard" }
-    Arm             = { tier = "Standard" }
+    VirtualMachines = {}
+    StorageAccounts = {}
+    KeyVaults       = {}
+    Containers      = {}
+    Arm             = {}
   }
 
   security_contact = var.security_contact_email == "" ? null : {

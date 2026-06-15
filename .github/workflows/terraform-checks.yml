@@ -73,6 +73,7 @@ jobs:
         with:
           directory: multi-cloud
           config_file: .checkov.yaml
+          skip_download: true
 
   policy:
     name: conftest policy

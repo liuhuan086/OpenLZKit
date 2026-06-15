@@ -65,6 +65,7 @@ locals {
 }
 
 resource "aws_ec2_transit_gateway" "this" {
+  #checkov:skip=CKV_AWS_331:Checkov 3.3.0 raises TypeError on TGW variable-backed option maps.
   count = var.create_transit_gateway ? 1 : 0
 
   description                        = var.transit_gateway.description

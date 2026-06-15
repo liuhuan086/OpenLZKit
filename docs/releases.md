@@ -6,7 +6,7 @@ OpenLZKit 的 release 不只表示代码打 tag，还表示文档、策略、测
 
 | Version | 名称 | What works | Static-only | Requires real cloud account | Known limitations |
 |---|---|---|---|---|---|
-| `v0.1.0` | Documentation + Static Validation Release | 五朵云目录、AWS/阿里云较完整策略、Demo Mode、控制映射、runbook | 大多数 Terraform validate、Rego unit tests、文档检查 | 无强制真实 apply | 不声称任何云已完成真实 sandbox verified |
+| [`v0.1.0`](release-notes/v0.1.0.md) | Documentation + Static Validation Release | 五朵云目录、AWS/阿里云较完整策略、Demo Mode、控制映射、runbook | 大多数 Terraform validate、Rego unit tests、文档检查 | 无强制真实 apply | 不声称任何云已完成真实 sandbox verified |
 | `v0.2.0` | AWS Verified Sandbox Release | AWS 至少一条从 bootstrap 到 workload handoff 的脱敏证据链 | 其他云保持 static validation | AWS sandbox Organization | 受 Organizations、Identity Center、Security Lake 区域/权限限制 |
 | `v0.3.0` | Alibaba Cloud Verified Sandbox Release | 阿里云复用 verified path 方法 | Azure/GCP/腾讯云 static validation | 阿里云资源目录 sandbox | 云上账号和资源目录配额限制 |
 | `v0.4.0` | Policy-as-Code Compliance Mapping Release | 跨云控制矩阵与更多 provider-specific Rego | 部分运行时控制仍需手工证据 | 选定云的 plan/integration | 合规映射不是认证结论 |

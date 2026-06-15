@@ -66,4 +66,5 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 | [testing-strategy](testing-strategy.md) | 测试分层、PR 门禁、生产发布门禁 |
 | [outputs-and-acceptance](outputs-and-acceptance.md) | 输出物与验收标准 |
 | [releases](releases.md) | release 路线与发布清单 |
+| [v0.1.0 release notes](release-notes/v0.1.0.md) | Documentation + Static Validation Release 说明 |
 | [references](references.md) | 各云官方文档链接 |

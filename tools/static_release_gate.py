@@ -51,6 +51,7 @@ REQUIRED_RELEASE_DOCS = [
     "docs/demo/aws-sandbox-apply-report.md",
     "docs/compliance/control-mapping.md",
     "docs/releases.md",
+    "docs/release-notes/v0.1.0.md",
     "docs/runbooks/aws-apply-order.md",
     "docs/runbooks/aws-rollback.md",
     "docs/runbooks/aws-break-glass-access.md",

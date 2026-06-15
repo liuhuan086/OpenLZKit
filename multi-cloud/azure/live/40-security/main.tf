@@ -30,13 +30,13 @@ module "policy_guardrails" {
       description         = "Deny resources outside the approved regions."
       management_group_id = var.root_management_group_id
       policy_rule = jsonencode({
-        if = {
-          not = {
+        "if" = {
+          "not" = {
             field = "location"
-            in    = var.allowed_locations
+            "in"  = var.allowed_locations
           }
         }
-        then = { effect = "deny" }
+        "then" = { effect = "deny" }
       })
     }
     deny-storage-public-blob = {
@@ -44,13 +44,13 @@ module "policy_guardrails" {
       description         = "Storage accounts must disable public blob access."
       management_group_id = var.root_management_group_id
       policy_rule = jsonencode({
-        if = {
+        "if" = {
           allOf = [
             { field = "type", equals = "Microsoft.Storage/storageAccounts" },
             { field = "Microsoft.Storage/storageAccounts/allowBlobPublicAccess", equals = true },
           ]
         }
-        then = { effect = "deny" }
+        "then" = { effect = "deny" }
       })
     }
   }

@@ -14,6 +14,7 @@ framework:
 quiet: true
 compact: true
 download-external-modules: false
+skip-download: true
 
 skip-check:
   # --- Secure-by-default but value comes from a variable checkov can't resolve ---
@@ -44,6 +45,7 @@ skip-check:
   - CKV_AWS_252  # CloudTrail SNS topic — optional notification wiring
   - CKV_AWS_240  # Firehose encryption — data encrypted at S3 destination via kms_key_arn
   - CKV_AWS_241  # Firehose CMK — data encrypted at S3 destination via kms_key_arn
+  - CKV_AWS_331  # Checkov 3.3.0 raises TypeError on aws_ec2_transit_gateway var maps
   - CKV2_AWS_5   # SG attached to a resource — template SG attached by the consumer
   - CKV2_AWS_3   # GuardDuty org/region scope — consumer-driven enablement
   - CKV2_AWS_45  # Config record all resources — recording group is configurable

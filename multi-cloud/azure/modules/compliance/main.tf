@@ -2,7 +2,7 @@ resource "azurerm_security_center_subscription_pricing" "this" {
   for_each = var.defender_plans
 
   resource_type = each.key
-  tier          = each.value.tier
+  tier          = "Standard"
   subplan       = each.value.subplan
 }
 

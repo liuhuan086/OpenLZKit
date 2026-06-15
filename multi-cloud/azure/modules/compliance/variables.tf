@@ -1,11 +1,10 @@
 variable "defender_plans" {
   description = <<-EOT
     Microsoft Defender for Cloud plans keyed by resource type
-    (e.g. "VirtualMachines", "StorageAccounts", "KeyVaults"). `tier` is
-    "Standard" (Defender on) or "Free".
+    (e.g. "VirtualMachines", "StorageAccounts", "KeyVaults"). Entries always
+    enable the Standard tier; omit a resource type instead of setting Free.
   EOT
   type = map(object({
-    tier    = optional(string, "Standard")
     subplan = optional(string)
   }))
   default = {}
