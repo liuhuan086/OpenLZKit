@@ -117,6 +117,7 @@ def check_markdown_links(files: list[Path], errors: list[str]) -> None:
 def check_unfinished_markers(files: list[Path], errors: list[str]) -> None:
     allowlist = {
         ("docs/testing-strategy.md", "`TODO` / `TBD`"),
+        ("docs/release-notes/v0.1.0.md", "TODO/TBD"),
         ("tests/TEST_CASES.md", "`TODO`"),
         ("tests/TEST_CASES.md", "TODO/TBD"),
     }
