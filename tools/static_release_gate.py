@@ -65,6 +65,7 @@ REQUIRED_RELEASE_DOCS = [
     "docs/runbooks/aws-cloudtrail-audit-check.md",
     "docs/runbooks/terraform-state-recovery.md",
     "docs/runbooks/ci-oidc-permission-troubleshooting.md",
+    "tools/aws_verified_path.py",
 ]
 
 

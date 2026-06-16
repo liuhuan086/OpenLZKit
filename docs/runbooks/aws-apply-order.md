@@ -11,6 +11,20 @@
 - `00-bootstrap` 的 state bucket 已启用版本化、加密、public access block 和 lock table。
 - PR 已通过 fmt、validate、TFLint、Checkov、Conftest。
 
+先运行本地 preflight，生成脱敏 readiness 摘要：
+
+```bash
+python3 tools/aws_verified_path.py --date YYYY-MM-DD
+```
+
+如果需要为 14 层 stack 预创建 evidence summary 模板：
+
+```bash
+python3 tools/aws_verified_path.py --date YYYY-MM-DD --write-stack-placeholders
+```
+
+该工具不会执行 `terraform apply`；真实 apply 仍必须按下表逐层人工审批。
+
 ## 推荐顺序
 
 | 顺序 | Stack | Apply 类型 | 成功标准 | 回滚入口 |
@@ -39,3 +53,5 @@
 - 相关 Conftest/Checkov/TFLint 输出。
 - 对应 AWS CLI/API 查询摘要。
 - rollback 判断：可 destroy、需手工 detach、或因保留策略不能删除。
+
+证据文件写入 [../demo/aws-apply-evidence](../demo/aws-apply-evidence/README.md)，plan 摘要写入 [../demo/sanitized-plan-output](../demo/sanitized-plan-output/README.md)。只提交人工复核后的脱敏摘要，不提交 raw plan、state 或云审计原文。

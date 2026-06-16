@@ -21,3 +21,13 @@ OpenLZKit 的 release 不只表示代码打 tag，还表示文档、策略、测
 - 有 Evidence path：AWS apply report、rollback report、sanitized plan 摘要约定和 evidence 目录约定。
 - 有 rollback/runbook：state、权限、审计、账号售卖失败、OIDC 故障。
 - Release notes 明确 `What works`、`Static-only`、`Requires real cloud account`、`Known limitations`。
+
+## v0.2.0 Preflight
+
+在连接 AWS sandbox 前先运行：
+
+```bash
+python3 tools/aws_verified_path.py --date YYYY-MM-DD
+```
+
+如果 AWS CLI 或短期凭证缺失，preflight 必须把结论标为 `blocked-before-sandbox-apply`，不能把静态验证包装成真实 sandbox evidence。
