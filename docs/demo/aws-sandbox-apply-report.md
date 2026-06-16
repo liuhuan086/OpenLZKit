@@ -24,6 +24,8 @@
 | State backend | `openlzkit-example-tfstate` | 必须启用版本化、加密和 public access block |
 | Evidence location | `evidence/aws/YYYY-MM-DD/` | 建议本地或私有工件库保存，仓库只提交脱敏摘要 |
 
+仓库内可提交的证据形态见 [aws-apply-evidence](aws-apply-evidence/README.md) 与 [sanitized-plan-output](sanitized-plan-output/README.md)。rollback 结果单独记录在 [aws-sandbox-rollback-report.md](aws-sandbox-rollback-report.md)。
+
 ## Apply 顺序与验证状态
 
 | 顺序 | Stack | 目标 | 当前状态 | 验证证据 |
@@ -65,6 +67,16 @@
 | AWS Config / Security Hub | 记录 enabled standards/rules | 不提交 finding resource id |
 | Budgets / CUR | 记录预算维度和 CUR 目的地类型 | 不提交真实金额以外的账单明细 |
 | Rollback log | 记录回退命令、结果和剩余资源 | 不提交真实资源 id |
+
+## Evidence File Contract
+
+| 文件 | 何时提交 | 内容 |
+|---|---|---|
+| `docs/demo/aws-apply-evidence/YYYY-MM-DD/<stack>-summary.md` | 真实 sandbox apply 或 dry-run 后 | stack scope、apply 类型、resource type action counts、policy result、runtime check 摘要 |
+| `docs/demo/sanitized-plan-output/YYYY-MM-DD/<stack>-plan-summary.md` | plan 已脱敏且经过人工复核后 | `terraform show -json` 的人工摘要，不含 raw plan/state |
+| `docs/demo/aws-sandbox-rollback-report.md` | rollback 演练后更新 | destroy/detach/retain 结果、剩余风险、后续 owner |
+
+`v0.1.0` 只交付 evidence contract，不声称这些文件已有真实 AWS 输出；`v0.2.0` 才应把 applied/dry-run 状态写入每层 stack。
 
 ## Rollback Summary
 

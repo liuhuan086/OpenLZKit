@@ -18,5 +18,6 @@ OpenLZKit 的 release 不只表示代码打 tag，还表示文档、策略、测
 - `terraform fmt`、`terraform validate`、TFLint、Checkov、Conftest 的适用范围已说明。
 - 所有账号、租户、订阅、UIN、ARN、邮箱和 bucket 唯一名均为明显假值或已脱敏。
 - 有 Demo path：业务申请、预期账号/OU/网络/控制、policy evidence。
+- 有 Evidence path：AWS apply report、rollback report、sanitized plan 摘要约定和 evidence 目录约定。
 - 有 rollback/runbook：state、权限、审计、账号售卖失败、OIDC 故障。
 - Release notes 明确 `What works`、`Static-only`、`Requires real cloud account`、`Known limitations`。

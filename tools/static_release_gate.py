@@ -39,6 +39,8 @@ REQUIRED_TAG_KEYS = {"managed_by", "owner", "cost_center", "environment"}
 
 REQUIRED_DEMO_FILES = [
     "examples/demo/README.md",
+    "examples/demo/aws-small-company/company-profile.md",
+    "examples/demo/aws-small-company/demo-walkthrough.md",
     "examples/demo/aws-small-company/org-request.yaml",
     "examples/demo/aws-small-company/account-request.yaml",
     "examples/demo/aws-small-company/workload-request.yaml",
@@ -49,6 +51,9 @@ REQUIRED_DEMO_FILES = [
 
 REQUIRED_RELEASE_DOCS = [
     "docs/demo/aws-sandbox-apply-report.md",
+    "docs/demo/aws-sandbox-rollback-report.md",
+    "docs/demo/aws-apply-evidence/README.md",
+    "docs/demo/sanitized-plan-output/README.md",
     "docs/compliance/control-mapping.md",
     "docs/releases.md",
     "docs/release-notes/v0.1.0.md",
@@ -230,6 +235,14 @@ def check_demo_examples(errors: list[str]) -> None:
     for control in ["Identity", "CI/CD", "Object storage", "Terraform state", "Tags", "Network", "Logging", "FinOps", "Compliance"]:
         if control not in controls:
             fail(errors, f"examples/demo/aws-small-company/expected-controls.md: missing control area {control}")
+    walkthrough = read_text(ROOT / "examples/demo/aws-small-company/demo-walkthrough.md")
+    for required_link_text in ["company-profile.md", "org-request.yaml", "account-request.yaml", "workload-request.yaml", "control-mapping.md", "aws-sandbox-apply-report.md"]:
+        if required_link_text not in walkthrough:
+            fail(errors, f"examples/demo/aws-small-company/demo-walkthrough.md: missing walkthrough reference {required_link_text}")
+    profile = read_text(ROOT / "examples/demo/aws-small-company/company-profile.md")
+    for required_section in ["Business Context", "Teams", "Business Requirements", "Demo Success Criteria"]:
+        if required_section not in profile:
+            fail(errors, f"examples/demo/aws-small-company/company-profile.md: missing section {required_section}")
 
 
 def main() -> int:

@@ -52,6 +52,9 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 | 文档 | 内容 |
 |---|---|
 | [aws-sandbox-apply-report](demo/aws-sandbox-apply-report.md) | AWS sandbox apply / dry-run / evidence 报告模板 |
+| [aws-sandbox-rollback-report](demo/aws-sandbox-rollback-report.md) | AWS sandbox rollback 证据报告模板 |
+| [aws-apply-evidence](demo/aws-apply-evidence/README.md) | 脱敏 AWS apply evidence 目录约定 |
+| [sanitized-plan-output](demo/sanitized-plan-output/README.md) | 可提交 Terraform plan 摘要约定 |
 
 ## compliance/ — 控制映射
 

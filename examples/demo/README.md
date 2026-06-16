@@ -17,6 +17,8 @@ Demo Mode 让没有云账号的读者也能理解 OpenLZKit 解决什么问题�
 
 | 文件 | 作用 |
 |---|---|
+| [aws-small-company/company-profile.md](aws-small-company/company-profile.md) | 公司背景、团队边界和 Demo 成功标准 |
+| [aws-small-company/demo-walkthrough.md](aws-small-company/demo-walkthrough.md) | 从业务申请到 sandbox evidence 的端到端走读 |
 | [aws-small-company/org-request.yaml](aws-small-company/org-request.yaml) | 组织/OU 申请 |
 | [aws-small-company/account-request.yaml](aws-small-company/account-request.yaml) | AWS account vending 申请 |
 | [aws-small-company/workload-request.yaml](aws-small-company/workload-request.yaml) | workload onboarding 申请 |
@@ -41,3 +43,5 @@ Business request
   -> sanitized evidence report
   -> workload handoff
 ```
+
+建议演示顺序：先讲 [company-profile](aws-small-company/company-profile.md)，再按 [demo-walkthrough](aws-small-company/demo-walkthrough.md) 逐步对照 request、expected output、control mapping 和 AWS apply report。
