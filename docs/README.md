@@ -12,6 +12,7 @@ OpenLZKit 的治理方法论文档。每个主题只有一个权威位置，避�
 | [03-cross-account-and-cross-service-access](learning/03-cross-account-and-cross-service-access.md) | 跨账号、跨服务访问原理与标准方案 |
 | [04-detailed-cloud-mapping](learning/04-detailed-cloud-mapping.md) | 五朵云概念映射 |
 | [05-multi-cloud-strategy](learning/05-multi-cloud-strategy.md) | 多云策略、目录策略、推荐优先级 |
+| [06-aws-landing-zone-visual-guide](learning/06-aws-landing-zone-visual-guide.md) | AWS Landing Zone 图解导览：账号、身份、网络、安全、日志、FinOps 与接入依赖 |
 
 ## design/ — 深入设计
 
